@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.use(
   cors({
-    origin: 'http://localhost:3000'
+    origin: process.env.CLIENT_URL || '*'
   })
 );
 router.use(express.json());
