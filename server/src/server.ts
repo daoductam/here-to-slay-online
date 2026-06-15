@@ -42,7 +42,7 @@ const httpServer = app.listen(port, () =>
 /* SOCKET.IO  SERVER */
 const io = new Server(httpServer, {
   cors: {
-    origin: 'http://localhost:3000'
+    origin: process.env.CLIENT_URL || '*'
   }
 });
 
