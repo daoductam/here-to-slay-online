@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/here-to-slay-online/static/css/main.862e11a1.css",
+    "main.js": "/here-to-slay-online/static/js/main.25880a74.js",
+    "static/media/HTS_Dragon.png": "/here-to-slay-online/static/media/HTS_Dragon.aa39b3320c76b88844d2.png",
+    "static/media/ranger.png": "/here-to-slay-online/static/media/ranger.dae7deac6d5f51905163.png",
+    "static/media/thief.png": "/here-to-slay-online/static/media/thief.1d842182b738f4cb2ae4.png",
+    "static/media/bard.png": "/here-to-slay-online/static/media/bard.ded3bc0343c2585d9555.png",
+    "static/media/wizard.png": "/here-to-slay-online/static/media/wizard.1832bfcf977098da39d7.png",
+    "static/media/fighter.png": "/here-to-slay-online/static/media/fighter.5b97a4649303df935d4f.png",
+    "static/media/guardian.png": "/here-to-slay-online/static/media/guardian.8fdf4a3cae79fba9f61d.png",
+    "static/media/central.png": "/here-to-slay-online/static/media/central.386da1bc3cf1d06279ec.png",
+    "static/media/blessed.png": "/here-to-slay-online/static/media/blessed.a340ef663ad68655bf73.png",
+    "static/media/cursed.png": "/here-to-slay-online/static/media/cursed.5b9b4d9b3c76f1a81506.png",
+    "static/media/tick.png": "/here-to-slay-online/static/media/tick.41264236bf0dcac51381.png",
+    "static/media/cross.png": "/here-to-slay-online/static/media/cross.2835c81cf9c25c6d7662.png",
+    "index.html": "/here-to-slay-online/index.html",
+    "main.862e11a1.css.map": "/here-to-slay-online/static/css/main.862e11a1.css.map",
+    "main.25880a74.js.map": "/here-to-slay-online/static/js/main.25880a74.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.862e11a1.css",
+    "static/js/main.25880a74.js"
+  ]
+}
