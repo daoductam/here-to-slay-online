@@ -25,7 +25,33 @@ const ConfirmCard: React.FC<ConfirmCardProps> = ({ socket }) => {
   } = useClientContext();
 
   const playCard = () => {
-    if (card && !state.turn.pause) {
+    if (customText === 'Exit Match') {
+      socket.emit('exit-match', roomId, userId);
+    } else if (customText === 'Draw') {
+      if (
+        state.turn.player === state.playerNum &&
+        state.turn.movesLeft >= 1 &&
+        state.turn.phase === 'play'
+      ) {
+        socket.emit('draw-one', roomId, userId);
+      }
+    } else if (customText === 'Redraw') {
+      if (!state || !socket || state.turn.movesLeft === 0) return;
+      if (state.turn.player === state.playerNum) {
+        socket.emit('draw-five', roomId, userId);
+      }
+    } else if (customText === 'Pass') {
+      if (state.turn.phase === 'draw' || state.turn.phase === 'play') {
+        socket.emit('pass', roomId, userId);
+      }
+    } else if (customText === 'Skip') {
+      if (
+        state.turn.effect &&
+        state.turn.effect.players.some(val => val === state.playerNum)
+      ) {
+        socket.emit('use-effect', roomId, userId, state.turn.effect.card, -2);
+      }
+    } else if (card && !state.turn.pause) {
       switch (state.turn.phase) {
         case 'play':
           if (
@@ -102,37 +128,6 @@ const ConfirmCard: React.FC<ConfirmCardProps> = ({ socket }) => {
           }
           break;
       }
-
-      setShow(false);
-      setTimeout(() => {
-        setCard(null);
-      }, 200);
-    } else if (customText === 'Draw') {
-      if (
-        state.turn.player === state.playerNum &&
-        state.turn.movesLeft >= 1 &&
-        state.turn.phase === 'play'
-      ) {
-        socket.emit('draw-one', roomId, userId);
-      }
-    } else if (customText === 'Redraw') {
-      if (!state || !socket || state.turn.movesLeft === 0) return;
-      if (state.turn.player === state.playerNum) {
-        socket.emit('draw-five', roomId, userId);
-      }
-    } else if (customText === 'Pass') {
-      if (state.turn.phase === 'draw' || state.turn.phase === 'play') {
-        socket.emit('pass', roomId, userId);
-      }
-    } else if (customText === 'Skip') {
-      if (
-        state.turn.effect &&
-        state.turn.effect.players.some(val => val === state.playerNum)
-      ) {
-        socket.emit('use-effect', roomId, userId, state.turn.effect.card, -2);
-      }
-    } else if (customText === 'Exit Match') {
-      socket.emit('exit-match', roomId, userId);
     }
 
     setCard(null);
