@@ -123,6 +123,14 @@ export const startMatch = (socket: Socket) => {
     const numPlayers = rooms[roomId].numPlayers;
     state.secret.playerSocketIds[playerNum] = socket.id;
 
+    if (rooms[roomId].reconnectTimer) {
+      clearInterval(rooms[roomId].reconnectTimer);
+      rooms[roomId].reconnectTimer = undefined;
+      state.match.paused = false;
+      state.match.disconnectedPlayerNum = null;
+      state.match.disconnectTimeLeft = undefined;
+    }
+
     if (state.match.gameStarted) {
       sendGameState(roomId);
       return;

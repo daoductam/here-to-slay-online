@@ -90,6 +90,11 @@ const Game: React.FC = () => {
       const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
       let socket = io(serverUrl);
       socket.on('connect', () => {});
+      socket.on('match-aborted', (playerName: string) => {
+        alert(`${playerName} đã rời khỏi trận đấu. Đang quay về trang chủ.`);
+        localStorage.removeItem('credentials');
+        navigate('/');
+      });
       setSocket(socket);
 
       socket.emit(
@@ -621,7 +626,36 @@ const Game: React.FC = () => {
             onTouchEnd={onTouchEnd}
             onTouchMove={onTouchMove}
           >
-            {state.turn.phase === 'start-roll' ? (
+            {state.match.paused ? (
+              <div className="paused-overlay" style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                backgroundColor: 'rgba(0, 0, 0, 0.95)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                zIndex: 99999,
+                color: '#fff'
+              }}>
+                <span className="material-symbols-outlined rotate" style={{
+                  animation: 'rotation 2s infinite linear',
+                  fontSize: '10vh',
+                  color: '#fc7c37',
+                  marginBottom: '4vh'
+                }}>sync</span>
+                <h2 style={{ fontSize: '4vh', margin: '1vh 0' }}>Trận đấu tạm dừng</h2>
+                <p style={{ fontSize: '2.5vh', color: '#ccc', maxWidth: '600px', textAlign: 'center' }}>
+                  Người chơi <strong>{state.match.players[state.match.disconnectedPlayerNum ?? 0]}</strong> đã mất kết nối.
+                </p>
+                <p style={{ fontSize: '3vh', color: '#fc7c37', marginTop: '2vh' }}>
+                  Đang chờ kết nối lại: <strong>{state.match.disconnectTimeLeft}s</strong>
+                </p>
+              </div>
+            ) : state.turn.phase === 'start-roll' ? (
               <StartRoll rollSummary={rollSummary} />
             ) : loadedImages === everyCard.length ? (
               <>

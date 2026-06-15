@@ -178,6 +178,23 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({
             <span className='material-symbols-outlined'>start</span>
           </button>
         )}
+      {/* EXIT MATCH */}
+      <button
+        className="circular show"
+        onClick={() => {
+          chosenCard.setShow(true);
+          chosenCard.setCustomText('Exit Match');
+          chosenCard.setCustomCenter('logout');
+        }}
+        style={{
+          position: 'absolute',
+          top: '1vh',
+          left: '9vh',
+          backgroundColor: '#DC143C'
+        }}
+      >
+        <span className="material-symbols-outlined icon">logout</span>
+      </button>
     </>
   );
 };

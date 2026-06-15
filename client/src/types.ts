@@ -159,6 +159,9 @@ export interface GameState {
     players: string[];
     isReady: (boolean | null)[];
     startRolls: { maxVal: number; inList: number[]; rolls: number[] };
+    paused?: boolean;
+    disconnectTimeLeft?: number;
+    disconnectedPlayerNum?: number | null;
   };
   turn: {
     player: number;

@@ -2,7 +2,7 @@ import { Server } from 'socket.io';
 import express from 'express';
 
 import expressServer from './controllers/express/expressServer';
-import { parseState } from './functions/helpers';
+import { parseState, checkCredentials } from './functions/helpers';
 import { rooms } from './rooms';
 
 import {
@@ -83,6 +83,68 @@ io.on('connection', socket => {
 
   // end-turn-discard
   socket.on('end-turn-discard', endTurnDiscard);
+
+  /* DISCONNECT & EXIT MATCH */
+  socket.on('exit-match', (roomId: string, playerId: string) => {
+    const playerNum = checkCredentials(roomId, playerId);
+    if (playerNum !== -1 && rooms[roomId]) {
+      if (rooms[roomId].reconnectTimer) {
+        clearInterval(rooms[roomId].reconnectTimer);
+      }
+      io.in(roomId).emit('match-aborted', rooms[roomId].state.match.players[playerNum]);
+      setTimeout(() => {
+        disconnectAll(roomId);
+        delete rooms[roomId];
+      }, 500);
+    }
+  });
+
+  socket.on('disconnect', () => {
+    // Find if this socket belongs to a player in an active match
+    for (const roomId of Object.keys(rooms)) {
+      const room = rooms[roomId];
+      if (room && room.state && room.state.secret) {
+        const idx = room.state.secret.playerSocketIds.indexOf(socket.id);
+        if (idx !== -1) {
+          // Found the player
+          if (room.state.match.gameStarted) {
+            // Already paused or timer active?
+            if (room.reconnectTimer) return;
+
+            room.state.match.paused = true;
+            room.state.match.disconnectedPlayerNum = idx;
+            room.state.match.disconnectTimeLeft = 120;
+            sendGameState(roomId);
+
+            room.reconnectTimer = setInterval(() => {
+              if (rooms[roomId]) {
+                const currentRoom = rooms[roomId];
+                if (currentRoom.state.match.disconnectTimeLeft !== undefined) {
+                  currentRoom.state.match.disconnectTimeLeft -= 1;
+                  if (currentRoom.state.match.disconnectTimeLeft <= 0) {
+                    clearInterval(currentRoom.reconnectTimer);
+                    currentRoom.reconnectTimer = undefined;
+                    
+                    io.in(roomId).emit('match-aborted', currentRoom.state.match.players[idx]);
+                    setTimeout(() => {
+                      disconnectAll(roomId);
+                      delete rooms[roomId];
+                    }, 500);
+                  } else {
+                    sendGameState(roomId);
+                  }
+                }
+              } else {
+                // Room was deleted, clear interval
+                clearInterval(room.reconnectTimer);
+              }
+            }, 1000);
+          }
+          break;
+        }
+      }
+    }
+  });
 });
 
 /* 

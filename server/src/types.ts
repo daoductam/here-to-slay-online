@@ -70,6 +70,7 @@ export interface Room {
   numPlayers: number;
   state: GameState;
   private: boolean;
+  reconnectTimer?: NodeJS.Timeout;
 }
 
 export const allCards = [
@@ -158,6 +159,9 @@ interface State {
     players: string[];
     isReady: (boolean | null)[];
     startRolls: { maxVal: number; inList: number[]; rolls: number[] };
+    paused?: boolean;
+    disconnectTimeLeft?: number;
+    disconnectedPlayerNum?: number | null;
   };
   turn: {
     player: number;
