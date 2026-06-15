@@ -35,20 +35,24 @@ header img {
   justify-content: center;
   align-items: center;
 }
+
 .load span.material-symbols-outlined.rotate {
   animation: rotation 0.7s infinite linear;
   font-size: 14vh;
   color: #484848;
   position: absolute;
 }
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(359deg);
   }
 }
+
 .load .loading {
   width: 25vw;
   height: 1vw;
@@ -58,17 +62,20 @@ header img {
   position: absolute;
   bottom: 41.5vh;
 }
+
 .load h6 {
   position: absolute;
   bottom: 45vh;
   margin: 0;
   font-size: 3vh;
 }
+
 .load .loading .inner {
   height: 1vw;
   border-radius: 0.5vw;
   background-color: #fc7c37;
 }
+
 .load .content {
   display: flex;
   flex-direction: column;
@@ -92,18 +99,22 @@ header img {
 .game button {
   margin: 1vh 0vh;
 }
+
 .game button.circular.cancel .material-symbols-outlined {
   font-size: 4.5vh;
   font-weight: 1000;
 }
+
 .game button.circular.pass {
   position: absolute;
   top: 1vh;
   right: 1.5vh;
 }
+
 .game button.circular .material-symbols-outlined {
   font-size: 3.5vh;
 }
+
 .game .help-trigger {
   width: 7vh;
   height: 7vh;
@@ -118,23 +129,28 @@ header img {
   transition: opacity 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   user-select: none;
 }
+
 .game .help-trigger.show:hover {
   cursor: help;
   box-shadow: #222 0 0 1vh 1vh;
 }
+
 .game .help-trigger .material-symbols-outlined {
   font-size: 5vh;
   margin-left: -1.2vh;
   margin-top: -1.2vh;
 }
+
 .game button.circular.show {
   opacity: 1;
 }
+
 .game button.circular.hide {
   opacity: 0;
   width: 0;
   height: 0;
 }
+
 .game button.circular.hide span.icon.material-symbols-outlined {
   font-size: 0;
 }
@@ -149,14 +165,17 @@ header img {
   height: 62.92vh;
   left: calc(50vw - 47.5vh);
 }
+
 .help-cards.show {
   top: 18vh;
   opacity: 1;
 }
+
 .help-cards.hide {
   top: -63vh;
   opacity: 0;
 }
+
 .help-cards .img-container img {
   box-shadow: #1a1a1a 0 0 1.5vh 1.5vh;
 }
@@ -165,6 +184,7 @@ header img {
   position: relative;
   margin: auto;
 }
+
 .hand-trigger {
   position: absolute;
   bottom: 0;
@@ -172,13 +192,16 @@ header img {
   height: 10vh;
   background: linear-gradient(to bottom, transparent, #111);
 }
+
 .hand-trigger h5 {
   margin-top: 5.2vh;
   font-size: 1.4vh;
 }
+
 .hand-trigger h5 span:nth-child(1) {
   display: block;
 }
+
 .hand-trigger h5 .arrow-down {
   margin-top: -0.5vh;
   font-size: 2.1vh;
@@ -191,14 +214,17 @@ header img {
   align-items: center;
   justify-content: center;
 }
+
 .turn-order {
   margin-top: 0.8vw;
   font-weight: 300;
   z-index: 999;
 }
+
 .turn-order div {
   display: inline;
 }
+
 .turn-order span {
   transition: 0.5s;
 }
@@ -208,6 +234,7 @@ header img {
   justify-content: space-between;
   margin-top: 0.5vw;
 }
+
 .turn-circle {
   width: 3.35vh;
   height: 3.3vh;
@@ -221,12 +248,13 @@ header img {
   transition: opacity 0.2s ease-in-out;
   transition: 0.2s width 0.1s ease-in-out, 0.2s margin 0.1s ease-in-out;
 }
+
 .turn-circle img {
   width: 3vh;
   height: 3vh;
-  filter: invert(61%) sepia(45%) saturate(3207%) hue-rotate(336deg)
-    brightness(101%) contrast(98%);
+  filter: invert(61%) sepia(45%) saturate(3207%) hue-rotate(336deg) brightness(101%) contrast(98%);
 }
+
 .turn-circle.active {
   opacity: 1;
   margin: 0 0.3vh;
@@ -248,6 +276,7 @@ header img {
   justify-content: space-between;
   align-items: center;
 }
+
 .shown-card-top {
   position: absolute;
   background-color: none;
@@ -256,9 +285,11 @@ header img {
   flex-direction: column;
   align-items: center;
 }
+
 .shown-card-top.show {
   opacity: 1;
 }
+
 .shown-card.show {
   opacity: 1;
   height: 100vh;
@@ -268,10 +299,12 @@ header img {
   justify-content: center;
   align-items: center;
 }
+
 .shown-card.left,
 .shown-card.right {
   box-shadow: #1e1e1e 0 0 20px 30px;
 }
+
 .shown-card.hide {
   width: 0;
   height: 100vh;
@@ -279,19 +312,23 @@ header img {
   opacity: 0;
   box-shadow: none;
 }
+
 .shown-card-top.hide {
   width: 0;
   height: 0;
   opacity: 0;
 }
+
 .shown-card.right {
   right: 0;
   padding-right: 1.2vw;
 }
+
 .shown-card.left {
   left: 0;
   padding-left: 1.2vw;
 }
+
 .shown-card-top {
   bottom: 33.3vh;
   left: calc(50vw - 22.5225vh);
@@ -301,6 +338,7 @@ header img {
   justify-content: center;
   background-color: transparent;
 }
+
 .shown-card-top img {
   box-shadow: #1e1e1e 0 0 25px 25px;
 }
@@ -311,6 +349,7 @@ header img {
   border-radius: 2vh;
   user-select: none;
 }
+
 .shown-card .small-enlarge {
   margin-left: 1.5vw;
 }
@@ -324,14 +363,17 @@ header img {
   justify-content: space-around;
   margin-bottom: -3vh;
 }
+
 .shown-card .requirements .requirement img {
   width: 4.5vh;
   height: 4.5vh;
   margin-right: 0.8vh;
 }
+
 .shown-card .requirements .requirement h1 {
   font-size: 4vh;
 }
+
 .shown-card .requirements .requirement {
   display: flex;
   align-items: center;
@@ -344,25 +386,31 @@ header img {
   border-radius: 2vh;
   user-select: none;
 }
+
 .small-enlarged.hero {
   position: absolute;
   z-index: 2;
   box-shadow: #1c1c1c 0 -1vh 2vh 3vh;
 }
+
 .small-enlarged.hero.own {
   top: 13vh;
 }
+
 .small-enlarged.item.own {
   top: 24.5vh;
 }
+
 .small-enlarged.item {
   position: absolute;
   z-index: 1;
   box-shadow: #fc7c37 0 0 1.2vh 1.2vh;
 }
+
 .small-enlarged.hero.other {
   top: 15vh;
 }
+
 .small-enlarged.item.other {
   top: 26.5vh;
 }
@@ -379,6 +427,7 @@ header img {
   background: linear-gradient(to bottom, transparent, #1e1e1e 8vh);
   transition: ease-in-out 0.2s;
 }
+
 .bottomMenu .discard {
   position: absolute;
   left: 1vw;
@@ -389,42 +438,53 @@ header img {
   display: flex;
   align-items: flex-end;
 }
+
 .hand .img-container {
   transition: margin-bottom 0.15s ease-in-out 0s,
     margin-top 0.15s ease-in-out 0.1s;
 }
+
 .hand img.small-md {
   border: 0px solid #fc7c37;
   user-select: none;
   transition: ease-in-out 0.25s;
 }
+
 .hand.list .img-container img.small-md.glow {
   box-shadow: #fc7c37 0 0 1.2vh 1.2vh;
 }
+
 .hand.list .img-container img.small-md {
   margin: 0 0.3vh;
 }
+
 .hand.cover .img-container img.small-md {
   margin: 0 0 0 -8.6vh;
 }
+
 .hand.list .img-container:hover img.small-md {
   margin: 3.75vh 1.2vh;
   border: 0.6vh solid #fc7c37;
 }
+
 .hand.cover .img-container:hover img.small-md {
   margin: 0 3vh 25px -3.5vh;
   border: 0.6vh solid #fc7c37;
 }
+
 .hand .img-container img.small-md {
   cursor: pointer;
   box-shadow: 0.2vh 0 1vh 0.1vh #000;
 }
+
 .hand.list .img-container img.small-md.inactive {
   opacity: 0.45;
 }
+
 .hand .img-container img.small-md.inactive {
   cursor: not-allowed;
 }
+
 .small-md {
   width: 18.837vh;
   height: 26.312vh;
@@ -438,13 +498,16 @@ header img {
   align-items: center;
   margin-left: -40px;
 }
+
 .start-roll_summary {
   display: flex;
   margin: auto;
 }
+
 .summary-player {
   margin-left: 40px;
 }
+
 .summary-player span {
   font-weight: 400;
 }
@@ -458,6 +521,7 @@ header img {
   width: 98vw;
   margin-left: 1vw;
 }
+
 .col {
   display: flex;
   height: 90vh;
@@ -468,6 +532,7 @@ header img {
   justify-content: space-around;
   margin-top: -2vw;
 }
+
 .col.middle {
   width: 34.5vw;
   height: 85vh;
@@ -477,6 +542,7 @@ header img {
 .player-board {
   position: relative;
 }
+
 .player-board .num-cards {
   display: flex;
   align-items: center;
@@ -484,14 +550,17 @@ header img {
   left: 1vh;
   top: -1.8vh;
 }
+
 .player-board .num-cards span.material-symbols-outlined {
   font-size: 3.5vh;
   transform: rotate(180deg);
 }
+
 .player-board .num-cards h4 {
   font-size: 2.8vh;
   /* margin-bottom: -0.1vh; */
 }
+
 .player-board h5 {
   font-size: 2.8vh;
   margin: 2vh;
@@ -506,6 +575,7 @@ header img {
   border-radius: 1.3vw;
   transition: filter 0.25s;
 }
+
 .player-board .overlay {
   position: absolute;
   width: 100%;
@@ -522,6 +592,7 @@ header img {
   opacity: 0;
   transition: opacity 0.35s ease-in-out;
 }
+
 .own-board .overlay.chosen {
   position: absolute;
   width: 100%;
@@ -537,9 +608,11 @@ header img {
   cursor: default;
   opacity: 1;
 }
+
 .player-board .overlay:hover {
   opacity: 1;
 }
+
 .player-board .overlay.chosen {
   opacity: 1;
   cursor: default;
@@ -550,6 +623,7 @@ header img {
   justify-content: space-between;
   align-items: center;
 }
+
 .top-row {
   display: flex;
   justify-content: space-between;
@@ -565,6 +639,7 @@ header img {
   border-radius: 1.6vw;
   transition: filter 0.25s;
 }
+
 .own-board .small {
   border: 0.135vh solid #fff;
   background-color: #00000044;
@@ -576,6 +651,7 @@ header img {
   justify-content: center;
   align-items: center;
 }
+
 .own-board .large {
   border: 0.08vw solid #fff;
   background-color: #00000044;
@@ -587,19 +663,23 @@ header img {
   justify-content: center;
   align-items: center;
 }
+
 .own-board img.small-card {
   width: 5.721vw;
   height: 8.04vw;
   border-radius: 0.405vh;
   user-select: none;
 }
+
 .own-board img.small-card.item {
   top: 2.9vh;
 }
+
 img.small-card.item {
   z-index: 1;
   top: 2.2vh;
 }
+
 img.small-card.hero {
   z-index: 2;
 }
@@ -616,41 +696,49 @@ img.small-card.hero {
   z-index: 2;
   transition: 0.25s ease-in-out, background-size 0.35s ease-in-out;
 }
+
 .small.item-attached.cursed::after {
   background: url('./assets/cursed.png');
   background-size: 3.33vh;
   background-position: center;
 }
+
 .small.item-attached.blessed::after {
   background: url('./assets/blessed.png');
   background-size: 3.33vh;
   background-position: center;
 }
+
 .small.item-attached.bard::after {
   background: url('./assets/bard.png');
   background-size: 3.33vh;
   background-position: center;
 }
+
 .small.item-attached.wizard::after {
   background: url('./assets/wizard.png');
   background-size: 3.33vh;
   background-position: center;
 }
+
 .small.item-attached.fighter::after {
   background: url('./assets/fighter.png');
   background-size: 3.33vh;
   background-position: center;
 }
+
 .small.item-attached.ranger::after {
   background: url('./assets/ranger.png');
   background-size: 3.33vh;
   background-position: center;
 }
+
 .small.item-attached.guardian::after {
   background: url('./assets/guardian.png');
   background-size: 3.33vh;
   background-position: center;
 }
+
 .small.item-attached.thief::after {
   background: url('./assets/thief.png');
   background-size: 3.33vh;
@@ -666,41 +754,49 @@ img.small-card.hero {
   height: 4.5vh;
   box-shadow: #111 0 0 1.4vh 0.5vh;
 }
+
 .own-board .small.item-attached.cursed::after {
   background: url('./assets/cursed.png');
   background-size: 4.5vh;
   background-position: center;
 }
+
 .own-board .small.item-attached.blessed::after {
   background: url('./assets/blessed.png');
   background-size: 4.5vh;
   background-position: center;
 }
+
 .own-board .small.item-attached.bard::after {
   background: url('./assets/bard.png');
   background-size: 4.5vh;
   background-position: center;
 }
+
 .own-board .small.item-attached.wizard::after {
   background: url('./assets/wizard.png');
   background-size: 4.5vh;
   background-position: center;
 }
+
 .own-board .small.item-attached.fighter::after {
   background: url('./assets/fighter.png');
   background-size: 4.5vh;
   background-position: center;
 }
+
 .own-board .small.item-attached.ranger::after {
   background: url('./assets/ranger.png');
   background-size: 4.5vh;
   background-position: center;
 }
+
 .own-board .small.item-attached.guardian::after {
   background: url('./assets/guardian.png');
   background-size: 4.5vh;
   background-position: center;
 }
+
 .own-board .small.item-attached.thief::after {
   background: url('./assets/thief.png');
   background-size: 4.5vh;
@@ -720,6 +816,7 @@ img.small-card.hero {
   display: flex;
   align-items: center;
 }
+
 .player-board .mat .passive {
   height: 3vw;
   width: 3vw;
@@ -732,10 +829,12 @@ img.small-card.hero {
   margin-right: 0.4vw;
   user-select: none;
 }
+
 .player-board .mat .passive img {
   width: 3.1vw;
   height: 3.1vw;
 }
+
 .player-board .mat .passive span {
   font-size: 2.5vw;
 }
@@ -746,6 +845,7 @@ img.small-card.hero {
   display: flex;
   align-items: center;
 }
+
 .own-board .mat .passive {
   height: 3.8vw;
   width: 3.8vw;
@@ -758,10 +858,12 @@ img.small-card.hero {
   margin-right: 0.4vw;
   user-select: none;
 }
+
 .own-board .mat .passive img {
   width: 3.9vw;
   height: 3.9vw;
 }
+
 .own-board .mat .passive span {
   font-size: 2.5vw;
 }
@@ -777,16 +879,19 @@ img.small-card.hero {
   transition: opacity 0.25s ease-in-out;
   margin-top: 2vw;
 }
+
 .center-board .mat.show {
   opacity: 1;
   display: block;
 }
+
 .center-board .mat.hide {
   opacity: 0;
   display: none;
   width: 0;
   height: 0;
 }
+
 .center-board .mat .cards {
   height: 8.7936vw;
   width: 27.48vw;
@@ -795,6 +900,7 @@ img.small-card.hero {
   align-items: center;
   justify-content: space-between;
 }
+
 .center-board .mat .background {
   position: absolute;
   width: 100%;
@@ -808,6 +914,7 @@ img.small-card.hero {
   background-size: cover;
   opacity: 0.3;
 }
+
 .center-board .small-cards {
   display: flex;
   justify-content: space-between;
@@ -815,6 +922,7 @@ img.small-card.hero {
   margin-left: -3.5vh;
   margin-right: -1vh;
 }
+
 .small-cards .small {
   margin: 0 0.5vh;
 }
@@ -833,6 +941,7 @@ img.small-card.hero {
   align-items: center;
   transition: border 0.25s;
 }
+
 .large {
   border: 0.081vw solid #fff;
   background-color: #00000044;
@@ -845,6 +954,7 @@ img.small-card.hero {
   align-items: center;
   transition: border 0.25s;
 }
+
 img.large-lg {
   width: 26.52vw;
   height: 45.3vw;
@@ -855,6 +965,7 @@ img.large-lg {
 .small:hover {
   border-color: #fc7c37;
 }
+
 .large:hover {
   border-color: #fc7c37;
 }
@@ -866,9 +977,11 @@ img.large-lg {
   width: 100%;
   height: 100%;
 }
+
 .own-board .mat .background {
   border-radius: 1.5vw;
 }
+
 .mat .background {
   background-size: cover;
   position: absolute;
@@ -880,27 +993,35 @@ img.large-lg {
   border-radius: 1.3vw;
   transition: 0.5s ease-in-out;
 }
+
 .mat.active .background {
   opacity: 0.9;
 }
+
 .mat.inactive .background {
   opacity: 0.2;
 }
+
 .mat.bard .background {
   background-image: url('./assets/mats/bard.png');
 }
+
 .mat.fighter .background {
   background-image: url('./assets/mats/fighter.png');
 }
+
 .mat.guardian .background {
   background-image: url('./assets/mats/guardian.png');
 }
+
 .mat.ranger .background {
   background-image: url('./assets/mats/ranger.png');
 }
+
 .mat.thief .background {
   background-image: url('./assets/mats/thief.png');
 }
+
 .mat.wizard .background {
   background-image: url('./assets/mats/wizard.png');
 }
@@ -913,6 +1034,7 @@ img.small-card {
   transition: border ease-out 0.5s;
   position: absolute;
 }
+
 img.large-card {
   width: 4.9vw;
   height: 8.473vw;
@@ -920,18 +1042,23 @@ img.large-card {
   user-select: none;
   transition: border ease-out 0.5s;
 }
+
 img.glow {
   box-shadow: #fc7c37 0 0 1.2vh 1.2vh;
 }
+
 img.glow-purple {
   box-shadow: #9f2df6 0 0 1.2vh 1.2vh;
 }
+
 img.glow-red {
   box-shadow: #fe2e2e 0 0 1.2vh 1.2vh;
 }
+
 img.click:hover {
   cursor: pointer;
 }
+
 img.deny:hover {
   cursor: not-allowed;
 }
@@ -940,6 +1067,7 @@ img.deny:hover {
   position: relative;
   /* width: fit-content; */
 }
+
 .img-container.cross-lg::after {
   content: '';
   background: url('./assets/cross.png');
@@ -957,6 +1085,7 @@ img.deny:hover {
   opacity: 0;
   transition: 0.25s ease-in-out, background-size 0.35s ease-in-out;
 }
+
 .img-container.cross-lg:hover::after {
   opacity: 1;
   border: 1vh solid #f95151;
@@ -981,16 +1110,19 @@ img.deny:hover {
   justify-content: center;
   align-items: center;
 }
+
 .popup.show,
 .popup.show .roll-popup {
   opacity: 1;
 }
+
 .popup.hide,
 .popup.hide .roll-popup {
   opacity: 0;
   width: 0;
   height: 0;
 }
+
 .popup .img-container.left {
   /* margin-right: -3vw; */
   width: 26.52vw;
@@ -998,6 +1130,7 @@ img.deny:hover {
   display: flex;
   flex-direction: column;
 }
+
 .challenge-popup,
 .challenge-roll-popup {
   width: 95%;
@@ -1005,18 +1138,21 @@ img.deny:hover {
   justify-content: space-between;
   align-items: center;
 }
+
 .popup.show .roll-popup {
   width: 90%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .small-xl {
   width: 26.52vw;
   height: 37.044vw;
   border-radius: 1.2vw;
   user-select: none;
 }
+
 .small-xl.challenge-hero {
   position: absolute;
   top: -5.5vh;
@@ -1024,34 +1160,43 @@ img.deny:hover {
   transition: 0.3s ease-in-out;
   opacity: 0.35;
 }
+
 .small-xl.challenge-hero:hover {
   opacity: 1;
   z-index: 7;
 }
-.small-xl.challenge-hero:hover + .small-xl.challenge-item {
+
+.small-xl.challenge-hero:hover+.small-xl.challenge-item {
   opacity: 0.35;
   /* z-index: 7; */
 }
+
 .small-xl.challenge-item {
   position: absolute;
   top: 6.1vh;
   z-index: 6;
   transition: 0.3s ease-in-out;
 }
+
 .small-lg {
-  width: 23.7888vw; /* 36.732 */
-  height: 33.228vw; /* 51.308 */
+  width: 23.7888vw;
+  /* 36.732 */
+  height: 33.228vw;
+  /* 51.308 */
   border-radius: 0.8vw;
 }
+
 /* ok i'm just running out of names */
 .small-lg-minus {
   width: 29.3856vh;
   height: 41.0464vh;
   border-radius: 1.2vh;
 }
+
 .popup .center {
   margin-top: -10vh;
 }
+
 .side-modifier {
   width: 26.52vw;
   height: 80vh;
@@ -1061,6 +1206,7 @@ img.deny:hover {
   align-items: center;
   justify-content: center;
 }
+
 .side-modifier .has-modifier {
   width: 26.52vw;
   height: 80vh;
@@ -1069,6 +1215,7 @@ img.deny:hover {
   align-items: center;
   justify-content: center;
 }
+
 .side-modifier h3 {
   font-size: 3vh;
   margin-bottom: 1vh;
@@ -1083,14 +1230,17 @@ img.deny:hover {
   align-items: flex-start;
   justify-content: space-around;
 }
+
 .side-list div {
   display: flex;
   align-items: flex-start;
   font-size: 3vh;
 }
+
 .side-list div .name {
   margin-right: 1vw;
 }
+
 div.tick {
   margin-top: -0.3vh;
   margin-left: -0.7vh;
@@ -1100,6 +1250,7 @@ div.tick {
   height: 5vh;
   width: 5vh;
 }
+
 div.cross {
   margin-top: -0.3vh;
   margin-left: -0.7vh;
@@ -1113,16 +1264,19 @@ div.cross {
 .popup .challenge-dice.active {
   cursor: pointer;
 }
+
 .popup .dice-box {
   height: 46vh;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .popup .dice-box img {
   width: 5vh;
   height: 5vh;
 }
+
 .popup .dice-box .summary {
   display: flex;
   justify-content: space-between;
@@ -1130,18 +1284,22 @@ div.cross {
   margin-bottom: 4vh;
   margin-top: -10vh;
 }
+
 .popup .dice-box .summary div {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .popup .dice-box .summary img {
   width: 6vh;
   height: 6vh;
 }
+
 .popup .dice-box .summary h1 {
   margin: 0 1vw;
 }
+
 .popup .arrows {
   width: 75%;
   display: flex;
@@ -1149,6 +1307,7 @@ div.cross {
   justify-content: space-between;
   font-weight: 800;
 }
+
 .popup .side-modifier .arrows {
   width: 50%;
   display: flex;
@@ -1156,15 +1315,18 @@ div.cross {
   justify-content: space-between;
   font-weight: 800;
 }
+
 .popup .arrows .name {
   font-size: 2.4vh;
   width: 20vh;
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
 .popup .arrows .material-symbols-outlined.hide {
   opacity: 0;
 }
+
 .popup .arrows .material-symbols-outlined {
   font-size: 5vh;
   user-select: none;
@@ -1176,23 +1338,28 @@ div.cross {
   align-items: center;
   transition: 0.2s ease-in-out;
 }
+
 .popup .arrows .material-symbols-outlined.show:hover {
   cursor: pointer;
   background-color: #333;
 }
+
 .popup .dice-box h1 {
   font-size: 4vh;
   margin: 0;
 }
+
 .popup .dice-box h2 {
   font-size: 2.5vh;
   width: 25vw;
   margin: 0;
 }
+
 .popup .dice-box h3 {
   font-size: 6vh;
   margin: 2vh;
 }
+
 .cancel-button {
   position: relative;
   width: 6vh;
@@ -1202,6 +1369,7 @@ div.cross {
   justify-content: center;
   transition: 0.3s ease-in-out;
 }
+
 .cancel-button .button {
   width: 5vh;
   height: 5vh;
@@ -1210,6 +1378,7 @@ div.cross {
   border-radius: 50%;
   transition: 0.3s ease-in-out;
 }
+
 .cancel-button .button::after {
   content: '';
   background: url('./assets/cross.png');
@@ -1222,13 +1391,16 @@ div.cross {
   height: 5vh;
   transition: 0.3s ease-in-out;
 }
+
 .cancel-button:hover .button {
   cursor: pointer;
   box-shadow: #000 2px 2px 6px 1px;
 }
+
 .cancel-button:hover .button::after {
   background-size: 5.5vh;
 }
+
 .cancel-container {
   display: flex;
   flex-direction: column;
@@ -1236,10 +1408,12 @@ div.cross {
   justify-content: center;
   margin-top: 5vh;
 }
+
 .popup .dice-box .cancel-container {
   margin-top: -16vh;
   margin-bottom: 10vh;
 }
+
 .cancel-container h5 {
   margin-top: 0.6vh;
   font-size: 2vh;
@@ -1256,6 +1430,7 @@ div.cross {
   height: 100vh;
   left: -5vh;
 }
+
 .choose-modifier.hide {
   opacity: 0;
   height: 0;
@@ -1263,18 +1438,22 @@ div.cross {
   transition: opacity 0.2s ease-in-out 0s, width 0s ease-in-out 0.2s,
     height 0s ease-in-out 0.2s;
 }
+
 .choose-modifier.show {
   opacity: 1;
   height: 100vh;
   width: 100vw;
   transition: opacity 0.2s ease-in-out 0s;
 }
+
 .choose-modifier.hide .center .img-container {
   align-content: center;
 }
+
 .choose-modifier .center {
   margin-top: 6vh;
 }
+
 .choose-modifier .left {
   font-size: 10vh;
   font-weight: 800;
@@ -1288,12 +1467,14 @@ div.cross {
   border: 1vh solid #2eee9bdd;
   transition: 0.3s ease-in-out;
 }
+
 .choose-modifier .left:hover {
   background-color: #2eee9baa;
   cursor: pointer;
   font-size: 15vh;
   font-weight: 1000;
 }
+
 .choose-modifier .right {
   font-size: 10vh;
   font-weight: 800;
@@ -1307,12 +1488,14 @@ div.cross {
   border: 1vh solid #f95151dd;
   transition: 0.3s ease-in-out;
 }
+
 .choose-modifier .right:hover {
   background-color: #f95151aa;
   cursor: pointer;
   font-size: 15vh;
   font-weight: 1000;
 }
+
 .choose-modifier .logo {
   width: 8vh;
   height: 8vh;
@@ -1330,6 +1513,7 @@ div.cross {
   z-index: 100;
   transition: opacity ease-in-out 0.2s;
 }
+
 .confirm-card.hide {
   opacity: 0;
   height: 0;
@@ -1337,26 +1521,32 @@ div.cross {
   transition: opacity 0.2s ease-in-out 0s, width 0s ease-in-out 0.2s,
     height 0s ease-in-out 0.2s;
 }
+
 .confirm-card.show {
   opacity: 1;
   height: 100vh;
   width: 100vw;
   transition: opacity 0.2s ease-in-out 0s;
 }
+
 .confirm-card.hide .img-container {
   align-content: center;
 }
+
 .confirm-card.hide .icon {
   align-content: center;
 }
+
 .confirm-card .icon {
   width: 30vh;
   height: 30vh;
 }
+
 .confirm-card .icon span.image.material-symbols-outlined {
   font-size: 30vh;
   user-select: none;
 }
+
 .confirm-card .left {
   font-size: 6vh;
   font-weight: 800;
@@ -1370,12 +1560,14 @@ div.cross {
   border: 1vh solid #2eee9bdd;
   transition: 0.3s ease-in-out;
 }
+
 .confirm-card .left:hover {
   background-color: #2eee9baa;
   cursor: pointer;
   font-size: 8vh;
   font-weight: 1000;
 }
+
 .confirm-card .right {
   font-size: 6vh;
   font-weight: 800;
@@ -1389,6 +1581,7 @@ div.cross {
   border: 1vh solid #f95151dd;
   transition: 0.3s ease-in-out;
 }
+
 .confirm-card .right:hover {
   background-color: #f95151aa;
   cursor: pointer;
@@ -1407,38 +1600,46 @@ div.cross {
   z-index: 98;
   transition: opacity ease-in-out 0.2s;
 }
+
 .discard-pile-container {
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
 }
+
 .discard-pile-popup.hide {
   opacity: 0;
 }
+
 .discard-pile-popup.show {
   opacity: 1;
   width: 100vw;
   height: 100vh;
 }
+
 .discard-pile-container .center {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 75vh;
 }
+
 .discard-pile-container h1 {
   margin-bottom: 0.5vh;
   margin-top: 6vh;
 }
+
 .discard-pile-container .material-symbols-outlined {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 60vh;
 }
+
 .discard-pile-container .material-symbols-outlined.hide {
   opacity: 0;
 }
+
 .discard-pile-container .material-symbols-outlined {
   font-size: 10vh;
   user-select: none;
@@ -1450,6 +1651,7 @@ div.cross {
   align-items: center;
   transition: 0.25s ease-in-out;
 }
+
 .discard-pile-container .material-symbols-outlined.show:hover {
   cursor: pointer;
   background-color: #39393988;
@@ -1464,6 +1666,7 @@ div.cross {
   justify-content: center;
   transition: opacity ease-in-out 0.2s;
 }
+
 .effect-cover.show {
   opacity: 1;
   height: 100vh;
@@ -1471,6 +1674,7 @@ div.cross {
   transition: opacity 0.2s ease-in-out 0s;
   top: 0;
 }
+
 .effect-cover.hide {
   opacity: 0;
   height: 0;
@@ -1479,6 +1683,7 @@ div.cross {
   transition: opacity 0.2s ease-in-out 0s, width 0s ease-in-out 0.2s,
     height 0s ease-in-out 0.2s, top 0s ease-in-out 0.2s;
 }
+
 .effect-cover .content {
   display: flex;
   flex-direction: column;
@@ -1487,6 +1692,7 @@ div.cross {
   height: 100%;
   width: 100%;
 }
+
 .effect-cover .content .top {
   position: absolute;
   top: 1vh;
@@ -1496,6 +1702,7 @@ div.cross {
   width: 90%;
   height: 72vh;
 }
+
 .effect-cover .content .bottom {
   position: absolute;
   bottom: 4vh;
@@ -1505,34 +1712,42 @@ div.cross {
   justify-content: center;
   z-index: 999;
 }
+
 .effect-cover .content .bottom img.small-md {
   transition: 0.25s ease-in-out;
   box-shadow: 0.2vh 0 1vh 0.1vh #000;
 }
+
 .effect-cover .content .bottom.list img.small-md {
   margin: 0 0.3vh;
 }
+
 .effect-cover .content .bottom img.small-md.active {
   cursor: pointer;
 }
+
 .effect-cover .content .bottom.cover img.small-md {
   margin: 0 0 0 -6.5vh;
 }
+
 .effect-cover .content .bottom.list img.small-md.active:hover,
 .effect-cover .content .bottom.list img.small-md.chosen {
   margin: 3.75vh 1.2vh;
   border: 0.6vh solid #fc7c37;
 }
+
 .effect-cover .content .bottom.cover img.small-md.active:hover,
 .effect-cover .content .bottom.cover img.small-md.chosen {
   margin: 0 3vh 25px -3.5vh;
   border: 0.6vh solid #fc7c37;
 }
+
 .effect-cover h1 {
   font-size: 7vh;
   width: 30vw;
   margin-right: -1.5vw;
 }
+
 .effect-cover h2 {
   position: absolute;
   font-size: 5vh;
@@ -1541,20 +1756,25 @@ div.cross {
   width: 30vw;
   text-align: center;
 }
+
 .content h1.purpose {
   transition: opacity 0.25s ease-in-out;
 }
+
 .content h1.purpose div:first-child {
   font-size: 8vh;
 }
+
 .content h1.purpose div:nth-child(2) {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .content h1.purpose span .content h1.purpose.show {
   opacity: 1;
 }
+
 .content h1.purpose.hide {
   opacity: 0;
   font-size: 0;
@@ -1569,6 +1789,7 @@ div.cross {
   width: 95%;
   height: 100%;
 }
+
 .effect-cover .choose-cover .arrow {
   width: 6vh;
   border: 1vh solid transparent;
@@ -1580,18 +1801,22 @@ div.cross {
   transition: 0.25s ease-in-out;
   cursor: pointer;
 }
+
 .effect-cover .choose-cover .arrow.active:hover {
   background-color: #67676766;
   border: 1vh solid #555;
 }
+
 .effect-cover .choose-cover .arrow.inactive {
   opacity: 0;
   cursor: default;
 }
+
 .effect-cover .choose-cover .arrow .icon {
   font-size: 10vh;
   user-select: none;
 }
+
 .effect-cover .choose-cover .left {
   font-size: 10vh;
   font-weight: 800;
@@ -1607,15 +1832,18 @@ div.cross {
     background-color 0.3s ease-in-out;
   border: 1vh solid #2eee9bdd;
 }
+
 .effect-cover .choose-cover .left.active:hover {
   background-color: #2eee9baa;
   cursor: pointer;
   font-size: 15vh;
   font-weight: 1000;
 }
+
 .effect-cover .choose-cover .left.inactive:hover {
   cursor: default;
 }
+
 .effect-cover .choose-cover .right {
   font-size: 10vh;
   font-weight: 800;
@@ -1631,12 +1859,14 @@ div.cross {
   transition: font-size 0.3s ease-in-out, font-weight 0.3s ease-in-out,
     background-color 0.3s ease-in-out;
 }
+
 .effect-cover .choose-cover .right.active:hover {
   background-color: #f95151aa;
   cursor: pointer;
   font-size: 12vh;
   font-weight: 1000;
 }
+
 .effect-cover .choose-cover .right.inactive:hover {
   cursor: default;
 }
@@ -1650,19 +1880,23 @@ div.cross {
   justify-content: center;
   transition: opacity ease-in-out 0.2s;
 }
+
 .discard-cover.show {
   width: 100vw;
   height: 100vh;
 }
+
 .discard-cover.hide {
   opacity: 0;
 }
+
 .discard-cover .effect-container {
   position: absolute;
   top: 0;
   height: 80%;
   width: 93%;
 }
+
 .discard-cover .effect-container .top {
   display: flex;
   align-items: center;
@@ -1670,20 +1904,24 @@ div.cross {
   height: 100%;
   width: 100%;
 }
+
 .discard-cover .content {
   display: flex;
   flex-direction: column;
 }
+
 .discard-cover .content h2 {
   position: absolute;
   font-size: 5.5vh;
   top: 10vh;
 }
+
 .discard-cover .cards {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .discard-cover .discarded {
   position: absolute;
   top: 25.5vh;
@@ -1691,13 +1929,16 @@ div.cross {
   display: flex;
   align-items: center;
 }
+
 .discard-cover .discarded .img-container {
   margin: 0.3vh;
 }
+
 .discard-cover .discarded .img-container img {
   border: 0.5vh solid transparent;
   transition: 0.25s ease-in-out;
 }
+
 .discard-cover .discarded .img-container:hover img {
   border: 0.5vh solid #fc7c37;
 }
@@ -1712,13 +1953,16 @@ div.cross {
   transition: opacity ease-in-out 0.2s;
   z-index: 1000;
 }
+
 .end-page.show {
   width: 100vw;
   height: 100vh;
 }
+
 .end-page.hide {
   opacity: 0;
 }
+
 .end-page .timer {
   position: absolute;
   bottom: 0;
@@ -1734,10 +1978,12 @@ div.cross {
   border-right: 0.8vh solid white;
   border-top: 0.8vh solid white;
 }
+
 .end-page .timer h1 {
   font-size: 8.5vh;
   margin-top: 3vh;
 }
+
 .end-page .timer h5 {
   margin-top: -6.5vh;
 }
@@ -1749,47 +1995,58 @@ div.cross {
   background-size: cover;
   transition: opacity ease-in-out 0.2s;
 }
+
 .helper-text-container.hide.disappear {
   height: 0;
   width: 0;
   top: 100vh;
 }
+
 .helper-text-container {
   top: calc(50vh - 15.4vw);
   left: 3.6vw;
   width: 92vw;
   height: 30.8vw;
 }
+
 .helper-text-container.show {
   opacity: 1;
 }
+
 .helper-text-container.hide {
   opacity: 0;
 }
+
 .helper-text-container h3 {
   margin-left: 1vw;
   margin-top: 18.5vw;
   font-size: 5.5vw;
   font-weight: 1000;
 }
+
 .helper-text-container.show h3 {
   opacity: 1;
 }
+
 .helper-text-container.hide h3 {
   opacity: 0;
 }
+
 .helper-text-container h4 {
   margin-left: 1vw;
   margin-top: -5.5vw;
   font-size: 1.8vw;
   font-weight: 300;
 }
+
 .helper-text-container.show h4 {
   opacity: 1;
 }
+
 .helper-text-container.hide h4 {
   opacity: 0;
 }
+
 /* .timer .time-bar {
   position: absolute;
   top: 0;
@@ -1808,185 +2065,3 @@ div.cross {
   height: 1vh;
   background-color: #fc7c37;
 } */
-
-/* RESPONSIVE DESIGN - MOBILE & TABLET PORTRAIT / LANDSCAPE */
-
-/* Portrait Mode (max-width: 768px or vertical aspect ratios) */
-@media screen and (max-width: 768px), screen and (max-aspect-ratio: 1/1) {
-  /* Restructure board layout from columns to vertical stacks */
-  .content {
-    flex-direction: column !important;
-    height: calc(100vh - 10vh) !important;
-    width: 100vw !important;
-    margin-left: 0 !important;
-    overflow-y: auto !important;
-    justify-content: flex-start !important;
-    align-items: center !important;
-    padding-bottom: 25vh !important; /* space for hand cards */
-    padding-top: 8vh !important; /* space for header */
-  }
-
-  /* Other players' container (col 0 and col 2) */
-  .content .col {
-    width: 95vw !important;
-    height: auto !important;
-    margin-top: 0 !important;
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    justify-content: space-around !important;
-    align-items: center !important;
-    order: 1 !important; /* top */
-  }
-
-  /* Center board and Own board container (col 1) */
-  .content .col.middle {
-    width: 95vw !important;
-    height: auto !important;
-    margin-top: 2vh !important;
-    flex-direction: column !important;
-    order: 2 !important; /* bottom */
-  }
-
-  /* Center Board scaling */
-  .center-board {
-    margin-top: 2vh !important;
-    width: 100% !important;
-    display: flex;
-    justify-content: center;
-  }
-  .center-board .mat {
-    width: 90vw !important;
-    height: auto !important;
-    padding: 10px !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-  .center-board .mat .cards {
-    width: 100% !important;
-    height: auto !important;
-    display: flex !important;
-    justify-content: space-around !important;
-  }
-
-  /* Adjust own board and other player boards sizing */
-  .own-board, .player-board {
-    width: 90vw !important;
-    margin-bottom: 2vh !important;
-  }
-  
-  .own-board .mat {
-    width: 100% !important;
-    height: auto !important;
-    padding: 15px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-  
-  .own-board .top-row, .own-board .bottom-row {
-    width: 100% !important;
-    display: flex !important;
-    justify-content: space-around !important;
-    margin: 5px 0 !important;
-  }
-
-  .player-board .mat {
-    width: 100% !important;
-    height: auto !important;
-    padding: 10px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-  }
-
-  /* Scale mat slots */
-  .own-board .small, .own-board img.small-card {
-    width: 15vw !important;
-    height: 21vw !important;
-  }
-  .own-board .large, .own-board img.large-card {
-    width: 18vw !important;
-    height: 31vw !important;
-  }
-
-  .player-board .small, .player-board img.small-card {
-    width: 12vw !important;
-    height: 17vw !important;
-  }
-  .player-board .large, .player-board img.large-card {
-    width: 15vw !important;
-    height: 26vw !important;
-  }
-
-  /* Fix absolute button positioning */
-  .game button.circular.pass {
-    top: 1vh !important;
-    right: 2vh !important;
-    z-index: 10000 !important;
-  }
-  .game .show-board-trigger {
-    top: 1vh !important;
-    right: 2vh !important;
-    z-index: 10000 !important;
-  }
-  .game button.circular.exit {
-    top: 1vh !important;
-    left: 8vh !important;
-    z-index: 10000 !important;
-  }
-
-  /* Scale shown card (Card inspector popup) */
-  .shown-card.show {
-    width: 100vw !important;
-    max-width: 100vw !important;
-    padding: 2vw !important;
-  }
-  .small-enlarged {
-    width: 75vw !important;
-    height: 105vw !important; /* Keep aspect ratio 1:1.4 */
-  }
-  .shown-card .requirements {
-    width: 90vw !important;
-  }
-
-  /* Hand menu scaling */
-  .bottomMenu {
-    height: 25vh !important;
-  }
-  .small-md {
-    width: 11vh !important;
-    height: 15.4vh !important;
-  }
-  .hand.cover .img-container img.small-md {
-    margin: 0 0 0 -5vh !important;
-  }
-}
-
-/* Landscape Mode for Smaller Screens (e.g. mobile rotated, max-height: 500px) */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-  .content {
-    height: 75vh !important;
-  }
-  .col {
-    height: 75vh !important;
-  }
-  .col.middle {
-    height: 75vh !important;
-  }
-  /* Scale down player boards slightly */
-  .player-board .mat {
-    transform: scale(0.8);
-    transform-origin: center;
-  }
-  .own-board .mat {
-    transform: scale(0.8);
-    transform-origin: center;
-  }
-  .center-board .mat {
-    transform: scale(0.8);
-    transform-origin: center;
-  }
-}
-
