@@ -51,6 +51,8 @@ jobs:
           npm run test -- --passWithNoTests
 
       - name: Build Client
+        env:
+          CI: false
         run: |
           cd client
           npm run build
@@ -79,6 +81,8 @@ jobs:
           npm ci
 
       - name: Build Client
+        env:
+          CI: false
         run: |
           cd client
           npm run build
