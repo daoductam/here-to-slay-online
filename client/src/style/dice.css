@@ -1,0 +1,137 @@
+.dices {
+  display: flex;
+}
+
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.dice {
+  width: 14vh;
+  height: 14vh;
+  transform-style: preserve-3d;
+  transition: transform 200ms;
+  margin: 2.3333vh;
+}
+
+.dot {
+  position: absolute;
+  width: 2.8vh;
+  height: 2.8vh;
+  margin: -1.32vh 0.6vh 0.6vh -1.32vh;
+  border-radius: 50%;
+  background-color: #222;
+}
+.side {
+  position: absolute;
+  background-color: #fff;
+  border-radius: 2vh;
+  width: 14vh;
+  height: 14vh;
+  border: 0.11666vh solid #fff;
+  text-align: center;
+}
+
+.side:nth-child(1) {
+  transform: translateZ(7vh);
+}
+
+.side:nth-child(6) {
+  transform: rotateY(90deg) translateZ(7vh);
+}
+
+.side:nth-child(3) {
+  transform: rotateY(-90deg) translateZ(7vh);
+}
+
+.side:nth-child(4) {
+  transform: rotateX(90deg) translateZ(7vh);
+}
+
+.side:nth-child(5) {
+  transform: rotateX(-90deg) translateZ(7vh);
+}
+
+.side:nth-child(2) {
+  transform: rotateY(-180deg) translateZ(7vh);
+}
+
+.two-1,
+.three-1,
+.four-1,
+.five-1,
+.six-1 {
+  top: 20%;
+  left: 20%;
+}
+
+.four-3,
+.five-3,
+.six-4 {
+  top: 20%;
+  left: 80%;
+}
+
+.one-1,
+.three-2,
+.five-5 {
+  top: 50%;
+  left: 50%;
+}
+
+.four-2,
+.five-2,
+.six-3 {
+  top: 80%;
+  left: 20%;
+}
+
+.two-2,
+.three-3,
+.four-4,
+.five-4,
+.six-6 {
+  top: 80%;
+  left: 80%;
+}
+
+.six-2 {
+  top: 50%;
+  left: 20%;
+}
+
+.six-5 {
+  top: 50%;
+  left: 80%;
+}
+
+.show-1 {
+  border-radius: 2vh;
+  transform: rotateX(720deg) rotateZ(-720deg);
+}
+
+.show-6 {
+  border-radius: 2vh;
+  transform: rotateY(-450deg) rotateZ(-1440deg);
+}
+
+.show-3 {
+  border-radius: 2vh;
+  transform: rotateY(810deg) rotateZ(720deg);
+}
+
+.show-4 {
+  border-radius: 2vh;
+  transform: rotateX(-810deg) rotateZ(-1080deg);
+}
+
+.show-5 {
+  border-radius: 2vh;
+  transform: rotateX(450deg) rotateZ(-720deg);
+}
+
+.show-2 {
+  border-radius: 2vh;
+  transform: rotateX(-900deg) rotateZ(1080deg);
+}
