@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { everyCard } from './cards';
 import { getImage } from './helpers/getImage';
 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
+
 function App() {
   const navigate = useNavigate();
 
@@ -41,13 +43,13 @@ function App() {
   }
 
   async function loadRooms() {
-    const response = await fetch('http://localhost:4000/get-rooms');
+    const response = await fetch(`${SERVER_URL}/get-rooms`);
     const json = await response.json();
     setRooms(json);
   }
 
   async function joinRoom(id?: string) {
-    const res = await fetch('http://localhost:4000/join-room', {
+    const res = await fetch(`${SERVER_URL}/join-room`, {
       method: 'POST',
       body: JSON.stringify({ roomId: id ? id : roomId, username: username }),
       headers: {
@@ -77,7 +79,7 @@ function App() {
     ) {
       alert('Invalid Room ID');
     } else {
-      const res = await fetch('http://localhost:4000/create-room', {
+      const res = await fetch(`${SERVER_URL}/create-room`, {
         method: 'POST',
         body: JSON.stringify({
           roomId: roomId,
