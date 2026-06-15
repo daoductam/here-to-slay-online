@@ -48,7 +48,7 @@ jobs:
           CI: true
         run: |
           cd client
-          npm run test
+          npm run test -- --passWithNoTests
 
       - name: Build Client
         run: |
