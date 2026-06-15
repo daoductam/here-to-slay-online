@@ -1808,3 +1808,185 @@ div.cross {
   height: 1vh;
   background-color: #fc7c37;
 } */
+
+/* RESPONSIVE DESIGN - MOBILE & TABLET PORTRAIT / LANDSCAPE */
+
+/* Portrait Mode (max-width: 768px or vertical aspect ratios) */
+@media screen and (max-width: 768px), screen and (max-aspect-ratio: 1/1) {
+  /* Restructure board layout from columns to vertical stacks */
+  .content {
+    flex-direction: column !important;
+    height: calc(100vh - 10vh) !important;
+    width: 100vw !important;
+    margin-left: 0 !important;
+    overflow-y: auto !important;
+    justify-content: flex-start !important;
+    align-items: center !important;
+    padding-bottom: 25vh !important; /* space for hand cards */
+    padding-top: 8vh !important; /* space for header */
+  }
+
+  /* Other players' container (col 0 and col 2) */
+  .content .col {
+    width: 95vw !important;
+    height: auto !important;
+    margin-top: 0 !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    order: 1 !important; /* top */
+  }
+
+  /* Center board and Own board container (col 1) */
+  .content .col.middle {
+    width: 95vw !important;
+    height: auto !important;
+    margin-top: 2vh !important;
+    flex-direction: column !important;
+    order: 2 !important; /* bottom */
+  }
+
+  /* Center Board scaling */
+  .center-board {
+    margin-top: 2vh !important;
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+  }
+  .center-board .mat {
+    width: 90vw !important;
+    height: auto !important;
+    padding: 10px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .center-board .mat .cards {
+    width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    justify-content: space-around !important;
+  }
+
+  /* Adjust own board and other player boards sizing */
+  .own-board, .player-board {
+    width: 90vw !important;
+    margin-bottom: 2vh !important;
+  }
+  
+  .own-board .mat {
+    width: 100% !important;
+    height: auto !important;
+    padding: 15px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .own-board .top-row, .own-board .bottom-row {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-around !important;
+    margin: 5px 0 !important;
+  }
+
+  .player-board .mat {
+    width: 100% !important;
+    height: auto !important;
+    padding: 10px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+
+  /* Scale mat slots */
+  .own-board .small, .own-board img.small-card {
+    width: 15vw !important;
+    height: 21vw !important;
+  }
+  .own-board .large, .own-board img.large-card {
+    width: 18vw !important;
+    height: 31vw !important;
+  }
+
+  .player-board .small, .player-board img.small-card {
+    width: 12vw !important;
+    height: 17vw !important;
+  }
+  .player-board .large, .player-board img.large-card {
+    width: 15vw !important;
+    height: 26vw !important;
+  }
+
+  /* Fix absolute button positioning */
+  .game button.circular.pass {
+    top: 1vh !important;
+    right: 2vh !important;
+    z-index: 10000 !important;
+  }
+  .game .show-board-trigger {
+    top: 1vh !important;
+    right: 2vh !important;
+    z-index: 10000 !important;
+  }
+  .game button.circular.exit {
+    top: 1vh !important;
+    left: 8vh !important;
+    z-index: 10000 !important;
+  }
+
+  /* Scale shown card (Card inspector popup) */
+  .shown-card.show {
+    width: 100vw !important;
+    max-width: 100vw !important;
+    padding: 2vw !important;
+  }
+  .small-enlarged {
+    width: 75vw !important;
+    height: 105vw !important; /* Keep aspect ratio 1:1.4 */
+  }
+  .shown-card .requirements {
+    width: 90vw !important;
+  }
+
+  /* Hand menu scaling */
+  .bottomMenu {
+    height: 25vh !important;
+  }
+  .small-md {
+    width: 11vh !important;
+    height: 15.4vh !important;
+  }
+  .hand.cover .img-container img.small-md {
+    margin: 0 0 0 -5vh !important;
+  }
+}
+
+/* Landscape Mode for Smaller Screens (e.g. mobile rotated, max-height: 500px) */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .content {
+    height: 75vh !important;
+  }
+  .col {
+    height: 75vh !important;
+  }
+  .col.middle {
+    height: 75vh !important;
+  }
+  /* Scale down player boards slightly */
+  .player-board .mat {
+    transform: scale(0.8);
+    transform-origin: center;
+  }
+  .own-board .mat {
+    transform: scale(0.8);
+    transform-origin: center;
+  }
+  .center-board .mat {
+    transform: scale(0.8);
+    transform-origin: center;
+  }
+}
+
