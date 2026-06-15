@@ -387,7 +387,7 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
             }}
           >
             <img
-              src='https://jingxianlau.github.io/here-to-slay/assets/icons/guardian.png'
+            src={`${process.env.PUBLIC_URL}/assets/icons/guardian.png`}
               alt='Shield'
             />
           </div>

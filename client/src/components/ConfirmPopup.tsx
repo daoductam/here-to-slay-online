@@ -176,9 +176,8 @@ const ConfirmCard: React.FC<ConfirmCardProps> = ({ socket }) => {
                 </div>
               )
             ) : customText && customCenter ? (
-              customCenter.includes(
-                'https://jingxianlau.github.io/here-to-slay/'
-              ) ? (
+              customCenter.includes('/assets/') ||
+              customCenter.includes('here-to-slay') ? (
                 <div className='img-container'>
                   <img
                     src={customCenter}

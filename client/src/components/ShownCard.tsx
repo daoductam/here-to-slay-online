@@ -125,7 +125,7 @@ const ShownCard: React.FC<ShownCardProps> = () => {
                 shownCard.val && (
                   <div className='requirement' key={i}>
                     <img
-                      src={`https://jingxianlau.github.io/here-to-slay/assets/icons/${val.hero}.png`}
+                      src={`${process.env.PUBLIC_URL}/assets/icons/${val.hero}.png`}
                       alt={val.hero}
                     />
                     <h1>

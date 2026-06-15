@@ -114,7 +114,7 @@ function App() {
   return (
     <div className='App' style={{ margin: '25px' }}>
       <img
-        src='https://jingxianlau.github.io/here-to-slay/HTS_title.png'
+        src={`${process.env.PUBLIC_URL}/HTS_title.png`}
         rel='preload'
         alt='Here to Slay'
         id='hts-logo'

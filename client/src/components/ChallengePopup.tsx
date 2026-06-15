@@ -217,7 +217,7 @@ const ChallengePopup: React.FC<{
               }}
             >
               <img
-                src='https://jingxianlau.github.io/here-to-slay/assets/challenge/challenge.png'
+                src={`${process.env.PUBLIC_URL}/assets/challenge/challenge.png`}
                 alt='challenge'
                 className='small-lg center-img'
                 draggable='false'
@@ -341,7 +341,7 @@ const ChallengePopup: React.FC<{
                       <div>
                         <img
                           src={
-                            'https://jingxianlau.github.io/here-to-slay/assets/sword.png'
+                            `${process.env.PUBLIC_URL}/assets/sword.png`
                           }
                           alt={''}
                         />
@@ -370,7 +370,7 @@ const ChallengePopup: React.FC<{
                         </h1>
                         <img
                           src={
-                            'https://jingxianlau.github.io/here-to-slay/assets/shield.png'
+                            `${process.env.PUBLIC_URL}/assets/shield.png`
                           }
                           alt={''}
                         />
@@ -413,7 +413,7 @@ const ChallengePopup: React.FC<{
                       </span>
                     ) : (
                       <img
-                        src='https://jingxianlau.github.io/here-to-slay/assets/sword.png'
+                        src={`${process.env.PUBLIC_URL}/assets/sword.png`}
                         alt={''}
                         className={`logo`}
                       />
@@ -473,7 +473,7 @@ const ChallengePopup: React.FC<{
                       </span>
                     ) : (
                       <img
-                        src='https://jingxianlau.github.io/here-to-slay/assets/shield.png'
+                        src={`${process.env.PUBLIC_URL}/assets/shield.png`}
                         alt={''}
                         className={`logo`}
                       />

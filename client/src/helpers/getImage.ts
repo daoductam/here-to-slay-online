@@ -6,11 +6,11 @@ export const shortenName = (card: AnyCard) =>
 export const getImage = (card: AnyCard) => {
   if (card) {
     if (card.type === CardType.hero) {
-      return `https://jingxianlau.github.io/here-to-slay/assets/${card.type}/${
+      return `${process.env.PUBLIC_URL}/assets/${card.type}/${
         card.class
       }/${shortenName(card)}.png`;
     } else {
-      return `https://jingxianlau.github.io/here-to-slay/assets/${
+      return `${process.env.PUBLIC_URL}/assets/${
         card.type
       }/${shortenName(card)}.png`;
     }

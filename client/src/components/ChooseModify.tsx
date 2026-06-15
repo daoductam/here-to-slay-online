@@ -73,8 +73,8 @@ const ChooseModify: React.FC<ChooseModifyProps> = ({
               className='logo'
               src={
                 dice === 0
-                  ? 'https://jingxianlau.github.io/here-to-slay/assets/sword.png'
-                  : 'https://jingxianlau.github.io/here-to-slay/assets/shield.png'
+                  ? `${process.env.PUBLIC_URL}/assets/sword.png`
+                  : `${process.env.PUBLIC_URL}/assets/shield.png`
               }
               alt={''}
               style={{ opacity: state.turn.challenger ? 1 : 0 }}

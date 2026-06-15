@@ -692,16 +692,16 @@ const magicCards: MagicCard[] = [
 ];
 
 const others: string[] = [
-  'https://jingxianlau.github.io/here-to-slay/assets/icons/bard.png',
-  'https://jingxianlau.github.io/here-to-slay/assets/icons/fighter.png',
-  'https://jingxianlau.github.io/here-to-slay/assets/icons/hero.png',
-  'https://jingxianlau.github.io/here-to-slay/assets/icons/ranger.png',
-  'https://jingxianlau.github.io/here-to-slay/assets/icons/guardian.png',
-  'https://jingxianlau.github.io/here-to-slay/assets/icons/wizard.png',
-  'https://jingxianlau.github.io/here-to-slay/assets/icons/thief.png',
-  'https://jingxianlau.github.io/here-to-slay/assets/circle-star.svg',
+  `${process.env.PUBLIC_URL}/assets/icons/bard.png`,
+  `${process.env.PUBLIC_URL}/assets/icons/fighter.png`,
+  `${process.env.PUBLIC_URL}/assets/icons/hero.png`,
+  `${process.env.PUBLIC_URL}/assets/icons/ranger.png`,
+  `${process.env.PUBLIC_URL}/assets/icons/guardian.png`,
+  `${process.env.PUBLIC_URL}/assets/icons/wizard.png`,
+  `${process.env.PUBLIC_URL}/assets/icons/thief.png`,
+  `${process.env.PUBLIC_URL}/assets/circle-star.svg`,
 
-  'https://jingxianlau.github.io/here-to-slay/assets/back/back-creme.png'
+  `${process.env.PUBLIC_URL}/assets/back/back-creme.png`
 ];
 
 export const everyCard: (AnyCard | string)[] = [

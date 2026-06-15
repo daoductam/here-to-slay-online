@@ -1,0 +1,3 @@
+main: refactor hardcoded assets to dynamic process.env.PUBLIC_URL paths
+
+Co-authored-by: AI Agent <agent@ai-kit>
