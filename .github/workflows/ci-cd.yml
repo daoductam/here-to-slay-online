@@ -53,6 +53,7 @@ jobs:
       - name: Build Client
         env:
           CI: false
+          REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_URL }}
         run: |
           cd client
           npm run build
@@ -83,6 +84,7 @@ jobs:
       - name: Build Client
         env:
           CI: false
+          REACT_APP_SERVER_URL: ${{ secrets.REACT_APP_SERVER_URL }}
         run: |
           cd client
           npm run build
