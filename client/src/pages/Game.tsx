@@ -87,7 +87,8 @@ const Game: React.FC = () => {
       return;
     } else {
       // create socket connection
-      let socket = io('http://localhost:4000');
+      const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
+      let socket = io(serverUrl);
       socket.on('connect', () => {});
       setSocket(socket);
 
