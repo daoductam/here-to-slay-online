@@ -89,26 +89,30 @@ const Game: React.FC = () => {
       // create socket connection
       const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
       let socket = io(serverUrl);
-      socket.on('connect', () => {});
+      
+      socket.on('connect', () => {
+        socket.emit(
+          'enter-lobby',
+          credentials.roomId,
+          credentials.userId,
+          localStorage.getItem('username'),
+          (successful: boolean) => {
+            if (!successful) {
+              localStorage.removeItem('credentials');
+              navigate('/');
+            } else {
+              socket.emit('start-match', credentials.roomId, credentials.userId);
+            }
+          }
+        );
+      });
+
       socket.on('match-aborted', (playerName: string) => {
         alert(`${playerName} đã rời khỏi trận đấu. Đang quay về trang chủ.`);
         localStorage.removeItem('credentials');
         navigate('/');
       });
       setSocket(socket);
-
-      socket.emit(
-        'enter-lobby',
-        credentials.roomId,
-        credentials.userId,
-        localStorage.getItem('username'),
-        (successful: boolean) => {
-          if (!successful) {
-            localStorage.removeItem('credentials');
-            navigate('/');
-          }
-        }
-      );
 
       socket.on('game-state', (newState: GameState) => {
         console.log(newState);
@@ -569,8 +573,6 @@ const Game: React.FC = () => {
             }
         }
       });
-
-      socket.emit('start-match', credentials.roomId, credentials.userId);
 
       mode.set(
         !window.matchMedia('(pointer: none)').matches ? 'touch' : 'cursor'
