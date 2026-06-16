@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/here-to-slay-online/static/css/main.80acd7ef.css",
-    "main.js": "/here-to-slay-online/static/js/main.986303d5.js",
+    "main.js": "/here-to-slay-online/static/js/main.62640851.js",
     "static/media/HTS_Dragon.png": "/here-to-slay-online/static/media/HTS_Dragon.aa39b3320c76b88844d2.png",
     "static/media/ranger.png": "/here-to-slay-online/static/media/ranger.dae7deac6d5f51905163.png",
     "static/media/thief.png": "/here-to-slay-online/static/media/thief.1d842182b738f4cb2ae4.png",
@@ -16,10 +16,10 @@
     "static/media/cross.png": "/here-to-slay-online/static/media/cross.2835c81cf9c25c6d7662.png",
     "index.html": "/here-to-slay-online/index.html",
     "main.80acd7ef.css.map": "/here-to-slay-online/static/css/main.80acd7ef.css.map",
-    "main.986303d5.js.map": "/here-to-slay-online/static/js/main.986303d5.js.map"
+    "main.62640851.js.map": "/here-to-slay-online/static/js/main.62640851.js.map"
   },
   "entrypoints": [
     "static/css/main.80acd7ef.css",
-    "static/js/main.986303d5.js"
+    "static/js/main.62640851.js"
   ]
 }
