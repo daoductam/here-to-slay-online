@@ -1,13 +1,26 @@
 import React, { useState } from 'react';
 import { cardDataVi, gameRulesVi, cardClassesVi, CardInfoVi } from '../helpers/cardDataVi';
+import { everyCard } from '../cards';
+import { getImage } from '../helpers/getImage';
+import { AnyCard } from '../types';
 import '../style/guide.css';
 
 const GameGuide: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'rules' | 'cards'>('rules');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedClass, setSelectedClass] = useState<string>('all');
-  const [expandedCard, setExpandedCard] = useState<string | null>(null);
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  // Helper to resolve card image path by English name
+  const getCardImagePath = (cardName: string): string => {
+    const cardObj = everyCard.find(
+      c => typeof c !== 'string' && c.name.toLowerCase() === cardName.toLowerCase()
+    ) as AnyCard | undefined;
+    if (cardObj) {
+      return getImage(cardObj) || '';
+    }
+    return '';
+  };
 
   // Filter cards based on search query and selected class
   const filteredCards = cardDataVi.filter(card => {
@@ -20,14 +33,6 @@ const GameGuide: React.FC = () => {
 
     return matchesSearch && matchesClass;
   });
-
-  const toggleExpandCard = (cardName: string) => {
-    if (expandedCard === cardName) {
-      setExpandedCard(null);
-    } else {
-      setExpandedCard(cardName);
-    }
-  };
 
   const renderRulesTab = () => (
     <div className="rules-section">
@@ -97,45 +102,49 @@ const GameGuide: React.FC = () => {
       <div className="cards-list-container">
         {filteredCards.length > 0 ? (
           filteredCards.map((card: CardInfoVi) => {
-            const isExpanded = expandedCard === card.name;
+            const imgPath = getCardImagePath(card.name);
             return (
               <div
-                className={`guide-card-item ${isExpanded ? 'expanded' : ''} type-${card.type}`}
+                className={`guide-card-item type-${card.type}`}
                 key={card.name}
-                onClick={() => toggleExpandCard(card.name)}
               >
-                <div className="guide-card-header">
-                  <div className="card-title-group">
-                    <span className="card-class-badge">{card.classVi}</span>
-                    <h4 className="card-name-vi">{card.nameVi}</h4>
-                    <span className="card-name-en">{card.name}</span>
-                  </div>
-                  <div className="card-header-right">
-                    {card.rollReq && (
-                      <span className="card-roll-req">
-                        <span className="material-symbols-outlined">casino</span>
-                        {card.rollReq}
-                      </span>
-                    )}
-                    <span className="material-symbols-outlined expand-arrow">
-                      {isExpanded ? 'expand_less' : 'expand_more'}
+                <div className="guide-card-img-holder">
+                  {imgPath ? (
+                    <img
+                      src={imgPath}
+                      alt={card.name}
+                      className="guide-card-image"
+                      draggable="false"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <div className="guide-card-placeholder">
+                      <span className="material-symbols-outlined">style</span>
+                    </div>
+                  )}
+                  {card.rollReq && (
+                    <span className="card-roll-badge">
+                      <span className="material-symbols-outlined">casino</span>
+                      {card.rollReq}
                     </span>
-                  </div>
+                  )}
                 </div>
 
-                {isExpanded && (
-                  <div className="guide-card-body" onClick={e => e.stopPropagation()}>
-                    <div className="divider"></div>
-                    <div className="card-effect-label">Hiệu ứng / Kỹ năng:</div>
-                    <p className="card-effect-text">{card.effectVi}</p>
-                    {card.failReq && (
-                      <div className="card-fail-req">
-                        <strong>Hình phạt (Nếu thất bại {card.failReq}):</strong>
-                        <p>{card.nameVi} sẽ gây hình phạt nếu đổ xúc xắc dưới {card.failReq.replace('<', '')}.</p>
-                      </div>
-                    )}
-                  </div>
-                )}
+                <div className="guide-card-details">
+                  <span className="card-class-badge">{card.classVi}</span>
+                  <h4 className="card-name-vi">{card.nameVi}</h4>
+                  <span className="card-name-en">{card.name}</span>
+                  
+                  <div className="divider"></div>
+                  
+                  <p className="card-effect-text">{card.effectVi}</p>
+                  
+                  {card.failReq && (
+                    <div className="card-fail-badge-vi">
+                      Phạt nếu đổ {card.failReq}
+                    </div>
+                  )}
+                </div>
               </div>
             );
           })

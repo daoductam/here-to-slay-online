@@ -1,45 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap');
+
+/* Apply Montserrat font family specifically to GameGuide elements and wrapper to bypass Lilita One */
+.game-layout-container,
+.game-layout-container *,
+.game-guide-desktop,
+.game-guide-desktop *,
+.game-guide-mobile-drawer,
+.game-guide-mobile-drawer *,
+.game-guide-mobile-toggle,
+.game-guide-mobile-toggle * {
+  font-family: 'Montserrat', sans-serif !important;
+}
+
 /* GAME GUIDE PANEL STYLING */
 
 .game-layout-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
-  max-width: 1400px;
-  margin: 0 auto;
+  align-items: stretch; /* Stretch children vertically */
+  width: 100%;
+  height: 100vh;
   padding: 20px;
   gap: 20px;
   box-sizing: border-box;
+  overflow: hidden;
+  background-color: #2c2c2c;
 }
 
-@media (max-width: 1024px) {
-  .game-layout-container {
-    flex-direction: column;
-    align-items: center;
-  }
+.game-layout-container .App {
+  flex: 0 0 420px; /* Fixed width for the form side */
+  overflow-y: auto;
+  padding-right: 10px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.game-layout-container .App::-webkit-scrollbar {
+  width: 6px;
+}
+
+.game-layout-container .App::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
 }
 
 /* Desktop Display */
 .game-guide-desktop {
-  width: 450px;
-  min-width: 380px;
-  height: calc(100vh - 50px);
-  background: rgba(45, 45, 45, 0.6);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-left: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+  flex: 1; /* Stretch horizontally to cover all remaining space */
+  height: 100%;
+  background: rgba(20, 20, 20, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   border-radius: 16px;
   overflow: hidden;
-  margin-left: 20px;
+  margin-left: 0;
 }
 
 /* Header & Tabs */
 .guide-header {
   padding: 20px 20px 10px 20px;
-  background: rgba(30, 30, 30, 0.8);
+  background: rgba(15, 15, 15, 0.75);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -48,6 +73,7 @@
   margin: 0 0 15px 0;
   color: #fc7c37;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  font-weight: 700 !important;
 }
 
 .guide-tabs {
@@ -57,12 +83,13 @@
 
 .guide-tab-btn {
   flex: 1;
-  background: rgba(80, 80, 80, 0.4);
-  color: #ccc;
+  background: rgba(80, 80, 80, 0.2);
+  color: #bbb;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 8px;
   padding: 8px 0;
-  font-size: 1.8vh;
+  font-size: 1.6vh;
+  font-weight: 500 !important;
   cursor: pointer;
   box-shadow: none;
   width: 100%;
@@ -71,7 +98,7 @@
 }
 
 .guide-tab-btn:hover {
-  background: rgba(252, 124, 55, 0.2);
+  background: rgba(252, 124, 55, 0.15);
   color: #fff;
   transform: none;
   box-shadow: none;
@@ -82,6 +109,7 @@
   color: #fff;
   border-color: #fc7c37;
   box-shadow: 0 4px 12px rgba(252, 124, 55, 0.3);
+  font-weight: 700 !important;
 }
 
 /* Body Scrollable Area */
@@ -89,10 +117,11 @@
   flex: 1;
   overflow-y: auto;
   padding: 20px;
+  background: rgba(20, 20, 20, 0.25);
 }
 
 .guide-body::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .guide-body::-webkit-scrollbar-track {
@@ -100,8 +129,8 @@
 }
 
 .guide-body::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
 }
 
 .guide-body::-webkit-scrollbar-thumb:hover {
@@ -113,64 +142,69 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
 .rule-card {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  padding: 15px;
-  transition: transform 0.2s ease;
+  padding: 20px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .rule-card:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .rule-card h3 {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   font-size: 2.2vh;
-  margin: 0 0 10px 0;
+  font-weight: 700 !important;
+  margin: 0 0 12px 0;
   color: #fca06c;
 }
 
 .rule-card h3 span {
-  font-size: 2.6vh;
+  font-size: 2.8vh;
 }
 
 .rule-content {
   margin: 0;
   font-size: 1.7vh;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #e0e0e0;
   white-space: pre-line;
 }
 
 .section-title {
   font-size: 2.2vh;
-  margin: 10px 0 0 0;
+  font-weight: 700 !important;
+  margin: 15px 0 5px 0;
   color: #fc7c37;
 }
 
 .mechanics-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 15px;
 }
 
 .mechanic-card {
-  background: rgba(0, 0, 0, 0.2);
-  border-left: 3px solid #fc7c37;
-  border-radius: 0 8px 8px 0;
-  padding: 12px;
+  background: rgba(0, 0, 0, 0.15);
+  border-left: 4px solid #fc7c37;
+  border-radius: 0 10px 10px 0;
+  padding: 15px;
 }
 
 .mechanic-card h4 {
-  margin: 0 0 5px 0;
+  margin: 0 0 8px 0;
   font-size: 1.9vh;
+  font-weight: 700 !important;
   color: #fff;
 }
 
@@ -178,7 +212,7 @@
   margin: 0;
   font-size: 1.6vh;
   color: #ccc;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 /* Cards Tab Layout */
@@ -190,33 +224,38 @@
 
 .search-filter-bar {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 15px;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 20px;
 }
 
 .search-input-wrapper {
   position: relative;
+  flex: 2;
   display: flex;
   align-items: center;
+}
+
+.class-filter-select-wrapper {
+  flex: 1;
 }
 
 .search-icon {
   position: absolute;
   left: 12px;
-  color: #aaa;
-  font-size: 20px;
+  color: #888;
+  font-size: 22px;
 }
 
 .guide-search-input {
   width: 100% !important;
   box-sizing: border-box;
-  padding: 10px 35px 10px 40px !important;
+  padding: 12px 35px 12px 42px !important;
   border-radius: 10px !important;
-  background: rgba(30, 30, 30, 0.8) !important;
+  background: rgba(30, 30, 30, 0.6) !important;
   border: 1px solid rgba(255, 255, 255, 0.1) !important;
   color: #fff !important;
-  font-size: 1.8vh !important;
+  font-size: 1.7vh !important;
 }
 
 .clear-search-btn {
@@ -246,11 +285,11 @@
 
 .guide-class-select {
   width: 100%;
-  background: rgba(30, 30, 30, 0.8);
+  background: rgba(30, 30, 30, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  padding: 10px;
-  font-size: 1.8vh;
+  padding: 12px;
+  font-size: 1.7vh;
   color: #fff;
   cursor: pointer;
   outline: none;
@@ -261,165 +300,173 @@
   color: #fff;
 }
 
+/* Grid of Cards container */
 .cards-list-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-height: 52vh;
-  overflow-y: auto;
-  padding-right: 5px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 5px;
 }
 
-/* Accordion Card List Item */
+/* Styled Card Grid Item */
 .guide-card-item {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 10px;
-  padding: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+  background: rgba(18, 18, 18, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
   overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  box-sizing: border-box;
 }
 
 .guide-card-item:hover {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(252, 124, 55, 0.3);
+  transform: translateY(-4px);
+  border-color: rgba(252, 124, 55, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.guide-card-item.expanded {
-  background: rgba(252, 124, 55, 0.05);
-  border-color: rgba(252, 124, 55, 0.5);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.guide-card-header {
+/* Image Container */
+.guide-card-img-holder {
+  width: 100%;
+  position: relative;
+  background: #111;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
+  padding: 10px 0;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.card-title-group {
+.guide-card-image {
+  height: 220px;
+  max-width: 90%;
+  object-fit: contain;
+  border-radius: 8px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
+}
+
+.guide-card-placeholder {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-card-placeholder span {
+  font-size: 60px;
+  color: #333;
+}
+
+.card-roll-badge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.4vh;
+  font-weight: 700 !important;
+  background: rgba(252, 124, 55, 0.95);
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.card-roll-badge span {
+  font-size: 16px;
+  color: #fff;
+}
+
+/* Card details (below image) */
+.guide-card-details {
+  padding: 15px;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  flex: 1;
 }
 
 .card-class-badge {
   font-size: 1.2vh;
-  padding: 2px 6px;
+  font-weight: 700 !important;
+  padding: 2px 8px;
   border-radius: 4px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.08);
   align-self: flex-start;
   color: #ddd;
+  margin-bottom: 6px;
+  text-transform: uppercase;
 }
 
 .card-name-vi {
   margin: 0;
   font-size: 1.9vh;
+  font-weight: 700 !important;
   color: #fff;
 }
 
 .card-name-en {
   font-size: 1.4vh;
   color: #888;
-}
-
-.card-header-right {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.card-roll-req {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 1.6vh;
-  background: rgba(252, 124, 55, 0.2);
-  color: #ffaa7a;
-  border: 1px solid rgba(252, 124, 55, 0.3);
-  padding: 2px 8px;
-  border-radius: 12px;
-}
-
-.card-roll-req span {
-  font-size: 18px;
-  color: #ffaa7a;
-}
-
-.expand-arrow {
-  color: #888;
-}
-
-.guide-card-body {
-  margin-top: 10px;
-  padding-top: 10px;
+  margin-bottom: 10px;
 }
 
 .divider {
   height: 1px;
   background: rgba(255, 255, 255, 0.08);
   margin-bottom: 10px;
-}
-
-.card-effect-label {
-  font-size: 1.4vh;
-  color: #fc7c37;
-  margin-bottom: 4px;
+  width: 100%;
 }
 
 .card-effect-text {
   margin: 0;
-  font-size: 1.6vh;
-  line-height: 1.4;
-  color: #e0e0e0;
+  font-size: 1.5vh;
+  line-height: 1.5;
+  color: #d8d8d8;
+  flex: 1;
 }
 
-.card-fail-req {
-  margin-top: 8px;
-  background: rgba(254, 46, 46, 0.1);
-  border: 1px solid rgba(254, 46, 46, 0.2);
-  padding: 8px;
-  border-radius: 6px;
-}
-
-.card-fail-req strong {
-  font-size: 1.4vh;
+.card-fail-badge-vi {
+  margin-top: 10px;
+  font-size: 1.3vh;
+  font-weight: 600 !important;
   color: #ff7373;
-}
-
-.card-fail-req p {
-  margin: 2px 0 0 0;
-  font-size: 1.4vh;
-  color: #fcc;
+  background: rgba(254, 46, 46, 0.12);
+  border: 1px solid rgba(254, 46, 46, 0.2);
+  padding: 4px 8px;
+  border-radius: 6px;
+  text-align: center;
 }
 
 .no-cards-found {
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 20px;
+  padding: 60px 20px;
   text-align: center;
   color: #888;
 }
 
 .no-cards-found span {
-  font-size: 40px;
-  margin-bottom: 10px;
+  font-size: 50px;
+  margin-bottom: 15px;
   color: #555;
 }
 
 /* Coloring classes based on character types */
-.type-leader { border-left: 3px solid #ffaa00; }
-.type-hero { border-left: 3px solid #00aaff; }
-.type-monster { border-left: 3px solid #ff4444; }
-.type-magic { border-left: 3px solid #cc00ff; }
-.type-item { border-left: 3px solid #11b56b; }
-.type-modifier { border-left: 3px solid #999; }
-.type-challenge { border-left: 3px solid #e15c15; }
+.type-leader { border-top: 4px solid #ffaa00; }
+.type-hero { border-top: 4px solid #00aaff; }
+.type-monster { border-top: 4px solid #ff4444; }
+.type-magic { border-top: 4px solid #cc00ff; }
+.type-item { border-top: 4px solid #11b56b; }
+.type-modifier { border-top: 4px solid #999; }
+.type-challenge { border-top: 4px solid #e15c15; }
 
-/* Mobile Floating Drawer */
+/* Mobile Floating Drawer overrides */
 .game-guide-mobile-toggle {
   display: none;
   position: fixed;
@@ -443,11 +490,6 @@
 .game-guide-mobile-toggle span {
   font-size: 28px;
   color: #fff;
-}
-
-.game-guide-mobile-toggle:hover {
-  transform: scale(1.1);
-  box-shadow: 0 6px 20px rgba(252, 124, 55, 0.7);
 }
 
 .game-guide-mobile-overlay {
@@ -512,10 +554,6 @@
   color: #aaa;
 }
 
-.close-drawer-btn:hover span {
-  color: #fff;
-}
-
 .drawer-tabs {
   display: flex;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -553,5 +591,16 @@
   }
   .game-guide-mobile-toggle {
     display: flex;
+  }
+  .game-layout-container {
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    height: auto;
+  }
+  .game-layout-container .App {
+    flex: 1;
+    width: 100%;
+    height: auto;
   }
 }
