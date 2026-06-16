@@ -4,6 +4,7 @@
   right: -360px;
   width: 340px;
   height: 100vh;
+  height: 100dvh;
   background-color: rgba(18, 14, 11, 0.95);
   border-left: 2px solid #fc7c37;
   box-shadow: -5px 0 25px rgba(0, 0, 0, 0.8);
@@ -233,4 +234,56 @@
   cursor: not-allowed !important;
   box-shadow: none !important;
   transform: none !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .chat-sidebar {
+    width: 100%;
+    right: -100%;
+    border-left: none;
+    box-shadow: none;
+  }
+
+  .chat-sidebar.open {
+    right: 0;
+  }
+
+  .chat-header {
+    padding: 15px 20px;
+  }
+
+  .chat-header h3 {
+    font-size: 1.25rem;
+  }
+
+  .chat-empty-state {
+    font-size: 1rem;
+  }
+
+  .chat-message-system {
+    font-size: 0.85rem;
+  }
+
+  .chat-message-sender {
+    font-size: 0.8rem;
+  }
+
+  .chat-message-bubble p {
+    font-size: 0.95rem;
+  }
+
+  .chat-message-time {
+    font-size: 0.7rem;
+  }
+
+  .chat-input-form {
+    padding: 12px 15px;
+    padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px)); /* Support safe area on iPhone */
+  }
+
+  .chat-input-form input {
+    font-size: 0.95rem;
+    padding: 8px 12px;
+  }
 }

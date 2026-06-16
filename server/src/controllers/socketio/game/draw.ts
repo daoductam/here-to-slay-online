@@ -37,6 +37,8 @@ export const drawTwo = (roomId: string, userId: string) => {
   const gameState = rooms[roomId].state;
   if (playerNum === -1 || gameState.turn.phase !== 'draw') return;
 
+  // RULE: Draw 2 cards per turn (original)
+  /*
   for (let i = 0; i < 2; i++) {
     let card = gameState.secret.deck.pop() as AnyCard;
 
@@ -49,6 +51,20 @@ export const drawTwo = (roomId: string, userId: string) => {
   }
 
   gameState.players[playerNum].numCards += 2;
+  */
+
+  // RULE: Draw 1 card per turn (modified)
+  /*
+  let card = gameState.secret.deck.pop() as AnyCard;
+  if (!card) {
+    card = reshuffleDeck(roomId);
+  }
+  card.player = playerNum;
+  gameState.players[playerNum].hand.push(card);
+  gameState.players[playerNum].numCards += 1;
+  */
+
+  // RULE: No draw at start of turn (modified)
   gameState.turn.phase = 'play';
   gameState.turn.phaseChanged = true;
   sendGameState(roomId);

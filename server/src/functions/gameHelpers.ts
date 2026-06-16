@@ -66,7 +66,8 @@ export function nextPlayer(roomId: string) {
     card => card.type === CardType.large && !('class' in card) && card.name === 'Mega Slime'
   );
   rooms[roomId].state.turn.movesLeft = hasMegaSlime ? 4 : 3;
-  rooms[roomId].state.turn.phase = 'draw';
+  // rooms[roomId].state.turn.phase = 'draw'; // Bypassed drawing at start of turn
+  rooms[roomId].state.turn.phase = 'play';
   rooms[roomId].state.turn.phaseChanged = true;
 
   for (

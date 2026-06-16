@@ -42,7 +42,8 @@ export const startRoll = (roomId: string, userId: string) => {
       // SETUP MATCH
       rooms[roomId].state.turn.player = startRolls.inList[0];
       rooms[roomId].state.turn.phaseChanged = true;
-      rooms[roomId].state.turn.phase = 'draw';
+      // rooms[roomId].state.turn.phase = 'draw'; // Bypassed drawing at start of turn
+      rooms[roomId].state.turn.phase = 'play';
       rooms[roomId].state.turn.isRolling = false;
       rooms[roomId].state.dice.main.roll[0] = 1;
       rooms[roomId].state.dice.main.roll[1] = 1;

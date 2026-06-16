@@ -88,10 +88,11 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
                 }}
                 onClick={() => {
                   if (
-                    state.turn.player === state.playerNum ||
-                    (state.turn.effect &&
+                    (state.turn.phase !== 'use-effect' && state.turn.player === state.playerNum) ||
+                    (state.turn.phase === 'use-effect' &&
+                      state.turn.effect &&
                       state.turn.effect.players.some(
-                        val => val === playerNum
+                        val => val === state.playerNum
                       ) &&
                       (mode.val !== 'touch' || shownCard.val?.id === card.id))
                   ) {
