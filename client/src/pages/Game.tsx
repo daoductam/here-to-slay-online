@@ -727,6 +727,24 @@ const Game: React.FC = () => {
                 <p style={{ fontSize: '3vh', color: '#fc7c37', marginTop: '2vh' }}>
                   Đang chờ kết nối lại: <strong>{state.match.disconnectTimeLeft}s</strong>
                 </p>
+                <button
+                  onClick={() => {
+                    socket?.emit('exit-match', credentials?.roomId, credentials?.userId);
+                  }}
+                  style={{
+                    marginTop: '4vh',
+                    padding: '1.2vh 2.4vh',
+                    fontSize: '2.2vh',
+                    backgroundColor: '#DC143C',
+                    border: 'none',
+                    borderRadius: '8px',
+                    boxShadow: '0 4px #a00d0d',
+                    cursor: 'pointer',
+                    color: 'white'
+                  }}
+                >
+                  Thoát trận đấu
+                </button>
               </div>
             ) : state.turn.phase === 'start-roll' ? (
               <StartRoll rollSummary={rollSummary} />
