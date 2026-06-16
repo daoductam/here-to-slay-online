@@ -15,6 +15,7 @@ import {
   ModifierCard,
   MonsterCard
 } from '../../../types';
+import { getLeader, hasLeader, hasMonster } from '../../../functions/leaderEffects';
 import { endTurnDiscard, useEffect } from './useEffect';
 
 export const meetsRollRequirements = (
@@ -48,6 +49,7 @@ export const modifyRoll = (
     modifier: ModifierCard;
     effect: 0 | 1;
     dice: 0 | 1;
+    guardianChoice?: 'plus' | 'minus' | 'none';
   } | null,
   modify: boolean
 ) => {
@@ -329,6 +331,11 @@ export const modifyRoll = (
             } else {
               useEffect(roomId, cardUserId, preppedCard);
             }
+
+            // Arctic Aries passive: draw 1 card when successfully activating a Hero ability
+            if (hasMonster(state, state.turn.player, 'Arctic Aries')) {
+              drawCards(roomId, state.turn.player, 1);
+            }
           } else {
             // fail
             state.mainDeck.preparedCard.successful = false;
@@ -386,19 +393,72 @@ export const modifyRoll = (
     return;
   }
 
-  const { dice, effect, modifier } = info;
+  const { dice, effect, modifier, guardianChoice } = info;
+
+  // Crowned Serpent passive: Draw 1 card when any player plays a Modifier card
+  for (let i = 0; i < rooms[roomId].numPlayers; i++) {
+    if (hasMonster(state, i, 'Crowned Serpent')) {
+      drawCards(roomId, i, 1);
+    }
+  }
+
+  const rollOwner = dice === 0
+    ? (state.turn.challenger !== undefined ? state.turn.challenger : state.turn.player)
+    : state.turn.player;
 
   if (dice === 0) {
     const mod = modifier.modifier[effect] as number;
     state.dice.main.modifier.push(modifier);
     state.dice.main.modValues.push(mod);
     state.dice.main.total += mod;
+
+    // Apply Abyss Queen passive: +1 to roll when another player plays a Modifier on your roll
+    if (playerNum !== rollOwner && hasMonster(state, rollOwner, 'Abyss Queen')) {
+      const aq = state.board[rollOwner].largeCards.find(card => card.type === CardType.large && !('class' in card) && card.name === 'Abyss Queen');
+      if (aq) {
+        state.dice.main.modifier.push(aq);
+        state.dice.main.modValues.push(1);
+        state.dice.main.total += 1;
+      }
+    }
+
+    // Apply Guardian leader effect
+    if (hasLeader(state, playerNum, HeroClass.guardian) && guardianChoice && guardianChoice !== 'none') {
+      const leaderVal = guardianChoice === 'plus' ? 1 : -1;
+      const leader = getLeader(state, playerNum);
+      if (leader) {
+        state.dice.main.modifier.push(leader);
+        state.dice.main.modValues.push(leaderVal);
+        state.dice.main.total += leaderVal;
+      }
+    }
   } else {
     const mod = modifier.modifier[effect] as number;
     if (!state.dice.defend) return;
     state.dice.defend.modifier.push(modifier);
     state.dice.defend.modValues.push(mod);
     state.dice.defend.total += mod;
+
+    // Apply Abyss Queen passive: +1 to roll when another player plays a Modifier on your roll
+    if (playerNum !== rollOwner && hasMonster(state, rollOwner, 'Abyss Queen')) {
+      const aq = state.board[rollOwner].largeCards.find(card => card.type === CardType.large && !('class' in card) && card.name === 'Abyss Queen');
+      if (aq) {
+        state.dice.defend.modifier.push(aq);
+        state.dice.defend.modValues.push(1);
+        state.dice.defend.total += 1;
+      }
+    }
+
+    // Apply Guardian leader effect
+    if (hasLeader(state, playerNum, HeroClass.guardian) && guardianChoice && guardianChoice !== 'none') {
+      const leaderVal = guardianChoice === 'plus' ? 1 : -1;
+      const leader = getLeader(state, playerNum);
+      if (leader) {
+        state.dice.defend.modifier.push(leader);
+        state.dice.defend.modValues.push(leaderVal);
+        state.dice.defend.total += leaderVal;
+      }
+    }
   }
 
   state.match.isReady.fill(dice === 0 ? true : null);

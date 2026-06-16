@@ -5,12 +5,14 @@ import {
   GameState,
   HeroCard,
   LeaderCard,
-  MonsterCard
+  MonsterCard,
+  HeroClass
 } from '../types';
 import shuffle from 'lodash.shuffle';
 import { initialState } from '../cards';
 import { sendGameState } from '../server';
 import random from 'lodash.random';
+import { getLeader, hasMonster } from './leaderEffects';
 
 
 export const distributeCards = (state: GameState, numPlayers: number) => {
@@ -60,7 +62,10 @@ export function nextPlayer(roomId: string) {
 
   const newPlayer = (player + 1) % rooms[roomId].numPlayers;
   rooms[roomId].state.turn.player = newPlayer;
-  rooms[roomId].state.turn.movesLeft = 3;
+  const hasMegaSlime = rooms[roomId].state.board[newPlayer].largeCards.some(
+    card => card.type === CardType.large && !('class' in card) && card.name === 'Mega Slime'
+  );
+  rooms[roomId].state.turn.movesLeft = hasMegaSlime ? 4 : 3;
   rooms[roomId].state.turn.phase = 'draw';
   rooms[roomId].state.turn.phaseChanged = true;
 
@@ -107,6 +112,8 @@ export function nextPlayer(roomId: string) {
     });
   }
 
+  rooms[roomId].state.players[newPlayer].leaderAbilityUsed = false;
+
   sendGameState(roomId);
 }
 
@@ -122,6 +129,40 @@ export function rollDice(roomId: string) {
       state.dice.main.total += passive.mod;
       state.dice.main.modifier.push(passive.card);
       state.dice.main.modValues.push(passive.mod);
+    }
+  }
+
+  // Apply Leader effects (Bard & Ranger)
+  const activePlayer = state.turn.player;
+  const leaderCard = getLeader(state, activePlayer);
+  if (leaderCard) {
+    if (state.turn.phase === 'use-effect-roll' && leaderCard.class === HeroClass.bard) {
+      state.dice.main.total += 1;
+      state.dice.main.modifier.push(leaderCard);
+      state.dice.main.modValues.push(1);
+    } else if (state.turn.phase === 'attack-roll' && leaderCard.class === HeroClass.ranger) {
+      state.dice.main.total += 1;
+      state.dice.main.modifier.push(leaderCard);
+      state.dice.main.modValues.push(1);
+    }
+  }
+
+  // Apply Monster passives (Anuran Cauldron, Dark Dragon King)
+  const board = state.board[activePlayer];
+  if (board) {
+    const anuran = board.largeCards.find(card => card.type === CardType.large && !('class' in card) && card.name === 'Anuran Cauldron');
+    if (anuran) {
+      state.dice.main.total += 1;
+      state.dice.main.modifier.push(anuran);
+      state.dice.main.modValues.push(1);
+    }
+    if (state.turn.phase === 'use-effect-roll') {
+      const ddk = board.largeCards.find(card => card.type === CardType.large && !('class' in card) && card.name === 'Dark Dragon King');
+      if (ddk) {
+        state.dice.main.total += 1;
+        state.dice.main.modifier.push(ddk);
+        state.dice.main.modValues.push(1);
+      }
     }
   }
 

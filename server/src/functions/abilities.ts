@@ -132,7 +132,7 @@ export const heroAbilities: {
         sendGameState(roomId);
       },
       (roomId, state, effect, returnVal, fromPlayer) => {
-        if (!state.turn.effect || !returnVal || !returnVal.card || !fromPlayer)
+        if (!state.turn.effect || !returnVal || !returnVal.card || fromPlayer === undefined)
           return;
 
         const card = removeCard(roomId, fromPlayer, returnVal.card.id);
@@ -755,7 +755,7 @@ export const heroAbilities: {
         sendGameState(roomId);
       },
       (roomId, state, effect, returnVal, fromPlayer) => {
-        if (!fromPlayer) return;
+        if (fromPlayer === undefined) return;
         if (returnVal && returnVal.num && returnVal.num === -2)
           endEffect(roomId, state, effect);
 
@@ -986,7 +986,7 @@ export const heroAbilities: {
       (roomId, state, effect, returnVal) => {
         if (
           !returnVal ||
-          !returnVal.num ||
+          returnVal.num === undefined ||
           !effect.active ||
           !effect.active.num
         )

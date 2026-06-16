@@ -10,6 +10,7 @@ import {
 } from '../types';
 import { sendGameState } from '../server';
 import { addHero, removeHero, reshuffleDeck } from './gameHelpers';
+import { getLeader, hasMonster } from './leaderEffects';
 import {
   endTurnDiscard,
   useEffect
@@ -148,6 +149,17 @@ export function playCard(
 export function destroyCard(roomId: string, playerNum: number, card: HeroCard) {
   const state = rooms[roomId].state;
 
+  // Terratuga passive: Hero cards cannot be destroyed
+  if (hasMonster(state, playerNum, 'Terratuga')) {
+    return;
+  }
+
+  // Corrupted Sabretooth passive: Steal instead of destroy
+  if (hasMonster(state, state.turn.player, 'Corrupted Sabretooth') && state.turn.player !== playerNum) {
+    stealCard(roomId, state.turn.player, playerNum, card);
+    return;
+  }
+
   if (!card.item || card.item.name !== 'Decoy Doll') {
     const heroCard = removeHero(roomId, playerNum, card.id);
     if (!heroCard) return;
@@ -158,6 +170,10 @@ export function destroyCard(roomId: string, playerNum: number, card: HeroCard) {
       ]--;
     } else {
       state.board[playerNum].classes[card.class]--;
+    }
+    // Dracos passive: Draw 1 card when a Hero in your party is destroyed
+    if (hasMonster(state, playerNum, 'Dracos')) {
+      drawCards(roomId, playerNum, 1);
     }
   }
 
@@ -278,5 +294,25 @@ export function drawCards(roomId: string, playerNum: number, num: number) {
     card.player = playerNum;
     state.players[playerNum].hand.push(card);
     state.players[playerNum].numCards++;
+
+    // Rex Major passive: Draw extra card when drawing a Modifier
+    if (card.type === CardType.modifier && hasMonster(state, playerNum, 'Rex Major')) {
+      num++;
+    }
+
+    // Orthus & Malamammoth passives: Play drawn Magic/Item card immediately for free
+    if (playerNum === state.turn.player) {
+      if (card.type === CardType.magic && hasMonster(state, playerNum, 'Orthus')) {
+        const magicCard = card;
+        setTimeout(() => {
+          playCard(roomId, playerNum, magicCard as MagicCard, true);
+        }, 500);
+      } else if (card.type === CardType.item && hasMonster(state, playerNum, 'Malamammoth')) {
+        const itemCard = card;
+        setTimeout(() => {
+          playCard(roomId, playerNum, itemCard as ItemCard, true);
+        }, 500);
+      }
+    }
   }
 }

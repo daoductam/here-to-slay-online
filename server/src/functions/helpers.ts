@@ -11,7 +11,8 @@ export const addPlayer = (roomId: string, userId: string, username: string) => {
     hand: [],
     numCards: 0,
     protection: [],
-    passives: []
+    passives: [],
+    leaderAbilityUsed: false
   });
   room.state.board.push({
     classes: {

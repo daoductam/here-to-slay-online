@@ -143,7 +143,12 @@ export const addCard = (
   effect: Effect,
   returnVal?: returnType
 ) => {
-  if (!returnVal || !returnVal.num || !effect.active || !effect.active.num)
+  if (
+    !returnVal ||
+    returnVal.num === undefined ||
+    !effect.active ||
+    !effect.active.num
+  )
     return;
   if (returnVal.num === -2) {
     effect.goNext = true;
@@ -161,6 +166,11 @@ export const addCard = (
   const card = removeCardIndex(roomId, effect.active.num[0], returnVal.num);
   if (card === -1) return;
   addCards(roomId, [card], state.turn.player);
+
+  if (!effect.active.card) {
+    effect.active.card = [];
+  }
+  effect.active.card.push(card);
 
   setTimeout(() => {
     sendGameState(roomId);
@@ -523,11 +533,12 @@ export const pullIfPull = (cardType: CardType) => [
     setTimeout(() => {
       if (!state.turn.effect || state.players[state.turn.player].numCards <= 0)
         return;
-      if (
-        state.players[state.turn.player].hand[
-          state.players[state.turn.player].numCards - 1
-        ].type === cardType
-      ) {
+      if (!effect.active || !effect.active.card || effect.active.card.length === 0) {
+        endEffect(roomId, state, effect);
+        return;
+      }
+      const pulledCard = effect.active.card[effect.active.card.length - 1];
+      if (pulledCard.type === cardType) {
         effect.choice = [playerPick];
         effect.players = [state.turn.player];
         const cardName = effect.card.name.replaceAll(' ', '-').toLowerCase();

@@ -16,6 +16,7 @@ const MainBoard: React.FC<MainBoardProps> = ({
   const { state } = useClientContext();
 
   const [boardOrder, setBoardOrder] = useState<number[][]>([[], [], []]);
+  const [thiefTargeting, setThiefTargeting] = useState(false);
 
   useEffect(() => {
     const numPlayers = state.val.match.players.length;
@@ -105,7 +106,13 @@ const MainBoard: React.FC<MainBoardProps> = ({
                     {state.val.match.players[boardNum]}
                   </h2>
                 )}
-                <PlayerBoard socket={socket} playerNum={boardNum} col={num} />
+                <PlayerBoard 
+                  socket={socket} 
+                  playerNum={boardNum} 
+                  col={num} 
+                  thiefTargeting={thiefTargeting}
+                  setThiefTargeting={setThiefTargeting}
+                />
               </div>
             ) : (
               <div

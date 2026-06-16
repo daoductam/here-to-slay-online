@@ -1,10 +1,7 @@
-import {
-  nextPlayer,
-  removeFreeUse,
-  rollDice
-} from '../../../functions/gameHelpers';
-import { discardCard } from '../../../functions/game';
+import { nextPlayer, removeFreeUse, rollDice } from '../../../functions/gameHelpers';
+import { discardCard, drawCards } from '../../../functions/game';
 import { checkCredentials, validSender } from '../../../functions/helpers';
+import { hasLeader } from '../../../functions/leaderEffects';
 import { heroAbilities } from '../../../functions/abilities';
 import { rooms } from '../../../rooms';
 import { disconnectAll, sendGameState } from '../../../server';
@@ -137,6 +134,10 @@ export const useEffect = (
     }
   } else {
     // new effect
+    if (card.type === CardType.magic && hasLeader(state, playerNum, HeroClass.wizard)) {
+      drawCards(roomId, playerNum, 1);
+    }
+
     let privateArr = [];
     for (let i = 0; i < rooms[roomId].numPlayers; i++) {
       privateArr.push(true);

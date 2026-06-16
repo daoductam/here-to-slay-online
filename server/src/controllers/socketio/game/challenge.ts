@@ -5,6 +5,7 @@ import { rooms } from '../../../rooms';
 import { sendGameState } from '../../../server';
 import { AnyCard, CardType, HeroClass } from '../../../types';
 import { endTurnDiscard, useEffect } from './useEffect';
+import { getLeader, hasMonster } from '../../../functions/leaderEffects';
 import random from 'lodash.random';
 
 export const prepareCard = (roomId: string, userId: string, card: AnyCard) => {
@@ -39,8 +40,19 @@ export const prepareCard = (roomId: string, userId: string, card: AnyCard) => {
     }
     sendGameState(roomId);
     setTimeout(() => {
-      state.turn.phase = 'challenge';
-      state.turn.phaseChanged = true;
+      // Warworn Owlbear passive: played Items cannot be Challenged
+      if (hasMonster(state, state.turn.player, 'Warworn Owlbear')) {
+        state.mainDeck.preparedCard = null;
+        if (state.turn.movesLeft > 0) {
+          state.turn.phase = 'play';
+          state.turn.phaseChanged = true;
+        } else {
+          endTurnDiscard(roomId, state.secret.playerIds[state.turn.player]);
+        }
+      } else {
+        state.turn.phase = 'challenge';
+        state.turn.phaseChanged = true;
+      }
       sendGameState(roomId);
     }, 1200);
   } else if (
@@ -120,6 +132,16 @@ export const challenge = (
       }
     }, 1200);
   } else if (challenged && cardId) {
+    // Bloodwing passive: when challenged, the challenger must discard a card
+    if (challenged && cardId && hasMonster(state, state.turn.player, 'Bloodwing') && playerNum !== state.turn.player) {
+      if (state.players[playerNum].hand.length > 0) {
+        const otherCardToDiscard = state.players[playerNum].hand.find(c => c.id !== cardId);
+        if (otherCardToDiscard) {
+          discardCard(roomId, playerNum, otherCardToDiscard.id);
+        }
+      }
+    }
+
     if (!discardCard(roomId, playerNum, cardId)) {
       return;
     }
@@ -159,6 +181,32 @@ export const challengeRoll = (roomId: string, userId: string) => {
   if (state.dice.main.total === 0) {
     state.dice.main.roll = roll;
     state.dice.main.total = val;
+
+    // Apply Fighter leader effect for challenger
+    const challengerLeader = getLeader(state, playerNum);
+    if (challengerLeader && challengerLeader.class === HeroClass.fighter) {
+      state.dice.main.total += 1;
+      state.dice.main.modifier.push(challengerLeader);
+      state.dice.main.modValues.push(1);
+    }
+
+    // Apply Challenger Monster passives (Anuran Cauldron, Titan Wyvern)
+    const challenger = state.turn.challenger;
+    if (challenger !== undefined) {
+      const anuran = state.board[challenger].largeCards.find(card => card.type === CardType.large && !('class' in card) && card.name === 'Anuran Cauldron');
+      if (anuran) {
+        state.dice.main.total += 1;
+        state.dice.main.modifier.push(anuran);
+        state.dice.main.modValues.push(1);
+      }
+      const titan = state.board[challenger].largeCards.find(card => card.type === CardType.large && !('class' in card) && card.name === 'Titan Wyvern');
+      if (titan) {
+        state.dice.main.total += 1;
+        state.dice.main.modifier.push(titan);
+        state.dice.main.modValues.push(1);
+      }
+    }
+
     state.dice.defend = {
       roll: [1, 1],
       total: 0,
@@ -168,6 +216,22 @@ export const challengeRoll = (roomId: string, userId: string) => {
   } else if (state.dice.defend !== null) {
     state.dice.defend.roll = roll;
     state.dice.defend.total = val;
+
+    // Apply Defender passives (Anuran Cauldron, Titan Wyvern)
+    const activePlayer = state.turn.player;
+    const anuran = state.board[activePlayer].largeCards.find(card => card.type === CardType.large && !('class' in card) && card.name === 'Anuran Cauldron');
+    if (anuran) {
+      state.dice.defend.total += 1;
+      state.dice.defend.modifier.push(anuran);
+      state.dice.defend.modValues.push(1);
+    }
+    const titan = state.board[activePlayer].largeCards.find(card => card.type === CardType.large && !('class' in card) && card.name === 'Titan Wyvern');
+    if (titan) {
+      state.dice.defend.total += 1;
+      state.dice.defend.modifier.push(titan);
+      state.dice.defend.modValues.push(1);
+    }
+
     for (let i = 0; i < state.players[state.turn.player].passives.length; i++) {
       const passive = state.players[state.turn.player].passives[i];
       if (passive.type === 'roll') {

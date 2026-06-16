@@ -102,6 +102,7 @@ export interface GameState {
       turns: number;
       card: HeroCard | LargeCard | MagicCard;
     }[];
+    leaderAbilityUsed: boolean;
   }[];
 
   // PUBLIC
@@ -166,7 +167,7 @@ export interface GameState {
   turn: {
     player: number;
     challenger?: number;
-    movesLeft: 0 | 1 | 2 | 3;
+    movesLeft: 0 | 1 | 2 | 3 | 4;
     phase:
       | 'start-roll'
       | 'end-turn-discard'

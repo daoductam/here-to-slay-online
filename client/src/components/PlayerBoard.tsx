@@ -8,12 +8,16 @@ interface PlayerBoardProps {
   socket: Socket;
   playerNum: number;
   col: number;
+  thiefTargeting: boolean;
+  setThiefTargeting: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 const PlayerBoard: React.FC<PlayerBoardProps> = ({
   playerNum,
   col,
-  socket
+  socket,
+  thiefTargeting,
+  setThiefTargeting
 }) => {
   const {
     state: { val: state },
@@ -279,54 +283,74 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
         </div>
 
         <div className='bottom-row'>
-          {state.board[playerNum].largeCards.map(card => (
-            <div
-              className='large'
-              key={card.id}
-              onMouseEnter={() => {
-                if (!shownCard.locked) {
-                  shownCard.set(card);
-                  shownCard.setPos(col === 0 ? 'right' : 'left');
-                }
-              }}
-              onMouseLeave={() => {
-                if (!shownCard.locked) {
-                  shownCard.set(null);
-                  shownCard.setPos(null);
-                }
-              }}
-            >
-              <img
-                src={getImage(card)}
-                alt={card.name}
-                className='large-card'
-                draggable='false'
-                style={{
-                  filter:
-                    (state.turn.phase === 'choose-hero' &&
-                      state.turn.player === state.playerNum) ||
-                    (state.turn.phase === 'use-effect' &&
-                      state.turn.effect &&
-                      state.turn.effect.players.some(
-                        pn => pn === state.playerNum
-                      ) &&
-                      (state.turn.effect.action === 'choose-boards' ||
-                        (state.turn.effect.players.some(
-                          pn => pn === playerNum
-                        ) &&
-                          state.turn.effect.action === 'choose-own-board') ||
-                        (!state.turn.effect.players.some(
-                          pn => pn === playerNum
-                        ) &&
-                          state.turn.effect.action ===
-                            'choose-other-boards')) &&
-                      state.turn.player === state.playerNum)
-                      ? 'brightness(35%)'
-                      : 'none'
+          {state.board[playerNum].largeCards.map((card, idx) => {
+            const isLeader = 'class' in card;
+            const isThiefLeader = isLeader && (card as LeaderCard).class === 'thief';
+            const canUseThiefAbility = isThiefLeader &&
+              playerNum === state.playerNum &&
+              state.turn.player === state.playerNum &&
+              state.turn.phase === 'play' &&
+              state.turn.movesLeft >= 1 &&
+              !state.players[playerNum].leaderAbilityUsed &&
+              !state.turn.pause;
+
+            return (
+              <div
+                className='large'
+                key={card.id}
+                onMouseEnter={() => {
+                  if (!shownCard.locked) {
+                    shownCard.set(card);
+                    shownCard.setPos(col === 0 ? 'right' : 'left');
+                  }
                 }}
-              />
-            </div>
-          ))}
+                onMouseLeave={() => {
+                  if (!shownCard.locked) {
+                    shownCard.set(null);
+                    shownCard.setPos(null);
+                  }
+                }}
+                onClick={() => {
+                  if (canUseThiefAbility) {
+                    setThiefTargeting(prev => !prev);
+                  }
+                }}
+              >
+                <img
+                  src={getImage(card)}
+                  alt={card.name}
+                  className={`large-card ${canUseThiefAbility ? 'click' : ''}`}
+                  draggable='false'
+                  style={{
+                    filter:
+                      (state.turn.phase === 'choose-hero' &&
+                        state.turn.player === state.playerNum) ||
+                      (state.turn.phase === 'use-effect' &&
+                        state.turn.effect &&
+                        state.turn.effect.players.some(
+                          pn => pn === state.playerNum
+                        ) &&
+                        (state.turn.effect.action === 'choose-boards' ||
+                          (state.turn.effect.players.some(
+                            pn => pn === playerNum
+                          ) &&
+                            state.turn.effect.action === 'choose-own-board') ||
+                          (!state.turn.effect.players.some(
+                            pn => pn === playerNum
+                          ) &&
+                            state.turn.effect.action ===
+                              'choose-other-boards')) &&
+                        state.turn.player === state.playerNum)
+                        ? 'brightness(35%)'
+                        : 'none',
+                    boxShadow: canUseThiefAbility ? (thiefTargeting ? '0 0 20px #ffb830' : '0 0 15px #2eee9b') : 'none',
+                    border: canUseThiefAbility ? (thiefTargeting ? '2px solid #ffb830' : '2px solid #2eee9b') : 'none',
+                    borderRadius: '0.8vw'
+                  }}
+                />
+              </div>
+            );
+          })}
 
           {Array.from(
             Array(4 - state.board[playerNum].largeCards.length),
@@ -368,6 +392,48 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
             {state.turn.effect.purpose.split(' ')[0]}
           </div>
         )}
+
+      {thiefTargeting && playerNum !== state.playerNum && state.players[playerNum].numCards > 0 && (
+        <div
+          className="overlay chosen"
+          style={{
+            background: 'rgba(46, 238, 155, 0.45)',
+            border: '0.4vh solid #2eee9b',
+            boxShadow: '0 0 1.5vh #2eee9b',
+            cursor: 'pointer',
+            fontSize: '3vh',
+            fontWeight: 'bold',
+            color: '#fff',
+            textShadow: '0 0 10px #000'
+          }}
+          onClick={() => {
+            socket.emit('use-leader-ability', roomId, userId, playerNum);
+            setThiefTargeting(false);
+          }}
+        >
+          CƯỚP BÀI
+        </div>
+      )}
+
+      {thiefTargeting && playerNum === state.playerNum && (
+        <div
+          className="overlay"
+          style={{
+            background: 'rgba(0, 0, 0, 0.7)',
+            border: '0.4vh solid #ffb830',
+            boxShadow: '0 0 1.5vh #ffb830',
+            cursor: 'pointer',
+            fontSize: '3vh',
+            fontWeight: 'bold',
+            color: '#ffb830'
+          }}
+          onClick={() => {
+            setThiefTargeting(false);
+          }}
+        >
+          HỦY BỎ
+        </div>
+      )}
       <div className='passives'>
         {state.players[playerNum].protection.map(val => (
           <div

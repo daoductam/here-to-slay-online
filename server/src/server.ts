@@ -27,6 +27,7 @@ import {
   useEffect,
   useEffectRoll
 } from './controllers/socketio/game/useEffect';
+import { useLeaderAbility } from './controllers/socketio/game/leaderAbility';
 import 'dotenv/config';
 
 /* EXPRESS SERVER */
@@ -83,6 +84,9 @@ io.on('connection', socket => {
 
   // end-turn-discard
   socket.on('end-turn-discard', endTurnDiscard);
+
+  // leader ability
+  socket.on('use-leader-ability', useLeaderAbility);
 
   /* DISCONNECT & EXIT MATCH */
   socket.on('exit-match', (roomId: string, playerId: string) => {
