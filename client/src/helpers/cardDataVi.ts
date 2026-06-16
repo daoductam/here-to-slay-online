@@ -792,7 +792,7 @@ export const cardDataVi: CardInfoVi[] = [
     classVi: 'Phép Thuật',
     type: 'magic',
     typeVi: 'Phép Thuật',
-    effectVi: 'Mỗi người chơi (bao gồm cả bạn) phải chọn bỏ 1 lá bài Anh Hùng trên bàn vào chồng bài loại.'
+    effectVi: 'Bỏ 1 lá bài trên tay. PHÁ HỦY 1 lá Anh Hùng của đối phương.'
   },
   {
     name: 'Enchanted Spell',
@@ -801,7 +801,7 @@ export const cardDataVi: CardInfoVi[] = [
     classVi: 'Phép Thuật',
     type: 'magic',
     typeVi: 'Phép Thuật',
-    effectVi: 'Được phép rút 3 lá bài từ bộ bài.'
+    effectVi: 'Cộng thêm 2 vào tất cả lượt đổ xúc xắc của bạn từ giờ cho đến hết lượt.'
   },
   {
     name: 'Entangling Trap',
@@ -810,7 +810,7 @@ export const cardDataVi: CardInfoVi[] = [
     classVi: 'Phép Thuật',
     type: 'magic',
     typeVi: 'Phép Thuật',
-    effectVi: 'Vô hiệu hóa 1 Anh Hùng của đối thủ: Họ không thể sử dụng kỹ năng của Anh Hùng đó cho tới lượt tiếp theo.'
+    effectVi: 'Bỏ 2 lá bài trên tay. CƯỚP 1 lá Anh Hùng của đối phương.'
   },
   {
     name: 'Forced Exchange',
@@ -828,7 +828,7 @@ export const cardDataVi: CardInfoVi[] = [
     classVi: 'Phép Thuật',
     type: 'magic',
     typeVi: 'Phép Thuật',
-    effectVi: 'Gỡ bỏ toàn bộ bài Vật phẩm (cả ban phước và nguyền rủa) đang gắn trên tất cả Anh Hùng trên bàn và chuyển chúng vào chồng bài loại.'
+    effectVi: 'Trả lại toàn bộ các lá Vật Phẩm đang gắn trên tất cả Anh Hùng về tay chủ sở hữu của chúng.'
   },
   {
     name: 'Winds of Change',
@@ -837,7 +837,7 @@ export const cardDataVi: CardInfoVi[] = [
     classVi: 'Phép Thuật',
     type: 'magic',
     typeVi: 'Phép Thuật',
-    effectVi: 'Yêu cầu tất cả người chơi gom toàn bộ bài trên tay họ lại, xáo đều và chia lại số lượng bài ban đầu cho mỗi người.'
+    effectVi: 'Đưa 1 lá Vật Phẩm đang gắn trên 1 Anh Hùng về tay của bạn, sau đó RÚT 1 lá bài.'
   },
 
   // Item Cards
