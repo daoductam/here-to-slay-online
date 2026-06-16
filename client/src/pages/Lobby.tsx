@@ -156,7 +156,7 @@ const Lobby: React.FC = () => {
               )}
 
             {Array.from(
-              Array(Math.min(2, 3 - matchState.players.length)),
+              Array(Math.max(0, (matchState.targetPlayers || 3) - matchState.players.length)),
               (_, i) => (
                 <div className='player blank' key={i}>
                   <span className='material-symbols-outlined rotate'>

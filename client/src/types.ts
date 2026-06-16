@@ -163,6 +163,7 @@ export interface GameState {
     paused?: boolean;
     disconnectTimeLeft?: number;
     disconnectedPlayerNum?: number | null;
+    targetPlayers?: number;
   };
   turn: {
     player: number;

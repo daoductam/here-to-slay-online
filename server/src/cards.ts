@@ -966,7 +966,8 @@ export const initialState: GameState = {
     gameStarted: false,
     players: [],
     isReady: [],
-    startRolls: { maxVal: 0, inList: [], rolls: [] }
+    startRolls: { maxVal: 0, inList: [], rolls: [] },
+    targetPlayers: 3
   },
   turn: {
     player: 0,

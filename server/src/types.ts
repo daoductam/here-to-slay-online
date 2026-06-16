@@ -163,6 +163,7 @@ interface State {
     paused?: boolean;
     disconnectTimeLeft?: number;
     disconnectedPlayerNum?: number | null;
+    targetPlayers?: number;
   };
   turn: {
     player: number;

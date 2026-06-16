@@ -9,10 +9,11 @@ const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
 function App() {
   const navigate = useNavigate();
 
-  const [rooms, setRooms] = useState<{ [key: string]: number }>({});
+  const [rooms, setRooms] = useState<{ [key: string]: { joined: number; target: number } }>({});
   const [roomId, setRoomId] = useState('');
   const [username, setUsername] = useState('');
   const [isPrivate, setIsPrivate] = useState(true);
+  const [targetPlayers, setTargetPlayers] = useState(3);
 
   useEffect(() => {
     const uname = localStorage.getItem('username');
@@ -78,7 +79,9 @@ function App() {
       );
       navigate('/lobby');
     } else {
-      // alert(json.res);
+      if (id !== '999999') {
+        alert(json.res || 'Could not join room');
+      }
     }
   }
 
@@ -94,7 +97,8 @@ function App() {
         body: JSON.stringify({
           roomId: roomId,
           isPrivate: isPrivate,
-          username: username
+          username: username,
+          targetPlayers: targetPlayers
         }),
         headers: {
           'Content-Type': 'application/json'
@@ -151,13 +155,39 @@ function App() {
           />
           <br />
           <br />
-          <label>Private: </label>
-          <input
-            type='checkbox'
-            checked={isPrivate}
-            onChange={_ => setIsPrivate(!isPrivate)}
-            className='checkbox'
-          />
+          <div style={{ display: 'flex', gap: '15px', alignItems: 'center', justifyContent: 'center' }}>
+            <div>
+              <label>Private: </label>
+              <input
+                type='checkbox'
+                checked={isPrivate}
+                onChange={_ => setIsPrivate(!isPrivate)}
+                className='checkbox'
+              />
+            </div>
+            <div>
+              <label>Players: </label>
+              <select
+                value={targetPlayers}
+                onChange={e => setTargetPlayers(Number(e.target.value))}
+                style={{
+                  padding: '6px 12px',
+                  borderRadius: '6px',
+                  backgroundColor: '#222',
+                  color: '#fff',
+                  border: '1px solid #444',
+                  fontSize: '14px',
+                  outline: 'none',
+                  cursor: 'pointer'
+                }}
+              >
+                <option value={2}>2 Players</option>
+                <option value={3}>3 Players</option>
+                <option value={4}>4 Players</option>
+                <option value={5}>5 Players</option>
+              </select>
+            </div>
+          </div>
           <br />
           <br />
           <button
@@ -185,7 +215,7 @@ function App() {
             {Object.keys(rooms).map(id => (
               <div className='room' key={id} onClick={() => joinRoom(id)}>
                 <div>{id}</div>
-                <div>Players: {rooms[id]}</div>
+                <div>Players: {rooms[id]?.joined || 0}/{rooms[id]?.target || 3}</div>
               </div>
             ))}
           </div>

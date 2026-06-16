@@ -7,17 +7,20 @@ import { RequestHandler } from 'express';
 import random from 'lodash.random';
 
 export const getRooms: RequestHandler = (req, res) => {
-  let updatedRooms: { [key: string]: number } = {};
+  let updatedRooms: { [key: string]: { joined: number; target: number } } = {};
   for (const key of Object.keys(rooms)) {
     if (!rooms[key].private && !rooms[key].state.match.gameStarted) {
-      updatedRooms[key] = rooms[key].numPlayers;
+      updatedRooms[key] = {
+        joined: rooms[key].numPlayers,
+        target: rooms[key].state.match.targetPlayers || 3
+      };
     }
   }
   res.json(updatedRooms);
 };
 
 export const createRoom: RequestHandler = (req, res) => {
-  const { roomId, isPrivate, username } = req.body;
+  const { roomId, isPrivate, username, targetPlayers } = req.body;
 
   // No more rooms available
   if (Object.keys(rooms).length === 900000)
@@ -47,8 +50,14 @@ export const createRoom: RequestHandler = (req, res) => {
     }
   }
 
+  let limit = Number(targetPlayers);
+  if (Number.isNaN(limit) || limit < 2 || limit > 5) {
+    limit = 3;
+  }
+
   // setup match
   let gameState = cloneDeep(initialState);
+  gameState.match.targetPlayers = limit;
   rooms[roomId] = {
     numPlayers: 0,
     state: gameState,
@@ -65,6 +74,10 @@ export const joinRoom: RequestHandler = (req, res) => {
   const userId = uuid();
 
   if (room) {
+    const target = rooms[roomId].state.match.targetPlayers || 3;
+    if (rooms[roomId].numPlayers >= target) {
+      return res.status(400).json({ successful: false, res: 'Room is full' });
+    }
     if (rooms[roomId].state.match.players.includes(username)) {
       return res.json({ successful: false, res: 'Username taken' });
     } else if (rooms[roomId].state.match.gameStarted) {

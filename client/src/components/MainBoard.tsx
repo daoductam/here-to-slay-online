@@ -22,6 +22,14 @@ const MainBoard: React.FC<MainBoardProps> = ({
     const numPlayers = state.val.match.players.length;
     let board: number[][] = [[], [], []];
     switch (numPlayers) {
+      case 2:
+        board[1].push(-1);
+        board[1].push(state.val.playerNum);
+        board[0].push((state.val.playerNum + 1) % 2);
+
+        setBoardOrder(board);
+        break;
+
       case 3:
         board[1].push(-1);
         board[1].push(state.val.playerNum);

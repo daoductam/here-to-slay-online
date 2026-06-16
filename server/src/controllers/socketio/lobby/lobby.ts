@@ -99,9 +99,10 @@ export const ready = (socket: Socket) => {
     sendState(roomId);
     cb(true);
 
+    const target = rooms[roomId].state.match.targetPlayers || 3;
     if (
       rooms[roomId].state.match.isReady.every(val => val === true) &&
-      rooms[roomId].numPlayers >= 3
+      rooms[roomId].numPlayers === target
     ) {
       setTimeout(() => {
         emit(roomId, 'start-match');
@@ -136,8 +137,9 @@ export const startMatch = (socket: Socket) => {
       return;
     }
 
+    const target = rooms[roomId].state.match.targetPlayers || 3;
     if (
-      numPlayers >= 3 &&
+      numPlayers === target &&
       confirmNumPlayers(roomId) &&
       state.secret.playerSocketIds.every(val => Boolean(val)) &&
       state.match.isReady.every(val => val === true) &&
