@@ -987,6 +987,15 @@ export const cardDataVi: CardInfoVi[] = [
     typeVi: 'Bổ Trợ',
     effectVi: 'Trừ đi 4 điểm vào kết quả bất kỳ lần đổ xúc xắc nào.'
   },
+  {
+    name: '4-0',
+    nameVi: 'Bổ Trợ (+4)',
+    class: 'modifier',
+    classVi: 'Bổ Trợ',
+    type: 'modifier',
+    typeVi: 'Bổ Trợ',
+    effectVi: 'Cộng thêm 4 điểm vào kết quả bất kỳ lần đổ xúc xắc nào.'
+  },
 
   // Challenge
   {

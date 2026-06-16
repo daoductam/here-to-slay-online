@@ -1818,7 +1818,7 @@ export const rollRequirements: {
   'corrupted-sabretooth': { pass: 9, fail: -6 },
   'crowned-serpent': { pass: 10, fail: -7 },
   'dark-dragon-king': { pass: 8, fail: -7 },
-  dracos: { pass: -5, fail: 8 },
+  dracos: { pass: 8, fail: -5 },
   malamammoth: { pass: 8, fail: -4 },
   'mega-slime': { pass: 8, fail: -7 },
   orthus: { pass: 8, fail: -4 },
