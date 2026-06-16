@@ -89,7 +89,7 @@ const EffectPopup: React.FC<EffectPopupProps> = ({
                 ? Array.from(Array(state.turn.effect.active.num[1]), (_, i) => (
                     <img
                       key={i}
-                      src={`${process.env.PUBLIC_URL}/assets/back/back-creme.png`}
+                      src={`${process.env.PUBLIC_URL}/assets/back/back-creme.webp`}
                       alt='card'
                       onClick={
                         state.turn.effect?.players.some(
@@ -167,7 +167,7 @@ const EffectPopup: React.FC<EffectPopupProps> = ({
                 ? Array.from(Array(state.turn.effect.active.num[1]), (_, i) => (
                     <img
                       key={i}
-                      src={`${process.env.PUBLIC_URL}/assets/back/back-creme.png`}
+                      src={`${process.env.PUBLIC_URL}/assets/back/back-creme.webp`}
                       alt='card'
                       className={`small-md ${
                         state.turn.effect?.choice &&
@@ -259,7 +259,7 @@ const EffectPopup: React.FC<EffectPopupProps> = ({
                 ? Array.from(Array(state.turn.effect.active.num[1]), (_, i) => (
                     <img
                       key={i}
-                      src={`${process.env.PUBLIC_URL}/assets/back/back-creme.png`}
+                      src={`${process.env.PUBLIC_URL}/assets/back/back-creme.webp`}
                       alt='card'
                       className={`small-md ${
                         state.turn.effect &&
@@ -390,7 +390,7 @@ const EffectPopup: React.FC<EffectPopupProps> = ({
             ) : (
               <div className='img-container center'>
                 <img
-                  src={`${process.env.PUBLIC_URL}/assets/back/back-creme.png`}
+                  src={`${process.env.PUBLIC_URL}/assets/back/back-creme.webp`}
                   alt='hidden card'
                   className='small-xl'
                   draggable='false'

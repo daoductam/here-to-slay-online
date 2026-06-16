@@ -692,25 +692,37 @@ const magicCards: MagicCard[] = [
 ];
 
 const others: string[] = [
-  `${process.env.PUBLIC_URL}/assets/icons/bard.png`,
-  `${process.env.PUBLIC_URL}/assets/icons/fighter.png`,
-  `${process.env.PUBLIC_URL}/assets/icons/hero.png`,
-  `${process.env.PUBLIC_URL}/assets/icons/ranger.png`,
-  `${process.env.PUBLIC_URL}/assets/icons/guardian.png`,
-  `${process.env.PUBLIC_URL}/assets/icons/wizard.png`,
-  `${process.env.PUBLIC_URL}/assets/icons/thief.png`,
+  `${process.env.PUBLIC_URL}/assets/icons/bard.webp`,
+  `${process.env.PUBLIC_URL}/assets/icons/fighter.webp`,
+  `${process.env.PUBLIC_URL}/assets/icons/hero.webp`,
+  `${process.env.PUBLIC_URL}/assets/icons/ranger.webp`,
+  `${process.env.PUBLIC_URL}/assets/icons/guardian.webp`,
+  `${process.env.PUBLIC_URL}/assets/icons/wizard.webp`,
+  `${process.env.PUBLIC_URL}/assets/icons/thief.webp`,
   `${process.env.PUBLIC_URL}/assets/circle-star.svg`,
 
-  `${process.env.PUBLIC_URL}/assets/back/back-creme.png`
+  `${process.env.PUBLIC_URL}/assets/back/back-creme.webp`
 ];
 
-export const everyCard: (AnyCard | string)[] = [
+// Phase 1: Critical assets loaded before showing game UI
+// These are always visible (card back, icons, modifiers, challenge)
+export const criticalAssets: (AnyCard | string)[] = [
+  ...others,        // card back + class icons + svg (~9 items)
+  ...modifierCards, // 5 modifier cards
+  ...challengeCard  // 1 challenge card
+];
+
+// Phase 2: Deferred assets — loaded in background after game UI appears
+export const deferredAssets: (AnyCard | string)[] = [
   ...heroCards,
   ...itemCards,
   ...magicCards,
-  ...modifierCards,
-  ...challengeCard,
   ...leaderCards,
-  ...monsterCards,
-  ...others
+  ...monsterCards
+];
+
+// Kept for backward compatibility with any existing imports
+export const everyCard: (AnyCard | string)[] = [
+  ...criticalAssets,
+  ...deferredAssets
 ];

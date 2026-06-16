@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { everyCard } from './cards';
+import { criticalAssets, deferredAssets } from './cards';
 import { getImage } from './helpers/getImage';
 import GameGuide from './components/GameGuide';
 
@@ -24,15 +24,24 @@ function App() {
       navigate('/lobby');
     }
 
-    for (let i = 0; i < everyCard.length; i++) {
+    // Phase 1: preload critical assets first
+    for (let i = 0; i < criticalAssets.length; i++) {
       let img = new Image();
-      let card = everyCard[i];
+      let card = criticalAssets[i];
+      img.src = typeof card === 'string' ? card : (getImage(card) as string);
+    }
+
+    // Phase 2: preload deferred assets in background
+    for (let i = 0; i < deferredAssets.length; i++) {
+      let img = new Image();
+      let card = deferredAssets[i];
       img.src = typeof card === 'string' ? card : (getImage(card) as string);
     }
 
     loadRooms();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
 
   function changeUsername(name: string) {
     if (name.length > 15) {

@@ -8,11 +8,12 @@ export const getImage = (card: AnyCard) => {
     if (card.type === CardType.hero) {
       return `${process.env.PUBLIC_URL}/assets/${card.type}/${
         card.class
-      }/${shortenName(card)}.png`;
+      }/${shortenName(card)}.webp`;
     } else {
       return `${process.env.PUBLIC_URL}/assets/${
         card.type
-      }/${shortenName(card)}.png`;
+      }/${shortenName(card)}.webp`;
     }
   }
 };
+

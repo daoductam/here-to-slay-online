@@ -73,8 +73,8 @@ const ChooseModify: React.FC<ChooseModifyProps> = ({
               className='logo'
               src={
                 dice === 0
-                  ? `${process.env.PUBLIC_URL}/assets/sword.png`
-                  : `${process.env.PUBLIC_URL}/assets/shield.png`
+                  ? `${process.env.PUBLIC_URL}/assets/sword.webp`
+                  : `${process.env.PUBLIC_URL}/assets/shield.webp`
               }
               alt={''}
               style={{ opacity: state.turn.challenger ? 1 : 0 }}

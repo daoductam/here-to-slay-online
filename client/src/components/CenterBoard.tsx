@@ -43,7 +43,7 @@ const CenterBoard: React.FC<CenterBoardProps> = ({
     chosenCard.setShow(true);
     chosenCard.setCustomText('Draw');
     chosenCard.setCustomCenter(
-      `${process.env.PUBLIC_URL}/assets/back/back-creme.png`
+      `${process.env.PUBLIC_URL}/assets/back/back-creme.webp`
     );
   }
   function drawEffect() {
@@ -176,7 +176,7 @@ const CenterBoard: React.FC<CenterBoardProps> = ({
           <div className='small-cards'>
             <div className='small deck'>
               <img
-                src={`${process.env.PUBLIC_URL}/assets/back/back-creme.png`}
+                src={`${process.env.PUBLIC_URL}/assets/back/back-creme.webp`}
                 alt='flipped card'
                 className={`small-card ${
                   (state.turn.phase === 'draw' &&

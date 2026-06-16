@@ -25,7 +25,7 @@ import ConfirmPopup from '../components/ConfirmPopup';
 import RollPopup from '../components/RollPopup';
 import { meetsRollRequirements } from '../helpers/meetsRequirements';
 import EndPage from '../components/EndPage';
-import { everyCard } from '../cards';
+import { everyCard, criticalAssets, deferredAssets } from '../cards';
 import { getImage } from '../helpers/getImage';
 
 const Game: React.FC = () => {
@@ -55,7 +55,7 @@ const Game: React.FC = () => {
   const [showEffectPopup, setShowEffectPopup] = useState(false);
   const [showDiscardPopup, setShowDiscardPopup] = useState(false);
 
-  const [loadedImages, setLoadedImages] = useState(0);
+  const [loadedCritical, setLoadedCritical] = useState(0);
 
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -578,13 +578,21 @@ const Game: React.FC = () => {
         !window.matchMedia('(pointer: none)').matches ? 'touch' : 'cursor'
       );
 
-      for (let i = 0; i < everyCard.length; i++) {
+      // Phase 1: load critical assets — unblocks game UI when complete
+      for (let i = 0; i < criticalAssets.length; i++) {
         let img = new Image();
         img.onload = () => {
           img.onload = null;
-          setLoadedImages(val => ++val);
+          setLoadedCritical(val => ++val);
         };
-        let card = everyCard[i];
+        let card = criticalAssets[i];
+        img.src = typeof card === 'string' ? card : (getImage(card) as string);
+      }
+
+      // Phase 2: load deferred assets in background — fire-and-forget
+      for (let i = 0; i < deferredAssets.length; i++) {
+        let img = new Image();
+        let card = deferredAssets[i];
         img.src = typeof card === 'string' ? card : (getImage(card) as string);
       }
 
@@ -659,7 +667,7 @@ const Game: React.FC = () => {
               </div>
             ) : state.turn.phase === 'start-roll' ? (
               <StartRoll rollSummary={rollSummary} />
-            ) : loadedImages === everyCard.length ? (
+            ) : loadedCritical === criticalAssets.length ? (
               <>
                 <TopMenu />
 
@@ -719,7 +727,7 @@ const Game: React.FC = () => {
                     <div
                       className='inner'
                       style={{
-                        width: `${(loadedImages / everyCard.length) * 25}vw`,
+                        width: `${(loadedCritical / criticalAssets.length) * 25}vw`,
                         transition: 'ease-in-out 0.15s'
                       }}
                     ></div>

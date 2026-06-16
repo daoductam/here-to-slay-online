@@ -27,7 +27,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "convert:webp": "node ../scripts/convert-to-webp.js"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +54,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/socket.io-client": "^3.0.0",
     "easytimer-react-hook": "^2.1.0",
-    "gh-pages": "^6.1.0"
+    "gh-pages": "^6.1.0",
+    "sharp": "^0.33.5"
   }
 }

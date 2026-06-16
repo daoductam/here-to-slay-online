@@ -387,7 +387,7 @@ const PlayerBoard: React.FC<PlayerBoardProps> = ({
             }}
           >
             <img
-            src={`${process.env.PUBLIC_URL}/assets/icons/guardian.png`}
+            src={`${process.env.PUBLIC_URL}/assets/icons/guardian.webp`}
               alt='Shield'
             />
           </div>
