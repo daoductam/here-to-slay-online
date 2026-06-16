@@ -3,11 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { criticalAssets, deferredAssets } from './cards';
 import { getImage } from './helpers/getImage';
 import GameGuide from './components/GameGuide';
+import useAudio from './hooks/useAudio';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
 
 function App() {
   const navigate = useNavigate();
+  const { playBGM } = useAudio();
 
   const [rooms, setRooms] = useState<{ [key: string]: { joined: number; target: number } }>({});
   const [roomId, setRoomId] = useState('');
@@ -16,6 +18,7 @@ function App() {
   const [targetPlayers, setTargetPlayers] = useState(3);
 
   useEffect(() => {
+    playBGM('lobby');
     const uname = localStorage.getItem('username');
     if (uname) {
       setUsername(uname);

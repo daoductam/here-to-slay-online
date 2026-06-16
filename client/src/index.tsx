@@ -6,6 +6,7 @@ import App from './App';
 import Lobby from './pages/Lobby';
 import Game from './pages/Game';
 import ClientContextProvider from './context/ClientStateContext';
+import { AudioProvider } from './context/AudioContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -13,13 +14,15 @@ const root = ReactDOM.createRoot(
 root.render(
   // <React.StrictMode>
   <ClientContextProvider>
-    <HashRouter>
-      <Routes>
-        <Route path='/' element={<App />} />
-        <Route path='/lobby' element={<Lobby />} />
-        <Route path='/game' element={<Game />} />
-      </Routes>
-    </HashRouter>
+    <AudioProvider>
+      <HashRouter>
+        <Routes>
+          <Route path='/' element={<App />} />
+          <Route path='/lobby' element={<Lobby />} />
+          <Route path='/game' element={<Game />} />
+        </Routes>
+      </HashRouter>
+    </AudioProvider>
   </ClientContextProvider>
   // </React.StrictMode>
 );

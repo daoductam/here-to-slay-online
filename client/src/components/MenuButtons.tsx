@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useClientContext from '../hooks/useClientContext';
+import AudioSettings from './AudioSettings';
 
 interface MenuButtonsProps {
   showBoard: boolean;
@@ -18,6 +19,8 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({
     showHand,
     shownCard
   } = useClientContext();
+
+  const [isAudioOpen, setIsAudioOpen] = useState(false);
 
   return (
     <>
@@ -195,6 +198,21 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({
       >
         <span className="material-symbols-outlined icon">logout</span>
       </button>
+      {/* AUDIO SETTINGS */}
+      <button
+        className="circular show"
+        onClick={() => setIsAudioOpen(true)}
+        style={{
+          position: 'absolute',
+          top: '1vh',
+          left: '1vh',
+          backgroundColor: '#fc7c37'
+        }}
+      >
+        <span className="material-symbols-outlined icon">volume_up</span>
+      </button>
+
+      <AudioSettings isOpen={isAudioOpen} onClose={() => setIsAudioOpen(false)} />
     </>
   );
 };

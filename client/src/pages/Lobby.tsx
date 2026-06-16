@@ -5,10 +5,12 @@ import { GameState } from '../types';
 import { getCredentials } from '../helpers/getJSON';
 import useClientContext from '../hooks/useClientContext';
 import GameGuide from '../components/GameGuide';
+import useAudio from '../hooks/useAudio';
 
 const Lobby: React.FC = () => {
   const navigate = useNavigate();
   const { setCredentials } = useClientContext();
+  const { playBGM, stopBGM } = useAudio();
 
   const [socket, setSocket] = useState<Socket | null>(null);
   const [matchState, setMatchState] = useState<GameState['match'] | null>(null);
@@ -25,6 +27,7 @@ const Lobby: React.FC = () => {
       return;
     } else {
       // create socket connection
+      playBGM('lobby');
       const serverUrl = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
       let socket = io(serverUrl);
       socket.on('connect', () => {});
@@ -81,6 +84,7 @@ const Lobby: React.FC = () => {
 
       return () => {
         if (socket) socket.disconnect();
+        stopBGM();
       };
     }
 

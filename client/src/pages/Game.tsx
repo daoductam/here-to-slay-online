@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { isEmpty } from 'lodash';
 import '../style/game.css';
 import '../style/index.css';
@@ -27,6 +27,7 @@ import { meetsRollRequirements } from '../helpers/meetsRequirements';
 import EndPage from '../components/EndPage';
 import { everyCard, criticalAssets, deferredAssets } from '../cards';
 import { getImage } from '../helpers/getImage';
+import useAudio from '../hooks/useAudio';
 
 const Game: React.FC = () => {
   const navigate = useNavigate();
@@ -45,6 +46,9 @@ const Game: React.FC = () => {
 
   // variables
   const [socket, setSocket] = useState<Socket | null>(null);
+  
+  const { playBGM, playSFX, stopBGM } = useAudio();
+  const prevStateRef = useRef<GameState | null>(null);
 
   const [showHelp, setShowHelp] = useState(false);
   const [rollSummary, setRollSummary] = useState<number[]>([]);
@@ -119,6 +123,61 @@ const Game: React.FC = () => {
 
       socket.on('game-state', (newState: GameState) => {
         console.log(newState);
+
+        const prevState = prevStateRef.current;
+        prevStateRef.current = newState;
+
+        // Dynamic BGM Transitions
+        if (newState.turn.phase === 'end-game') {
+          playBGM('victory');
+        } else if (
+          newState.turn.phase === 'challenge' ||
+          newState.turn.phase === 'challenge-roll' ||
+          newState.turn.phase === 'attack-roll' ||
+          newState.turn.phase === 'use-effect-roll'
+        ) {
+          playBGM('battle');
+        } else {
+          playBGM('gameplay');
+        }
+
+        // SFX triggers
+        if (prevState) {
+          // Dice roll SFX
+          if (
+            (newState.turn.isRolling && !prevState.turn.isRolling) ||
+            (newState.dice.main.total > 0 && prevState.dice.main.total === 0) ||
+            (newState.dice.defend?.total && !prevState.dice.defend?.total)
+          ) {
+            playSFX('dice');
+          }
+
+          // Challenge trigger SFX
+          if (newState.turn.phase === 'challenge' && prevState.turn.phase !== 'challenge') {
+            playSFX('challenge');
+          }
+
+          // Card play SFX
+          if (newState.mainDeck.preparedCard && !prevState.mainDeck.preparedCard) {
+            playSFX('play');
+          }
+
+          // Monster Slay SFX
+          const getLargeCardCount = (s: GameState) =>
+            s.board.reduce((acc, b) => acc + (b.largeCards ? b.largeCards.length : 0), 0);
+          if (getLargeCardCount(newState) > getLargeCardCount(prevState)) {
+            playSFX('slay');
+          }
+
+          // Card draw SFX
+          if (newState.playerNum !== -1) {
+            const newHand = newState.players[newState.playerNum]?.hand?.length || 0;
+            const oldHand = prevState.players[newState.playerNum]?.hand?.length || 0;
+            if (newHand > oldHand) {
+              playSFX('draw');
+            }
+          }
+        }
 
         setState(newState);
         if (newState.turn.phase !== 'end-game') setShowBoard(_ => false);
@@ -603,6 +662,7 @@ const Game: React.FC = () => {
         if (socket) {
           socket.disconnect();
         }
+        stopBGM();
       };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
