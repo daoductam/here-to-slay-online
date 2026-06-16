@@ -375,7 +375,7 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'hero',
     typeVi: 'Anh Hùng',
     rollReq: '7+',
-    effectVi: 'Đổ xúc xắc 7+: Rút ngẫu nhiên 1 lá Anh Hùng trên tay của đối phương và đánh nó xuống bàn của bạn ngay lập tức.'
+    effectVi: 'Đổ xúc xắc 7+: Rút ngẫu nhiên 1 lá bài trên tay đối thủ. Nếu đó là lá Anh Hùng, rút thêm 1 lá nữa từ tay đối thủ đó.'
   },
   {
     name: 'Beary Wise',
@@ -395,7 +395,7 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'hero',
     typeVi: 'Anh Hùng',
     rollReq: '5+',
-    effectVi: 'Đổ xúc xắc 5+: Rút trộm 1 lá bài Thách Thức (Challenge) từ tay người chơi khác và đưa vào tay bạn.'
+    effectVi: 'Đổ xúc xắc 5+: Rút ngẫu nhiên 1 lá bài trên tay đối thủ. Nếu đó là lá Thách Thức (Challenge), rút thêm 1 lá nữa từ tay đối thủ đó.'
   },
   {
     name: 'Heavy Bear',
