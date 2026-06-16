@@ -59,6 +59,19 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const fadeIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const sfxRefs = useRef<Record<SFXTrack, HTMLAudioElement> | null>(null);
 
+  // Sync state values to Refs to avoid stale closures
+  const bgmEnabledRef = useRef(bgmEnabled);
+  const sfxEnabledRef = useRef(sfxEnabled);
+  const bgmVolumeRef = useRef(bgmVolume);
+  const sfxVolumeRef = useRef(sfxVolume);
+  const currentTrackRef = useRef(currentTrack);
+
+  useEffect(() => { bgmEnabledRef.current = bgmEnabled; }, [bgmEnabled]);
+  useEffect(() => { sfxEnabledRef.current = sfxEnabled; }, [sfxEnabled]);
+  useEffect(() => { bgmVolumeRef.current = bgmVolume; }, [bgmVolume]);
+  useEffect(() => { sfxVolumeRef.current = sfxVolume; }, [sfxVolume]);
+  useEffect(() => { currentTrackRef.current = currentTrack; }, [currentTrack]);
+
   // Initialize SFX audio pool on mount
   useEffect(() => {
     const pool: Record<string, HTMLAudioElement> = {};
@@ -138,7 +151,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const playBGM = (track: BGMTrack) => {
-    if (currentTrack === track) return;
+    if (currentTrackRef.current === track) return;
 
     // Fade out previous track
     if (audioRef.current) {
@@ -164,22 +177,23 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 
   const startNewTrack = (track: BGMTrack) => {
     setCurrentTrack(track);
+    currentTrackRef.current = track;
     const audio = new Audio(BGM_PATHS[track]);
     audio.loop = true;
-    audio.volume = bgmVolume;
+    audio.volume = bgmVolumeRef.current;
     audioRef.current = audio;
 
-    if (bgmEnabled) {
+    if (bgmEnabledRef.current) {
       audio.play().catch(e => console.log('BGM playback failed:', e));
     }
   };
 
   const playSFX = (sfx: SFXTrack) => {
-    if (!sfxEnabled || !sfxRefs.current) return;
+    if (!sfxEnabledRef.current || !sfxRefs.current) return;
     const audio = sfxRefs.current[sfx];
     if (audio) {
       audio.currentTime = 0;
-      audio.volume = sfxVolume;
+      audio.volume = sfxVolumeRef.current;
       audio.play().catch(e => console.log('SFX playback failed:', e));
     }
   };
@@ -190,6 +204,7 @@ export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       audioRef.current = null;
     }
     setCurrentTrack(null);
+    currentTrackRef.current = null;
     if (fadeIntervalRef.current) {
       clearInterval(fadeIntervalRef.current);
       fadeIntervalRef.current = null;

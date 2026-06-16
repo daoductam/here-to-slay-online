@@ -84,7 +84,6 @@ const Lobby: React.FC = () => {
 
       return () => {
         if (socket) socket.disconnect();
-        stopBGM();
       };
     }
 
