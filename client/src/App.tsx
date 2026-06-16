@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { everyCard } from './cards';
 import { getImage } from './helpers/getImage';
+import GameGuide from './components/GameGuide';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
 
@@ -112,75 +113,78 @@ function App() {
   // DEV
 
   return (
-    <div className='App' style={{ margin: '25px' }}>
-      <img
-        src={`${process.env.PUBLIC_URL}/HTS_title.png`}
-        rel='preload'
-        alt='Here to Slay'
-        id='hts-logo'
-        width='300px'
-      />
-      <br />
-      <form>
-        <label>Username</label>
-        <br />
-        <input
-          type='text'
-          value={username}
-          onChange={e => changeUsername(e.target.value)}
+    <div className="game-layout-container">
+      <div className='App' style={{ margin: '25px' }}>
+        <img
+          src={`${process.env.PUBLIC_URL}/HTS_title.png`}
+          rel='preload'
+          alt='Here to Slay'
+          id='hts-logo'
+          width='300px'
         />
         <br />
-        <br />
-        <label>Room</label>
-        <br />
-        <input
-          type='text'
-          value={roomId}
-          onChange={e => setRoomId(e.target.value)}
-        />
-        <br />
-        <br />
-        <label>Private: </label>
-        <input
-          type='checkbox'
-          checked={isPrivate}
-          onChange={_ => setIsPrivate(!isPrivate)}
-          className='checkbox'
-        />
-        <br />
-        <br />
-        <button
-          onClick={e => {
-            e.preventDefault();
-            joinRoom();
-          }}
-        >
-          Join
-        </button>
-        <button
-          onClick={e => {
-            e.preventDefault();
-            createRoom();
-          }}
-        >
-          Create
-        </button>
-      </form>
+        <form>
+          <label>Username</label>
+          <br />
+          <input
+            type='text'
+            value={username}
+            onChange={e => changeUsername(e.target.value)}
+          />
+          <br />
+          <br />
+          <label>Room</label>
+          <br />
+          <input
+            type='text'
+            value={roomId}
+            onChange={e => setRoomId(e.target.value)}
+          />
+          <br />
+          <br />
+          <label>Private: </label>
+          <input
+            type='checkbox'
+            checked={isPrivate}
+            onChange={_ => setIsPrivate(!isPrivate)}
+            className='checkbox'
+          />
+          <br />
+          <br />
+          <button
+            onClick={e => {
+              e.preventDefault();
+              joinRoom();
+            }}
+          >
+            Join
+          </button>
+          <button
+            onClick={e => {
+              e.preventDefault();
+              createRoom();
+            }}
+          >
+            Create
+          </button>
+        </form>
 
-      <br />
-      <h2>Find Rooms: </h2>
-      {Object.keys(rooms).length ? (
-        <div className='rooms'>
-          {Object.keys(rooms).map(id => (
-            <div className='room' key={id} onClick={() => joinRoom(id)}>
-              <div>{id}</div>
-              <div>Players: {rooms[id]}</div>
-            </div>
-          ))}
-        </div>
-      ) : (
-        <h3>No rooms found :(</h3>
-      )}
+        <br />
+        <h2>Find Rooms: </h2>
+        {Object.keys(rooms).length ? (
+          <div className='rooms'>
+            {Object.keys(rooms).map(id => (
+              <div className='room' key={id} onClick={() => joinRoom(id)}>
+                <div>{id}</div>
+                <div>Players: {rooms[id]}</div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <h3>No rooms found :(</h3>
+        )}
+      </div>
+      <GameGuide />
     </div>
   );
 }

@@ -1,0 +1,557 @@
+/* GAME GUIDE PANEL STYLING */
+
+.game-layout-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  gap: 20px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 1024px) {
+  .game-layout-container {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Desktop Display */
+.game-guide-desktop {
+  width: 450px;
+  min-width: 380px;
+  height: calc(100vh - 50px);
+  background: rgba(45, 45, 45, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-left: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-left: 20px;
+}
+
+/* Header & Tabs */
+.guide-header {
+  padding: 20px 20px 10px 20px;
+  background: rgba(30, 30, 30, 0.8);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.guide-header h2 {
+  font-size: 2.8vh;
+  margin: 0 0 15px 0;
+  color: #fc7c37;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.guide-tabs {
+  display: flex;
+  gap: 10px;
+}
+
+.guide-tab-btn {
+  flex: 1;
+  background: rgba(80, 80, 80, 0.4);
+  color: #ccc;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  padding: 8px 0;
+  font-size: 1.8vh;
+  cursor: pointer;
+  box-shadow: none;
+  width: 100%;
+  margin: 0;
+  transition: all 0.2s ease;
+}
+
+.guide-tab-btn:hover {
+  background: rgba(252, 124, 55, 0.2);
+  color: #fff;
+  transform: none;
+  box-shadow: none;
+}
+
+.guide-tab-btn.active {
+  background: #fc7c37;
+  color: #fff;
+  border-color: #fc7c37;
+  box-shadow: 0 4px 12px rgba(252, 124, 55, 0.3);
+}
+
+/* Body Scrollable Area */
+.guide-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.guide-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.guide-body::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.guide-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.guide-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(252, 124, 55, 0.5);
+}
+
+/* Rules Section Layout */
+.rules-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rule-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 15px;
+  transition: transform 0.2s ease;
+}
+
+.rule-card:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.rule-card h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 2.2vh;
+  margin: 0 0 10px 0;
+  color: #fca06c;
+}
+
+.rule-card h3 span {
+  font-size: 2.6vh;
+}
+
+.rule-content {
+  margin: 0;
+  font-size: 1.7vh;
+  line-height: 1.5;
+  color: #e0e0e0;
+  white-space: pre-line;
+}
+
+.section-title {
+  font-size: 2.2vh;
+  margin: 10px 0 0 0;
+  color: #fc7c37;
+}
+
+.mechanics-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mechanic-card {
+  background: rgba(0, 0, 0, 0.2);
+  border-left: 3px solid #fc7c37;
+  border-radius: 0 8px 8px 0;
+  padding: 12px;
+}
+
+.mechanic-card h4 {
+  margin: 0 0 5px 0;
+  font-size: 1.9vh;
+  color: #fff;
+}
+
+.mechanic-card p {
+  margin: 0;
+  font-size: 1.6vh;
+  color: #ccc;
+  line-height: 1.4;
+}
+
+/* Cards Tab Layout */
+.cards-section {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.search-filter-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  color: #aaa;
+  font-size: 20px;
+}
+
+.guide-search-input {
+  width: 100% !important;
+  box-sizing: border-box;
+  padding: 10px 35px 10px 40px !important;
+  border-radius: 10px !important;
+  background: rgba(30, 30, 30, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: #fff !important;
+  font-size: 1.8vh !important;
+}
+
+.clear-search-btn {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  box-shadow: none !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin: 0;
+}
+
+.clear-search-btn span {
+  font-size: 18px;
+  color: #aaa;
+}
+
+.clear-search-btn:hover span {
+  color: #fff;
+}
+
+.guide-class-select {
+  width: 100%;
+  background: rgba(30, 30, 30, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 1.8vh;
+  color: #fff;
+  cursor: pointer;
+  outline: none;
+}
+
+.guide-class-select option {
+  background: #2c2c2c;
+  color: #fff;
+}
+
+.cards-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 52vh;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+/* Accordion Card List Item */
+.guide-card-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  overflow: hidden;
+}
+
+.guide-card-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(252, 124, 55, 0.3);
+}
+
+.guide-card-item.expanded {
+  background: rgba(252, 124, 55, 0.05);
+  border-color: rgba(252, 124, 55, 0.5);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.guide-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.card-class-badge {
+  font-size: 1.2vh;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  align-self: flex-start;
+  color: #ddd;
+}
+
+.card-name-vi {
+  margin: 0;
+  font-size: 1.9vh;
+  color: #fff;
+}
+
+.card-name-en {
+  font-size: 1.4vh;
+  color: #888;
+}
+
+.card-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-roll-req {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 1.6vh;
+  background: rgba(252, 124, 55, 0.2);
+  color: #ffaa7a;
+  border: 1px solid rgba(252, 124, 55, 0.3);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.card-roll-req span {
+  font-size: 18px;
+  color: #ffaa7a;
+}
+
+.expand-arrow {
+  color: #888;
+}
+
+.guide-card-body {
+  margin-top: 10px;
+  padding-top: 10px;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 10px;
+}
+
+.card-effect-label {
+  font-size: 1.4vh;
+  color: #fc7c37;
+  margin-bottom: 4px;
+}
+
+.card-effect-text {
+  margin: 0;
+  font-size: 1.6vh;
+  line-height: 1.4;
+  color: #e0e0e0;
+}
+
+.card-fail-req {
+  margin-top: 8px;
+  background: rgba(254, 46, 46, 0.1);
+  border: 1px solid rgba(254, 46, 46, 0.2);
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.card-fail-req strong {
+  font-size: 1.4vh;
+  color: #ff7373;
+}
+
+.card-fail-req p {
+  margin: 2px 0 0 0;
+  font-size: 1.4vh;
+  color: #fcc;
+}
+
+.no-cards-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: #888;
+}
+
+.no-cards-found span {
+  font-size: 40px;
+  margin-bottom: 10px;
+  color: #555;
+}
+
+/* Coloring classes based on character types */
+.type-leader { border-left: 3px solid #ffaa00; }
+.type-hero { border-left: 3px solid #00aaff; }
+.type-monster { border-left: 3px solid #ff4444; }
+.type-magic { border-left: 3px solid #cc00ff; }
+.type-item { border-left: 3px solid #11b56b; }
+.type-modifier { border-left: 3px solid #999; }
+.type-challenge { border-left: 3px solid #e15c15; }
+
+/* Mobile Floating Drawer */
+.game-guide-mobile-toggle {
+  display: none;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+  width: 55px;
+  height: 55px;
+  border-radius: 50% !important;
+  background: #fc7c37;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(252, 124, 55, 0.5);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  margin: 0;
+  padding: 0;
+}
+
+.game-guide-mobile-toggle span {
+  font-size: 28px;
+  color: #fff;
+}
+
+.game-guide-mobile-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(252, 124, 55, 0.7);
+}
+
+.game-guide-mobile-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2000;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.game-guide-mobile-drawer {
+  width: 85%;
+  max-width: 400px;
+  height: 100%;
+  background: #222;
+  box-shadow: -5px 0 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drawer-header h3 {
+  margin: 0;
+  font-size: 2.2vh;
+  color: #fc7c37;
+}
+
+.close-drawer-btn {
+  background: transparent;
+  border: none;
+  width: 32px;
+  height: 32px;
+  box-shadow: none !important;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+}
+
+.close-drawer-btn span {
+  font-size: 24px;
+  color: #aaa;
+}
+
+.close-drawer-btn:hover span {
+  color: #fff;
+}
+
+.drawer-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drawer-tab-btn {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 12px 0;
+  font-size: 1.8vh;
+  color: #aaa;
+  cursor: pointer;
+  box-shadow: none !important;
+  margin: 0;
+}
+
+.drawer-tab-btn.active {
+  color: #fc7c37;
+  border-bottom: 2px solid #fc7c37;
+  font-weight: bold;
+}
+
+.drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* Responsiveness mapping styling */
+@media (max-width: 1024px) {
+  .game-guide-desktop {
+    display: none;
+  }
+  .game-guide-mobile-toggle {
+    display: flex;
+  }
+}
