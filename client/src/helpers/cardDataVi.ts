@@ -34,6 +34,18 @@ export const gameRulesVi = {
     title: 'Điểm Hành Động (Action Points - AP)',
     content: 'Mỗi lượt chơi bạn sẽ bắt đầu với 3 Điểm Hành Động (AP). Bạn có thể chi tiêu AP để thực hiện các hành động sau:\n• Rút 1 lá bài: Tốn 1 AP.\n• Đánh 1 lá bài từ tay (Anh Hùng, Phép Thuật, Vật Phẩm): Tốn 1 AP.\n• Kích hoạt kỹ năng của 1 Anh Hùng đã ở trên bàn: Tốn 1 AP (phải đổ xúc xắc đạt yêu cầu).\n• Tấn công Quái Vật: Tốn 2 AP (phải thỏa mãn yêu cầu về lớp nhân vật và đổ xúc xắc để phân định thắng/thua).\n• Đổi bài: Bỏ toàn bộ bài trên tay và rút 5 lá bài mới: Tốn 3 AP.'
   },
+  turnStructure: {
+    title: 'Cấu Trúc Lượt Chơi Chi Tiết',
+    content: '1. BẮT ĐẦU LƯỢT:\n- Nhận lại đầy đủ 3 Điểm Hành Động (AP).\n- Kích hoạt các hiệu ứng "vào đầu lượt" (ví dụ: đổi lớp nhân vật của Thủ lĩnh đa hệ).\n2. GIAI ĐOẠN HÀNH ĐỘNG:\n- Tự do thực hiện các hành động tốn AP trong khả năng (Rút bài, chơi bài, kích hoạt kỹ năng, tấn công quái vật).\n- Hành động kích hoạt kỹ năng Anh Hùng: Mỗi Anh Hùng chỉ được kích hoạt tối đa 1 lần mỗi lượt.\n3. KẾT THÚC LƯỢT:\n- Bỏ bớt bài nếu số bài trên tay vượt quá giới hạn (giới hạn mặc định là 7 lá bài).\n- Chuyển lượt sang cho người chơi tiếp theo theo chiều kim đồng hồ.'
+  },
+  cardTypes: {
+    title: 'Các Loại Thẻ Bài Trong Game',
+    content: '• Thủ Lĩnh (Party Leader): Bắt đầu game trên bàn đấu, mang lại kỹ năng nội tại mạnh mẽ và đếm như 1 lớp nhân vật trong tổ đội của bạn.\n• Anh Hùng (Hero): Trụ cột của tổ đội. Cần tốn 1 AP để chơi xuống bàn đấu và sở hữu kỹ năng kích hoạt bằng xúc xắc.\n• Vật Phẩm (Item): Trang bị gắn vào Anh Hùng.Blessed Item mang lại điểm cộng hoặc lợi thế, trong khi Cursed Item mang lại hình phạt cho Anh Hùng của đối thủ.\n• Phép Thuật (Magic): Thẻ bài có hiệu ứng kích hoạt ngay lập tức rồi đưa vào chồng bài bỏ.\n• Bổ Trợ (Modifier): Có thể chơi từ tay bất kỳ lúc nào sau khi đổ xúc xắc (của bạn hoặc đối thủ) để tăng/giảm kết quả đổ.\n• Thách Thức (Challenge): Chơi khi đối thủ chuẩn bị hạ bài từ tay xuống để mở cuộc thách đấu xúc xắc.'
+  },
+  expansions: {
+    title: 'Bản Mở Rộng & Lớp Nhân Vật Mới (Đang Cập Nhật)',
+    content: 'Các bản mở rộng mang đến những cơ chế và lớp nhân vật mới:\n• Đấu Sĩ (Warrior): Tương tác mạnh mẽ với các lá bài Vật Phẩm (trang bị) để tăng sức mạnh hoặc cướp đoạt.\n• Hiền Triết (Druid): Thiên về cơ chế đổ xúc xắc điểm thấp (roll thấp để kích hoạt kỹ năng).\n• Pháp Sư Rồng (Sorcerer): Tập trung vào tương tác, cường hóa và tái sử dụng các lá Phép Thuật.\n• Cuồng Chiến (Berserker): Chuyên phá hủy tổ đội đối thủ và tăng khả năng chiến đấu khi tấn công Quái Vật.\n• Gọi Hồn (Necromancer): Tương tác và hồi sinh các quân bài từ chồng bài bỏ.\n• Thủ lĩnh Đa Hệ (Dual-class Leaders): Cho phép người chơi đổi hệ của thủ lĩnh vào đầu lượt của mình để dễ dàng đạt điều kiện thắng (6 lớp nhân vật khác nhau).'
+  },
   mechanics: [
     {
       name: 'Thách Thức (Challenge)',

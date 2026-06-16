@@ -14,6 +14,8 @@ Chào mừng bạn đến với **Here to Slay Online** – phiên bản trực 
   - Tấn công Quái vật (Attack Monster) & Đổ xúc xắc Tấn công.
   - Sử dụng Thẻ bài & Kích hoạt Hiệu ứng (Effects & Modifiers).
   - Quản lý lượt chơi và Cơ chế Bỏ bài cuối lượt (End Turn Discard).
+- **Thư viện & Cẩm Nang Luật Chơi Chi Tiết:** Tích hợp trực tiếp bảng hướng dẫn chi tiết về cấu trúc lượt, phân loại thẻ bài và luật các bản mở rộng ngay trong giao diện game.
+- **Dữ liệu Bản Mở Rộng hoàn thiện:** Đã cấu trúc dữ liệu và dịch thuật cho 119 lá bài từ 5 bản mở rộng lớn (`Berserkers & Necromancers`, `Dragon Sorcerers`, `KSE`, `Monster Expansion`, `Warriors & Druids`).
 - **Giao diện hiện đại:** Được viết bằng React, tối ưu trải nghiệm người dùng với các thông báo và popup tương tác trực quan.
 
 ---
@@ -30,6 +32,15 @@ Chào mừng bạn đến với **Here to Slay Online** – phiên bản trực 
 - **Express.js:** Server HTTP quản lý các API cơ bản.
 - **Socket.io:** Xử lý logic phòng game và đồng bộ hóa trạng thái bàn chơi thời gian thực.
 - **Nodemon:** Tự động khởi động lại Server khi có thay đổi mã nguồn trong quá trình phát triển.
+
+---
+
+## 📦 Tối Ưu Hóa Tài Nguyên (Asset Optimization)
+
+Để tối ưu tốc độ tải trang và dung lượng build của ứng dụng, toàn bộ hình ảnh tài nguyên game đã được chuyển đổi từ định dạng `.png` sang `.webp` chất lượng cao:
+- **Hiệu quả:** Tổng dung lượng thư mục assets giảm từ **`204.88 MB`** xuống chỉ còn **`16.37 MB`** (giảm tới **92%** kích thước).
+- **Tiện ích chuyển đổi:** Dự án cung cấp một script offline sử dụng thư viện `sharp` nằm tại `scripts/convert-to-webp.js` để tự động hóa việc quét và nén ảnh.
+  - Lệnh nén ảnh thủ công: `node scripts/convert-to-webp.js` (hoặc chạy qua client script: `npm run convert:webp`)
 
 ---
 
@@ -86,3 +97,4 @@ cd here-to-slay-online
    - Mỗi người chơi thực hiện các hành động trong lượt của mình (Rút bài, Đánh thẻ bài, Tấn công Quái vật).
    - Khi bạn đánh một thẻ bài Hero/Item, người chơi khác có quyền ném thẻ **Challenge** để ngăn chặn hành động đó.
    - Thắng trò chơi bằng cách tiêu diệt đủ **3 Quái vật** hoặc thu thập đủ **6 Lớp Anh Hùng (Hero Classes)** khác nhau trong Tổ đội (Party) của mình.
+   - *Lưu ý về các bản mở rộng:* Lớp nhân vật **Warrior** trong Warriors & Druids được dịch chuẩn là **Đấu Sĩ** để hoàn toàn phân biệt rõ với lớp **Fighter (Chiến Binh)** của bản cơ bản khi tính toán điều kiện thắng cuộc.
