@@ -721,7 +721,7 @@ const Game: React.FC = () => {
                   </span>
                   <h6>
                     Loading Assets
-                    {'.'.repeat((loadedImages % 3) + 1)}
+                    {'.'.repeat((loadedCritical % 3) + 1)}
                   </h6>
                   <div className='loading'>
                     <div
