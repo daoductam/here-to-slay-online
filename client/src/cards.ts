@@ -637,6 +637,12 @@ const modifierCards: ModifierCard[] = [
     modifier: [-4],
     type: CardType.modifier,
     id: ''
+  },
+  {
+    name: '4-0',
+    modifier: [4],
+    type: CardType.modifier,
+    id: ''
   }
 ];
 

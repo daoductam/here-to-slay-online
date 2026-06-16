@@ -95,7 +95,7 @@ export const cardDataVi: CardInfoVi[] = [
     classVi: 'Thủ Lĩnh Hộ Vệ',
     type: 'leader',
     typeVi: 'Thủ Lĩnh',
-    effectVi: 'Mỗi khi một người chơi khác cố gắng PHÁ HỦY hoặc CƯỚP ĐOẠT thẻ bài của bạn, cộng thêm 1 vào kết quả đổ xúc xắc phòng thủ.'
+    effectVi: 'Mỗi khi bạn chơi một lá bài Bổ Trợ vào lượt đổ xúc xắc, cộng thêm 1 hoặc trừ đi 1 vào kết quả đổ đó.'
   },
   {
     name: 'The Shadow Claw',
@@ -104,7 +104,7 @@ export const cardDataVi: CardInfoVi[] = [
     classVi: 'Thủ Lĩnh Sát Thủ',
     type: 'leader',
     typeVi: 'Thủ Lĩnh',
-    effectVi: 'Mỗi khi bạn cướp (Steal) một thẻ Anh Hùng của đối thủ, bạn có thể chọn bỏ 1 lá bài trên tay và cướp thêm 1 lá bài ngẫu nhiên trên tay đối thủ đó.'
+    effectVi: 'Một lần mỗi lượt vào lượt của bạn, bạn có thể tiêu tốn 1 điểm hành động để kéo 1 lá bài từ tay người chơi khác.'
   },
 
   // Monsters
@@ -116,8 +116,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '7+',
-    failReq: '<6',
-    effectVi: 'Tiêu diệt thành công: Được phép rút 1 lá bài mỗi khi bất kỳ ai đánh một lá Phép Thuật.\nThất bại: Phải hy sinh 1 Anh Hùng trên bàn.'
+    failReq: '<7',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Phải hy sinh 1 Anh Hùng.\nHiệu ứng: Mỗi khi bạn đổ xúc xắc, cộng thêm 1 vào kết quả.'
   },
   {
     name: 'Arctic Aries',
@@ -127,8 +127,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '10+',
-    failReq: '<6',
-    effectVi: 'Tiêu diệt thành công: Thêm +1 AP vào mỗi lượt của bạn.\nThất bại: Phải hy sinh 1 Anh Hùng trên bàn.'
+    failReq: '<7',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Phải hy sinh 1 Anh Hùng.\nHiệu ứng: Mỗi khi bạn đổ xúc xắc kích hoạt kỹ năng Anh Hùng thành công, bạn được phép rút 1 lá bài.'
   },
   {
     name: 'Bloodwing',
@@ -138,8 +138,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '9+',
-    failReq: '<6',
-    effectVi: 'Tiêu diệt thành công: Bạn được phép cộng hoặc trừ 1 vào bất kỳ kết quả đổ xúc xắc nào của mình.\nThất bại: Phải hy sinh 1 Anh Hùng trên bàn.'
+    failReq: '<7',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Phải hy sinh 1 Anh Hùng.\nHiệu ứng: Mỗi khi có người chơi khác THÁCH THỨC bạn, người chơi đó phải bỏ 1 lá bài trên tay.'
   },
   {
     name: 'Orthus',
@@ -149,8 +149,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '8+',
-    failReq: '<4',
-    effectVi: 'Tiêu diệt thành công: Được phép rút 1 lá bài mỗi khi bạn đổ xúc xắc kích hoạt kỹ năng Anh Hùng thành công.\nThất bại: Bỏ 2 lá bài trên tay.'
+    failReq: '<5',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Bỏ 2 lá bài trên tay.\nHiệu ứng: Mỗi khi đổ xúc xắc để TẤN CÔNG Quái Vật, bạn có thể đổ lại một trong hai xúc xắc.'
   },
   {
     name: 'Corrupted Sabretooth',
@@ -160,8 +160,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '9+',
-    failReq: '<6',
-    effectVi: 'Tiêu diệt thành công: Bạn không thể bị thách thức (Challenge) bởi bất kỳ ai khi đánh bài Phép Thuật.\nThất bại: Phải hy sinh 1 Anh Hùng trên bàn.'
+    failReq: '<7',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Phải hy sinh 1 Anh Hùng.\nHiệu ứng: Mỗi khi một hiệu ứng yêu cầu bạn PHÁ HỦY 1 Anh Hùng, thay vào đó bạn có thể CƯỚP ĐOẠT Anh Hùng đó.'
   },
   {
     name: 'Crowned Serpent',
@@ -171,8 +171,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '10+',
-    failReq: '<7',
-    effectVi: 'Tiêu diệt thành công: Mỗi khi bạn đánh một lá bài Anh Hùng, bạn có thể lập tức đổ xúc xắc kích hoạt kỹ năng của nó miễn phí.\nThất bại: Phải hy sinh 1 Anh Hùng trên bàn.'
+    failReq: '<8',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Phải hy sinh 1 Anh Hùng.\nHiệu ứng: +1 vào kết quả mỗi khi bạn đổ xúc xắc kích hoạt kỹ năng Anh Hùng.'
   },
   {
     name: 'Abyss Queen',
@@ -182,8 +182,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '8+',
-    failReq: '<5',
-    effectVi: 'Tiêu diệt thành công: Mỗi khi bạn thách thức đối thủ thành công, được cướp 1 lá bài ngẫu nhiên từ tay đối thủ đó.\nThất bại: Phải hy sinh 1 Anh Hùng trên bàn.'
+    failReq: '<6',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Phải hy sinh 1 Anh Hùng.\nHiệu ứng: Mỗi khi người chơi khác chơi lá Bổ Trợ vào lượt đổ của bạn, cộng thêm 1 vào kết quả đổ đó.'
   },
   {
     name: 'Dracos',
@@ -193,8 +193,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '8+',
-    failReq: '<5',
-    effectVi: 'Tiêu diệt thành công: Thêm +1 AP vào mỗi lượt của bạn.\nThất bại: Phải hy sinh 1 Anh Hùng trên bàn.'
+    failReq: '<6',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Phải hy sinh 1 Anh Hùng.\nHiệu ứng: +2 vào kết quả mỗi khi bạn chơi một lá Phép Thuật.'
   },
   {
     name: 'Dark Dragon King',
@@ -204,8 +204,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '8+',
-    failReq: '<7',
-    effectVi: 'Tiêu diệt thành công: Mỗi khi bạn đổ xúc xắc, bạn có thể chọn đổi hướng xoay của xúc xắc (cộng thêm hoặc trừ 2 vào kết quả).\nThất bại: Bỏ 2 lá bài trên tay.'
+    failReq: '<8',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Bỏ 2 lá bài trên tay.\nHiệu ứng: Mỗi khi đổ xúc xắc kích hoạt kỹ năng Anh Hùng, bạn có thể đổ thêm xúc xắc thứ 3.'
   },
   {
     name: 'Malamammoth',
@@ -215,8 +215,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '8+',
-    failReq: '<4',
-    effectVi: 'Tiêu diệt thành công: Tất cả lá bài Bổ Trợ của bạn đánh ra đều được cộng thêm 1 vào hiệu lực.\nThất bại: Bỏ 2 lá bài trên tay.'
+    failReq: '<5',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Bỏ 2 lá bài trên tay.\nHiệu ứng: Mỗi khi có ai đó (kể cả bạn) chơi một lá Bổ Trợ, bạn có thể rút 1 lá bài.'
   },
   {
     name: 'Rex Major',
@@ -226,8 +226,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '8+',
-    failReq: '<4',
-    effectVi: 'Tiêu diệt thành công: Đối thủ phải tốn 2 AP nếu muốn thách thức (Challenge) lá bài của bạn.\nThất bại: Bỏ 2 lá bài trên tay.'
+    failReq: '<5',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Bỏ 2 lá bài trên tay.\nHiệu ứng: Mỗi khi rút 1 lá bài, bạn có thể chọn rút thêm 1 lá bài nữa, sau đó bỏ 1 lá bài trên tay.'
   },
   {
     name: 'Terratuga',
@@ -237,8 +237,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '11+',
-    failReq: '<7',
-    effectVi: 'Tiêu diệt thành công: Các Anh Hùng của bạn hoàn toàn miễn nhiễm với kỹ năng PHÁ HỦY của đối thủ.\nThất bại: Phải hy sinh 1 Anh Hùng trên bàn.'
+    failReq: '<8',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Phải hy sinh 1 Anh Hùng.\nHiệu ứng: Mỗi khi bạn phải hy sinh 1 Anh Hùng, bạn có thể chọn bỏ 1 lá bài trên tay để thay thế.'
   },
   {
     name: 'Mega Slime',
@@ -248,8 +248,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '8+',
-    failReq: '<7',
-    effectVi: 'Tiêu diệt thành công: Được phép rút thêm 1 lá bài ở đầu mỗi lượt chơi.\nThất bại: Phải hy sinh 1 Anh Hùng trên bàn.'
+    failReq: '<8',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Phải hy sinh 1 Anh Hùng.\nHiệu ứng: Bạn được phép chơi thêm 1 Anh Hùng mỗi lượt.'
   },
   {
     name: 'Titan Wyvern',
@@ -259,8 +259,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '8+',
-    failReq: '<4',
-    effectVi: 'Tiêu diệt thành công: Được phép hồi lại 1 Anh Hùng từ chồng bài loại lên tay bất kỳ khi nào có Anh Hùng của bạn bị phá hủy.\nThất bại: Bỏ 2 lá bài trên tay.'
+    failReq: '<5',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Bỏ 2 lá bài trên tay.\nHiệu ứng: Bạn có thể tiêu tốn 1 AP để cướp 1 lá Vật Phẩm đang được trang bị của bất kỳ ai.'
   },
   {
     name: 'Warworn Owlbear',
@@ -270,8 +270,8 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'monster',
     typeVi: 'Quái Vật',
     rollReq: '8+',
-    failReq: '<4',
-    effectVi: 'Tiêu diệt thành công: Bạn được phép dùng 1 AP để cướp 1 Anh Hùng của đối phương (chỉ dùng được 1 lần/lượt).\nThất bại: Bỏ 2 lá bài trên tay.'
+    failReq: '<5',
+    effectVi: 'Thành công: Tiêu diệt Quái Vật này.\nThất bại: Bỏ 2 lá bài trên tay.\nHiệu ứng: +1 vào kết quả mỗi khi bạn đổ xúc xắc để TẤN CÔNG Quái Vật.'
   },
 
   // Bards
@@ -559,7 +559,7 @@ export const cardDataVi: CardInfoVi[] = [
     type: 'hero',
     typeVi: 'Anh Hùng',
     rollReq: '8+',
-    effectVi: 'Đổ xúc xắc 8+: Rút 2 lá bài từ bộ bài, sau đó bạn có thể chơi ngay lập tức tối đa 2 lá Vật Phẩm từ tay.'
+    effectVi: 'Đổ xúc xắc 8+: Rút 2 lá bài. Nếu có ít nhất một trong số các lá đó là lá Vật Phẩm, bạn có thể chơi ngay lập tức một trong hai lá đó.'
   },
   {
     name: 'Serious Grey',
