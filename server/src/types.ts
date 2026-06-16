@@ -66,12 +66,21 @@ export type AnyCard =
 
 export type LargeCard = LeaderCard | MonsterCard;
 
+export interface ChatMessage {
+  id: string;
+  sender: string;
+  text: string;
+  timestamp: number;
+  isSystem?: boolean;
+}
+
 export interface Room {
   numPlayers: number;
   state: GameState;
   private: boolean;
   reconnectTimer?: NodeJS.Timeout;
   endGameTimer?: NodeJS.Timeout;
+  chatHistory: ChatMessage[];
 }
 
 export const allCards = [

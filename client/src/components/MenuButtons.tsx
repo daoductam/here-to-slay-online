@@ -6,12 +6,16 @@ interface MenuButtonsProps {
   showBoard: boolean;
   setShowBoard: React.Dispatch<React.SetStateAction<boolean>>;
   setShowHelp: React.Dispatch<React.SetStateAction<boolean>>;
+  unreadCount: number;
+  onClickChat: () => void;
 }
 
 const MenuButtons: React.FC<MenuButtonsProps> = ({
   showBoard,
   setShowBoard,
-  setShowHelp
+  setShowHelp,
+  unreadCount,
+  onClickChat
 }) => {
   const {
     state: { val: state },
@@ -210,6 +214,41 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({
         }}
       >
         <span className="material-symbols-outlined icon">volume_up</span>
+      </button>
+
+      {/* CHAT TOGGLE */}
+      <button
+        className="circular show"
+        onClick={onClickChat}
+        style={{
+          position: 'absolute',
+          top: '1vh',
+          left: '17vh',
+          backgroundColor: '#4a3b32',
+          border: '1px solid #fc7c37',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}
+      >
+        <span className="material-symbols-outlined icon">forum</span>
+        {unreadCount > 0 && (
+          <span style={{
+            position: 'absolute',
+            top: '-5px',
+            right: '-5px',
+            backgroundColor: '#DC143C',
+            color: 'white',
+            borderRadius: '50%',
+            padding: '2px 6px',
+            fontSize: '1.2vh',
+            fontWeight: 'bold',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.5)',
+            lineHeight: 1
+          }}>
+            {unreadCount}
+          </span>
+        )}
       </button>
 
       <AudioSettings isOpen={isAudioOpen} onClose={() => setIsAudioOpen(false)} />

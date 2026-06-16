@@ -29,6 +29,7 @@ import {
 } from './controllers/socketio/game/useEffect';
 import { useLeaderAbility } from './controllers/socketio/game/leaderAbility';
 import { returnToLobby, playAgain } from './controllers/socketio/game/gameReset';
+import { sendChatMessage } from './controllers/socketio/chat';
 import 'dotenv/config';
 
 /* EXPRESS SERVER */
@@ -42,7 +43,7 @@ const httpServer = app.listen(port, () =>
 );
 
 /* SOCKET.IO  SERVER */
-const io = new Server(httpServer, {
+export const io = new Server(httpServer, {
   cors: {
     origin: process.env.CLIENT_URL || '*'
   }
@@ -55,6 +56,7 @@ io.on('connection', socket => {
   socket.on('ready', ready(socket));
   socket.on('start-match', startMatch(socket));
   socket.on('player-num', playerNum);
+  socket.on('chat:send', sendChatMessage(socket));
 
   /* GAME */
   // pass

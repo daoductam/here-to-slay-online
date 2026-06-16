@@ -44,6 +44,7 @@ export const enterLobby = (socket: Socket) => {
           `Anonymous ${playerNum + 1}`)
     ) {
       socket.join(roomId);
+      socket.emit('chat:history', rooms[roomId].chatHistory || []);
 
       sendState(roomId);
       cb(true);

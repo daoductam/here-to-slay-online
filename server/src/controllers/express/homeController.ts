@@ -61,7 +61,8 @@ export const createRoom: RequestHandler = (req, res) => {
   rooms[roomId] = {
     numPlayers: 0,
     state: gameState,
-    private: isPrivate
+    private: isPrivate,
+    chatHistory: []
   };
   addPlayer(id, userId, username);
 

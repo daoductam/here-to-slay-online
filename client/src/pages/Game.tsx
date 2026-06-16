@@ -4,7 +4,8 @@ import '../style/game.css';
 import '../style/index.css';
 import { useNavigate } from 'react-router-dom';
 import { Socket, io } from 'socket.io-client';
-import { CardType, GameState, allCards } from '../types';
+import { CardType, GameState, allCards, ChatMessage } from '../types';
+import ChatSidebar from '../components/ChatSidebar';
 import StartRoll from '../components/StartRoll';
 import MainBoard from '../components/MainBoard';
 import Hand from '../components/Hand';
@@ -58,6 +59,15 @@ const Game: React.FC = () => {
   const [showDiscardPile, setShowDiscardPile] = useState(false);
   const [showEffectPopup, setShowEffectPopup] = useState(false);
   const [showDiscardPopup, setShowDiscardPopup] = useState(false);
+
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [unreadChatCount, setUnreadChatCount] = useState(0);
+
+  const isChatOpenRef = useRef(isChatOpen);
+  useEffect(() => {
+    isChatOpenRef.current = isChatOpen;
+  }, [isChatOpen]);
 
   const [loadedCritical, setLoadedCritical] = useState(0);
 
@@ -119,6 +129,19 @@ const Game: React.FC = () => {
       socket.on('return-to-lobby', () => {
         navigate('/lobby');
       });
+
+      socket.on('chat:message', (msg: ChatMessage) => {
+        setChatMessages(prev => [...prev, msg]);
+        if (!isChatOpenRef.current && msg.sender !== localStorage.getItem('username')) {
+          setUnreadChatCount(prev => prev + 1);
+          playSFX('chat');
+        }
+      });
+
+      socket.on('chat:history', (history: ChatMessage[]) => {
+        setChatMessages(history);
+      });
+
       setSocket(socket);
 
       socket.on('game-state', (newState: GameState) => {
@@ -786,6 +809,11 @@ const Game: React.FC = () => {
                   showBoard={showBoard}
                   setShowBoard={setShowBoard}
                   setShowHelp={setShowHelp}
+                  unreadCount={unreadChatCount}
+                  onClickChat={() => {
+                    setIsChatOpen(true);
+                    setUnreadChatCount(0);
+                  }}
                 />
 
                 <EndPage showBoard={showBoard} socket={socket} />
@@ -793,6 +821,16 @@ const Game: React.FC = () => {
                 <HelpCards showHelp={showHelp} />
 
                 <ConfirmPopup socket={socket} />
+
+                <ChatSidebar
+                  isOpen={isChatOpen}
+                  onClose={() => setIsChatOpen(false)}
+                  messages={chatMessages}
+                  onSendMessage={(text) => {
+                    socket?.emit('chat:send', credentials?.roomId, credentials?.userId, text);
+                  }}
+                  username={localStorage.getItem('username') || ''}
+                />
               </>
             ) : (
               <div className='load'>

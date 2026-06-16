@@ -1,21 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Socket, io } from 'socket.io-client';
 import { useNavigate } from 'react-router-dom';
-import { GameState } from '../types';
+import { GameState, ChatMessage } from '../types';
 import { getCredentials } from '../helpers/getJSON';
 import useClientContext from '../hooks/useClientContext';
 import GameGuide from '../components/GameGuide';
 import useAudio from '../hooks/useAudio';
+import ChatSidebar from '../components/ChatSidebar';
 
 const Lobby: React.FC = () => {
   const navigate = useNavigate();
   const { setCredentials } = useClientContext();
-  const { playBGM, stopBGM } = useAudio();
+  const { playBGM, stopBGM, playSFX } = useAudio();
 
   const [socket, setSocket] = useState<Socket | null>(null);
   const [matchState, setMatchState] = useState<GameState['match'] | null>(null);
   const [playerNum, setPlayerNum] = useState(-1);
   const [isReady, setIsReady] = useState(false);
+
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([]);
+  const [unreadChatCount, setUnreadChatCount] = useState(0);
+
+  const isChatOpenRef = useRef(isChatOpen);
+  useEffect(() => {
+    isChatOpenRef.current = isChatOpen;
+  }, [isChatOpen]);
 
   const credentials = getCredentials();
   const username = localStorage.getItem('username') as string;
@@ -80,6 +90,18 @@ const Lobby: React.FC = () => {
 
       socket.on('start-match', () => {
         navigate('/game');
+      });
+
+      socket.on('chat:message', (msg: ChatMessage) => {
+        setChatMessages(prev => [...prev, msg]);
+        if (!isChatOpenRef.current && msg.sender !== username) {
+          setUnreadChatCount(prev => prev + 1);
+          playSFX('chat');
+        }
+      });
+
+      socket.on('chat:history', (history: ChatMessage[]) => {
+        setChatMessages(history);
       });
 
       return () => {
@@ -172,6 +194,59 @@ const Lobby: React.FC = () => {
         </div>
       </div>
       <GameGuide />
+
+      <button
+        onClick={() => {
+          setIsChatOpen(true);
+          setUnreadChatCount(0);
+        }}
+        style={{
+          position: 'absolute',
+          top: '2vh',
+          right: '2vh',
+          backgroundColor: '#4a3b32',
+          border: '1px solid #fc7c37',
+          color: 'white',
+          borderRadius: '50%',
+          width: '6vh',
+          height: '6vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          cursor: 'pointer',
+          boxShadow: '0 4px 10px rgba(0,0,0,0.5)',
+          zIndex: 99
+        }}
+      >
+        <span className="material-symbols-outlined" style={{ fontSize: '3vh' }}>forum</span>
+        {unreadChatCount > 0 && (
+          <span style={{
+            position: 'absolute',
+            top: '-5px',
+            right: '-5px',
+            backgroundColor: '#DC143C',
+            color: 'white',
+            borderRadius: '50%',
+            padding: '2px 6px',
+            fontSize: '1.2vh',
+            fontWeight: 'bold',
+            boxShadow: '0 2px 5px rgba(0,0,0,0.5)',
+            lineHeight: 1
+          }}>
+            {unreadChatCount}
+          </span>
+        )}
+      </button>
+
+      <ChatSidebar
+        isOpen={isChatOpen}
+        onClose={() => setIsChatOpen(false)}
+        messages={chatMessages}
+        onSendMessage={(text) => {
+          socket?.emit('chat:send', credentials.roomId, credentials.userId, text);
+        }}
+        username={username}
+      />
     </div>
   ) : (
     <></>

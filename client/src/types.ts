@@ -5,6 +5,14 @@ export interface Credentials {
   userId: string;
 }
 
+export interface ChatMessage {
+  id: string;
+  sender: string;
+  text: string;
+  timestamp: number;
+  isSystem?: boolean;
+}
+
 export enum HeroClass {
   fighter = 'fighter',
   bard = 'bard',

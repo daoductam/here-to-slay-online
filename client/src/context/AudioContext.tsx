@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useRef, useState } from 'react';
 
 export type BGMTrack = 'lobby' | 'gameplay' | 'battle' | 'victory';
-export type SFXTrack = 'dice' | 'draw' | 'play' | 'challenge' | 'slay';
+export type SFXTrack = 'dice' | 'draw' | 'play' | 'challenge' | 'slay' | 'chat';
 
 interface AudioContextType {
   bgmEnabled: boolean;
@@ -32,7 +32,8 @@ const SFX_PATHS: Record<SFXTrack, string> = {
   draw: `${process.env.PUBLIC_URL}/audio/sfx_draw.mp3`,
   play: `${process.env.PUBLIC_URL}/audio/sfx_play.mp3`,
   challenge: `${process.env.PUBLIC_URL}/audio/sfx_challenge.mp3`,
-  slay: `${process.env.PUBLIC_URL}/audio/sfx_slay.mp3`
+  slay: `${process.env.PUBLIC_URL}/audio/sfx_slay.mp3`,
+  chat: `${process.env.PUBLIC_URL}/audio/sfx_chat.mp3`
 };
 
 export const AudioProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
