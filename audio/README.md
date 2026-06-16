@@ -14,3 +14,4 @@ Please place the following `.mp3` audio files in this directory:
 - `sfx_play.mp3`: Sound of playing a card.
 - `sfx_challenge.mp3`: Sudden epic impact/war horn for challenge trigger.
 - `sfx_slay.mp3`: Sword slash / monster death cry for slaying a monster.
+- `sfx_chat.mp3`: Subtle notification alert sound for incoming chat messages.
