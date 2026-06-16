@@ -34,3 +34,6 @@ logs/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Project-specific ignored folders
+data-nochange-to-improve-client-and-server/
