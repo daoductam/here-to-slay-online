@@ -79,9 +79,7 @@ function App() {
       );
       navigate('/lobby');
     } else {
-      if (id !== '999999') {
-        alert(json.res || 'Could not join room');
-      }
+      alert(json.res || 'Could not join room');
     }
   }
 
@@ -118,12 +116,6 @@ function App() {
     }
   }
 
-  // DEV
-  useEffect(() => {
-    joinRoom('999999');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  // DEV
 
   return (
     <div className="game-layout-container">

@@ -28,6 +28,7 @@ import {
   useEffectRoll
 } from './controllers/socketio/game/useEffect';
 import { useLeaderAbility } from './controllers/socketio/game/leaderAbility';
+import { returnToLobby, playAgain } from './controllers/socketio/game/gameReset';
 import 'dotenv/config';
 
 /* EXPRESS SERVER */
@@ -87,6 +88,10 @@ io.on('connection', socket => {
 
   // leader ability
   socket.on('use-leader-ability', useLeaderAbility);
+
+  // game reset options
+  socket.on('return-to-lobby', returnToLobby(socket));
+  socket.on('play-again', playAgain(socket));
 
   /* DISCONNECT & EXIT MATCH */
   socket.on('exit-match', (roomId: string, playerId: string) => {

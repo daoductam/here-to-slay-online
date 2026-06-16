@@ -112,6 +112,9 @@ const Game: React.FC = () => {
         localStorage.removeItem('credentials');
         navigate('/');
       });
+      socket.on('return-to-lobby', () => {
+        navigate('/lobby');
+      });
       setSocket(socket);
 
       socket.on('game-state', (newState: GameState) => {
@@ -566,9 +569,9 @@ const Game: React.FC = () => {
               setShowBoard(true);
             }
             allowedCards.set([]);
-            localStorage.removeItem('credentials');
 
             if (180 - newState.match.startRolls.maxVal <= 0) {
+              localStorage.removeItem('credentials');
               navigate('/');
             }
         }
@@ -707,7 +710,7 @@ const Game: React.FC = () => {
                   setShowHelp={setShowHelp}
                 />
 
-                <EndPage showBoard={showBoard} />
+                <EndPage showBoard={showBoard} socket={socket} />
 
                 <HelpCards showHelp={showHelp} />
 

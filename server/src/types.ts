@@ -71,6 +71,7 @@ export interface Room {
   state: GameState;
   private: boolean;
   reconnectTimer?: NodeJS.Timeout;
+  endGameTimer?: NodeJS.Timeout;
 }
 
 export const allCards = [

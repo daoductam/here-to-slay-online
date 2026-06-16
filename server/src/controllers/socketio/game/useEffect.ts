@@ -229,17 +229,24 @@ export const endTurnDiscard = (
     rooms[roomId].state.turn.phaseChanged = true;
     sendGameState(roomId);
 
+    if (rooms[roomId].endGameTimer) {
+      clearInterval(rooms[roomId].endGameTimer);
+    }
+
     let start = Date.now();
-    const timer = setInterval(() => {
+    rooms[roomId].endGameTimer = setInterval(() => {
       let delta = Date.now() - start;
-      // random variable cos i don't need one specifically for game end timer
+      if (!rooms[roomId]) {
+        return;
+      }
       rooms[roomId].state.match.startRolls.maxVal = Math.floor(delta / 1000);
       sendGameState(roomId);
 
       if (delta / 1000 >= 180) {
         disconnectAll(roomId);
+        const timer = rooms[roomId].endGameTimer;
         delete rooms[roomId];
-        clearInterval(timer);
+        if (timer) clearInterval(timer);
       }
     }, 1000);
     return;
