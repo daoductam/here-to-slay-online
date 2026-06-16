@@ -108,7 +108,7 @@ const Lobby: React.FC = () => {
 
   return credentials && matchState && playerNum !== -1 ? (
     <div className="game-layout-container">
-      <div>
+      <div className="lobby-left-container">
         <h5 className='lobby-id'>Lobby ID: {credentials.roomId}</h5>
         <div className='lobby'>
           <div className='details'>

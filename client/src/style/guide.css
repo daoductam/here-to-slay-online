@@ -12,6 +12,12 @@
   font-family: 'Montserrat', sans-serif !important;
 }
 
+/* Force Material Symbols Outlined font to prevent them from showing as raw text */
+.material-symbols-outlined,
+.material-symbols-outlined * {
+  font-family: 'Material Symbols Outlined' !important;
+}
+
 /* GAME GUIDE PANEL STYLING */
 
 .game-layout-container {
@@ -29,7 +35,7 @@
 }
 
 .game-layout-container .App {
-  flex: 0 0 420px; /* Fixed width for the form side */
+  flex: 0 0 320px; /* Narrower width for the form side so Guide stays closer */
   overflow-y: auto;
   padding-right: 10px;
   height: 100%;
@@ -41,6 +47,23 @@
 }
 
 .game-layout-container .App::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+.lobby-left-container {
+  flex: 0 0 400px;
+  overflow-y: auto;
+  padding-right: 10px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.lobby-left-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.lobby-left-container::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 3px;
 }
