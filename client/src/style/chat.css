@@ -38,22 +38,36 @@
 }
 
 .chat-close-btn {
-  background: none;
-  border: none;
-  color: #a89485;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 5px;
-  border-radius: 50%;
-  transition: all 0.2s;
+  background: none !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  border: none !important;
+  padding: 5px !important;
+  border-radius: 50% !important;
+  color: #a89485 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.2s !important;
+  transform: none !important;
 }
 
 .chat-close-btn:hover {
-  color: #fc7c37;
-  background-color: rgba(252, 124, 55, 0.1);
-  transform: rotate(90deg);
+  color: #fc7c37 !important;
+  background-color: rgba(252, 124, 55, 0.1) !important;
+  transform: rotate(90deg) !important;
+  box-shadow: none !important;
+}
+
+.chat-close-btn:focus-visible,
+.chat-close-btn:active {
+  box-shadow: none !important;
+  transform: none !important;
+  background-color: transparent !important;
 }
 
 .chat-messages-container {
@@ -191,28 +205,32 @@
 }
 
 .chat-input-form button {
-  background-color: #fc7c37;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 2px 4px rgba(252, 124, 55, 0.4);
+  background-color: #fc7c37 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 6px !important;
+  width: 40px !important;
+  height: 40px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  transition: all 0.2s !important;
+  box-shadow: 0 2px 4px rgba(252, 124, 55, 0.4) !important;
+  transform: none !important;
 }
 
 .chat-input-form button:hover:not(:disabled) {
-  background-color: #e2611e;
-  transform: translateY(-1px);
+  background-color: #e2611e !important;
+  transform: translateY(-1px) !important;
 }
 
 .chat-input-form button:disabled {
-  background-color: rgba(252, 124, 55, 0.2);
-  color: rgba(255, 255, 255, 0.3);
-  cursor: not-allowed;
-  box-shadow: none;
+  background-color: rgba(252, 124, 55, 0.2) !important;
+  color: rgba(255, 255, 255, 0.3) !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+  transform: none !important;
 }
