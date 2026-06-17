@@ -245,6 +245,7 @@ export const challengeRoll = (roomId: string, userId: string) => {
 
   if (state.dice.defend && state.dice.defend.total > 0) {
     setTimeout(() => {
+      state.match.isReady.fill(null);
       state.turn.phaseChanged = true;
       state.turn.phase = 'modify';
       state.turn.isRolling = false;

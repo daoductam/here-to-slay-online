@@ -461,6 +461,23 @@ export const modifyRoll = (
     }
   }
 
-  state.match.isReady.fill(dice === 0 ? true : null);
-  sendGameState(roomId);
+  state.match.isReady.fill(null);
+
+  if (state.turn.phase === 'modify') {
+    const { startRoomTimer, MODIFY_TIME_LIMIT } = require('../../../functions/timerHelper');
+    const activeUserId = state.secret.playerIds[state.turn.player];
+    startRoomTimer(roomId, 'modify', MODIFY_TIME_LIMIT, () => {
+      const currentRoom = rooms[roomId];
+      if (!currentRoom) return;
+
+      for (let i = 0; i < currentRoom.numPlayers; i++) {
+        if (currentRoom.state.match.isReady[i] === null) {
+          currentRoom.state.match.isReady[i] = false;
+        }
+      }
+      modifyRoll(roomId, activeUserId, null, false);
+    });
+  } else {
+    sendGameState(roomId);
+  }
 };

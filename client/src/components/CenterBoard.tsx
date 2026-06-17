@@ -4,6 +4,7 @@ import { Socket } from 'socket.io-client';
 import useClientContext from '../hooks/useClientContext';
 import { meetsRequirements } from '../helpers/meetsRequirements';
 import { MonsterCard } from '../types';
+import { TimerBar } from './TimerBar';
 
 interface CenterBoardProps {
   socket: Socket;
@@ -73,6 +74,7 @@ const CenterBoard: React.FC<CenterBoardProps> = ({
 
   return (
     <>
+      <TimerBar timer={state.timer} />
       <h1
         className={`purpose ${
           state.turn.phase === 'use-effect' &&

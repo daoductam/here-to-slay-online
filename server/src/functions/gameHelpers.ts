@@ -187,6 +187,7 @@ export function rollDice(roomId: string) {
   sendGameState(roomId);
 
   setTimeout(() => {
+    state.match.isReady.fill(null);
     state.turn.phaseChanged = true;
     state.turn.phase = 'modify';
     state.turn.isRolling = false;

@@ -273,6 +273,11 @@ export interface GameState {
     isRolling: boolean;
     pause: boolean;
   };
+  timer?: {
+    type: 'turn' | 'challenge' | 'modify';
+    timeLeft: number;
+    maxTime: number;
+  } | null;
   playerNum: number;
 }
 

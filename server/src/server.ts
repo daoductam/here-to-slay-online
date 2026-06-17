@@ -30,6 +30,7 @@ import {
 import { useLeaderAbility } from './controllers/socketio/game/leaderAbility';
 import { returnToLobby, playAgain } from './controllers/socketio/game/gameReset';
 import { sendChatMessage } from './controllers/socketio/chat';
+import { handlePhaseTimer } from './functions/timerHelper';
 import 'dotenv/config';
 
 /* EXPRESS SERVER */
@@ -181,12 +182,16 @@ export function sendGameState(roomId: string) {
   if (rooms[roomId]) {
     const state = rooms[roomId].state;
 
+    if (state.turn.phaseChanged) {
+      state.turn.phaseChanged = false;
+      handlePhaseTimer(roomId);
+    }
+
     for (let i = 0; i < rooms[roomId].numPlayers; i++) {
       const privateState = parseState(state.secret.playerIds[i], state);
       io.to(state.secret.playerSocketIds[i]).emit('game-state', privateState);
     }
 
-    state.turn.phaseChanged = false;
     if (state.turn.effect) {
       state.turn.effect.actionChanged = false;
     }

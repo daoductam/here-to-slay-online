@@ -80,6 +80,7 @@ export interface Room {
   private: boolean;
   reconnectTimer?: NodeJS.Timeout;
   endGameTimer?: NodeJS.Timeout;
+  timerId?: NodeJS.Timeout;
   chatHistory: ChatMessage[];
 }
 
@@ -276,6 +277,11 @@ interface State {
     isRolling: boolean;
     pause: boolean;
   };
+  timer?: {
+    type: 'turn' | 'challenge' | 'modify';
+    timeLeft: number;
+    maxTime: number;
+  } | null;
 }
 
 export interface GameState extends State {
