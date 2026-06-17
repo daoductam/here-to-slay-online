@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/here-to-slay-online/static/css/main.c2a87f70.css",
-    "main.js": "/here-to-slay-online/static/js/main.97f991f9.js",
+    "main.css": "/here-to-slay-online/static/css/main.9ec5ddf7.css",
+    "main.js": "/here-to-slay-online/static/js/main.7f90168d.js",
     "static/media/HTS_Dragon.png": "/here-to-slay-online/static/media/HTS_Dragon.aa39b3320c76b88844d2.png",
     "static/media/ranger.png": "/here-to-slay-online/static/media/ranger.dae7deac6d5f51905163.png",
     "static/media/thief.png": "/here-to-slay-online/static/media/thief.1d842182b738f4cb2ae4.png",
@@ -15,11 +15,11 @@
     "static/media/tick.png": "/here-to-slay-online/static/media/tick.41264236bf0dcac51381.png",
     "static/media/cross.png": "/here-to-slay-online/static/media/cross.2835c81cf9c25c6d7662.png",
     "index.html": "/here-to-slay-online/index.html",
-    "main.c2a87f70.css.map": "/here-to-slay-online/static/css/main.c2a87f70.css.map",
-    "main.97f991f9.js.map": "/here-to-slay-online/static/js/main.97f991f9.js.map"
+    "main.9ec5ddf7.css.map": "/here-to-slay-online/static/css/main.9ec5ddf7.css.map",
+    "main.7f90168d.js.map": "/here-to-slay-online/static/js/main.7f90168d.js.map"
   },
   "entrypoints": [
-    "static/css/main.c2a87f70.css",
-    "static/js/main.97f991f9.js"
+    "static/css/main.9ec5ddf7.css",
+    "static/js/main.7f90168d.js"
   ]
 }
