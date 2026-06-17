@@ -122,7 +122,7 @@ function App() {
 
   return (
     <div className="game-layout-container">
-      <div className='App' style={{ margin: '25px' }}>
+      <div className='App'>
         <img
           src={`${process.env.PUBLIC_URL}/HTS_title.png`}
           rel='preload'

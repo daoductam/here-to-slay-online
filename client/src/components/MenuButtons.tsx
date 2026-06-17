@@ -185,65 +185,31 @@ const MenuButtons: React.FC<MenuButtonsProps> = ({
         )}
       {/* EXIT MATCH */}
       <button
-        className="circular show"
+        className="circular show exit-match-btn"
         onClick={() => {
           chosenCard.setShow(true);
           chosenCard.setCustomText('Exit Match');
           chosenCard.setCustomCenter('logout');
-        }}
-        style={{
-          position: 'absolute',
-          top: '1vh',
-          left: '17vh',
-          backgroundColor: '#DC143C'
         }}
       >
         <span className="material-symbols-outlined icon">logout</span>
       </button>
       {/* AUDIO SETTINGS */}
       <button
-        className="circular show"
+        className="circular show audio-settings-btn"
         onClick={() => setIsAudioOpen(true)}
-        style={{
-          position: 'absolute',
-          top: '1vh',
-          left: '9vh',
-          backgroundColor: '#fc7c37'
-        }}
       >
         <span className="material-symbols-outlined icon">volume_up</span>
       </button>
 
       {/* CHAT TOGGLE */}
       <button
-        className="circular show"
+        className="circular show chat-toggle-btn"
         onClick={onClickChat}
-        style={{
-          position: 'absolute',
-          top: '1vh',
-          left: '25vh',
-          backgroundColor: '#4a3b32',
-          border: '1px solid #fc7c37',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center'
-        }}
       >
         <span className="material-symbols-outlined icon">forum</span>
         {unreadCount > 0 && (
-          <span style={{
-            position: 'absolute',
-            top: '-5px',
-            right: '-5px',
-            backgroundColor: '#DC143C',
-            color: 'white',
-            borderRadius: '50%',
-            padding: '2px 6px',
-            fontSize: '1.2vh',
-            fontWeight: 'bold',
-            boxShadow: '0 2px 5px rgba(0,0,0,0.5)',
-            lineHeight: 1
-          }}>
+          <span className="unread-badge">
             {unreadCount}
           </span>
         )}

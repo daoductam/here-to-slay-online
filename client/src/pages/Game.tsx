@@ -693,6 +693,13 @@ const Game: React.FC = () => {
 
   return (
     <>
+      <div className="orientation-lock-overlay">
+        <div className="orientation-lock-content">
+          <span className="material-symbols-outlined screen-rotate-icon">screen_rotation</span>
+          <h2>Xoay ngang màn hình</h2>
+          <p>Vui lòng xoay ngang điện thoại để trải nghiệm trận đấu tốt nhất.</p>
+        </div>
+      </div>
       {credentials && !isEmpty(state) && socket && (
         <div
           onClick={
