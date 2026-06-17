@@ -1,4 +1,12 @@
 daoductam.dpdns.org {
-    # Reverse proxy to the backend server running on port 4000
-    reverse_proxy server:4000
+    # Route Socket.io traffic to the backend server
+    reverse_proxy /socket.io/* server:4000
+
+    # Route API endpoints to the backend server
+    reverse_proxy /get-rooms server:4000
+    reverse_proxy /join-room server:4000
+    reverse_proxy /create-room server:4000
+
+    # Fallback to serving the React client app
+    reverse_proxy client:80
 }

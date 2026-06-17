@@ -8,8 +8,15 @@ services:
     restart: always
     environment:
       - PORT=4000
-      - CLIENT_URL=https://jingxianlau.github.io # Allow GitHub Pages client
-      # You can add other env vars here if needed
+      - CLIENT_URL=https://daoductam.dpdns.org
+    networks:
+      - game-network
+
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    restart: always
     networks:
       - game-network
 
@@ -25,6 +32,7 @@ services:
       - caddy_config:/config
     depends_on:
       - server
+      - client
     networks:
       - game-network
 
