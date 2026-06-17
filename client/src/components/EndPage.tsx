@@ -28,75 +28,46 @@ const EndPage: React.FC<{ showBoard: boolean; socket: Socket | null }> = ({ show
     >
       {state.turn.phase === 'end-game' &&
         state.match.isReady.filter(val => val === true).length > 0 && (
-          <>
-            <div className='helper-text-container show' style={{ top: '10vh' }}>
-              <h3 style={{ fontSize: '15vh', marginTop: '29vh' }}>
+          <div className='end-game-container'>
+            <div className='end-game-banner'>
+              <h3 className='end-game-status'>
                 {state.match.isReady.filter(val => val === true).length === 1
                   ? 'Victory!'
                   : 'Draw'}
               </h3>
             </div>
-            <h1 style={{ marginTop: '50vh' }}>
+            
+            <span className='end-game-winner-title'>Winner</span>
+            <div className='end-game-winners'>
               {state.match.players.map((val, i) =>
                 state.match.isReady[i] ? (
-                  <div key={i} style={{ color: '#fc7c37', fontSize: '8vh' }}>
+                  <div key={i} className='winner-name'>
                     {val}
                   </div>
-                ) : (
-                  <></>
-                )
+                ) : null
               )}
-            </h1>
+            </div>
 
-            <div style={{
-              display: 'flex',
-              gap: '20px',
-              marginTop: '5vh',
-              zIndex: 1001,
-              position: 'relative'
-            }}>
+            <div className='end-game-buttons'>
               <button 
                 onClick={handlePlayAgain}
-                style={{
-                  padding: '12px 24px',
-                  fontSize: '2.5vh',
-                  minWidth: '22vh',
-                  cursor: 'pointer',
-                  backgroundColor: '#fc7c37',
-                  border: 'none',
-                  borderRadius: '8px',
-                  boxShadow: '0 6px #ca500f',
-                  transition: 'transform 0.1s, box-shadow 0.1s',
-                  height: 'auto'
-                }}
+                className='end-game-btn play-again-btn'
               >
                 Chơi tiếp ván mới
               </button>
               <button 
                 onClick={handleReturnToLobby}
-                style={{
-                  padding: '12px 24px',
-                  fontSize: '2.5vh',
-                  minWidth: '22vh',
-                  cursor: 'pointer',
-                  backgroundColor: '#444',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: '8px',
-                  boxShadow: '0 6px #222',
-                  transition: 'transform 0.1s, box-shadow 0.1s',
-                  height: 'auto'
-                }}
+                className='end-game-btn return-lobby-btn'
               >
                 Quay lại phòng chờ
               </button>
             </div>
 
-            <div className='timer'>
+            <div className='end-game-timer'>
               <h1>{180 - state.match.startRolls.maxVal}s</h1>
               <h5>Lobby Closes</h5>
             </div>
-          </>
+          </div>
         )}
     </div>
   );

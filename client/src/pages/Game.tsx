@@ -265,7 +265,7 @@ const Game: React.FC = () => {
           case 'challenge':
             setShowDiscardPopup(false);
             setShowEffectPopup(false);
-            setActiveDice(0);
+            if (activeDice !== 0) setActiveDice(0);
             showPopup.set(true);
             showHand.setLocked(false);
 
@@ -283,34 +283,38 @@ const Game: React.FC = () => {
           case 'challenge-roll':
             setShowDiscardPopup(false);
             setShowEffectPopup(false);
-            setActiveDice(0);
+            if (newState.dice.defend && newState.dice.defend.total > 0) {
+              if (activeDice !== 1) setActiveDice(1);
+            } else {
+              if (activeDice !== 0) setActiveDice(0);
+            }
             showPopup.set(true);
             showRoll.set(false);
             showHand.setLocked(false);
             if (!showBoard) {
               shownCard.setLocked(true);
             }
-            if (newState.dice.defend && newState.dice.defend.total > 0) {
-              setActiveDice(1);
-            }
 
             if (newState.dice.main.total > 0) {
-              setTimeout(() => {
-                showRoll.set(true);
-              }, 1000);
-              setTimeout(() => {
-                if (newState.dice.defend?.total) {
-                  showRoll.set(false);
-                }
-                hasRolled.set(false);
+              const wasMainRolledJustNow = !prevState || prevState.dice.main.total === 0;
+              if (wasMainRolledJustNow) {
+                setTimeout(() => {
+                  showRoll.set(true);
+                }, 1000);
+                setTimeout(() => {
+                  if (newState.dice.defend?.total) {
+                    showRoll.set(false);
+                  }
+                  hasRolled.set(false);
 
-                if (
-                  newState.dice.main.total > 0 &&
-                  newState.dice.defend?.total === 0
-                ) {
-                  setActiveDice(1);
-                }
-              }, 3000);
+                  if (
+                    newState.dice.main.total > 0 &&
+                    newState.dice.defend?.total === 0
+                  ) {
+                    if (activeDice !== 1) setActiveDice(1);
+                  }
+                }, 3000);
+              }
             }
 
             if (newState.turn.phaseChanged) {
@@ -330,12 +334,15 @@ const Game: React.FC = () => {
             }
 
             if (newState.dice.main.total > 0) {
-              setTimeout(() => {
-                showRoll.set(true);
-              }, 1000);
-              setTimeout(() => {
-                hasRolled.set(false);
-              }, 3000);
+              const wasMainRolledJustNow = !prevState || prevState.dice.main.total === 0;
+              if (wasMainRolledJustNow) {
+                setTimeout(() => {
+                  showRoll.set(true);
+                }, 1000);
+                setTimeout(() => {
+                  hasRolled.set(false);
+                }, 3000);
+              }
             }
 
             if (newState.turn.phaseChanged) {
@@ -355,12 +362,15 @@ const Game: React.FC = () => {
             }
 
             if (newState.dice.main.total > 0) {
-              setTimeout(() => {
-                showRoll.set(true);
-              }, 1000);
-              setTimeout(() => {
-                hasRolled.set(false);
-              }, 3000);
+              const wasMainRolledJustNow = !prevState || prevState.dice.main.total === 0;
+              if (wasMainRolledJustNow) {
+                setTimeout(() => {
+                  showRoll.set(true);
+                }, 1000);
+                setTimeout(() => {
+                  hasRolled.set(false);
+                }, 3000);
+              }
             }
 
             if (newState.turn.phaseChanged) {
@@ -381,10 +391,10 @@ const Game: React.FC = () => {
 
             if (newState.match.isReady.every(val => val === true)) {
               allowedCards.set([CardType.modifier]);
-              setActiveDice(0);
+              if (activeDice !== 0) setActiveDice(0);
             } else if (newState.match.isReady.every(val => val === null)) {
               allowedCards.set([CardType.modifier]);
-              setActiveDice(1);
+              if (activeDice !== 1) setActiveDice(1);
             } else if (newState.match.isReady[newState.playerNum] === false) {
               allowedCards.set([]);
             } else {

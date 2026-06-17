@@ -1946,11 +1946,12 @@ div.cross {
 .end-page {
   position: absolute;
   top: 0;
-  background: #000000dd;
+  background: rgba(10, 8, 6, 0.92);
+  backdrop-filter: blur(16px);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity ease-in-out 0.2s;
+  transition: opacity ease-in-out 0.25s;
   z-index: 1000;
 }
 
@@ -1963,7 +1964,153 @@ div.cross {
   opacity: 0;
 }
 
-.end-page .timer {
+.end-game-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  padding: 4vh;
+  box-sizing: border-box;
+  animation: endGamePopupIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes endGamePopupIn {
+  from {
+    transform: scale(0.85);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.end-game-banner {
+  position: relative;
+  width: 85vw;
+  max-width: 680px;
+  height: 28.5vw;
+  max-height: 228px;
+  background: url('./assets/HTS_Dragon.png') no-repeat center;
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2vh;
+}
+
+.end-game-status {
+  font-family: 'Lilita One', sans-serif;
+  font-size: clamp(6vh, 9.5vw, 11vh);
+  color: #fff;
+  text-shadow: 0 0 15px rgba(252, 124, 55, 0.75), 0 4px 12px rgba(0, 0, 0, 0.8);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.end-game-winner-title {
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  font-size: 1.8vh;
+  font-weight: 700;
+  margin-top: 2vh;
+  margin-bottom: 0.5vh;
+}
+
+.end-game-winners {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1vh;
+}
+
+.winner-name {
+  font-family: 'Lilita One', sans-serif;
+  color: #fc7c37;
+  font-size: clamp(5.5vh, 7vw, 7.5vh);
+  text-shadow: 0 0 20px rgba(252, 124, 55, 0.4), 0 3px 8px rgba(0, 0, 0, 0.6);
+  animation: winnerFadeIn 0.8s ease-out;
+}
+
+@keyframes winnerFadeIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.end-game-buttons {
+  display: flex;
+  gap: 20px;
+  margin-top: 4vh;
+  z-index: 1001;
+  position: relative;
+}
+
+.end-game-btn {
+  padding: 14px 28px;
+  font-family: 'Lilita One', sans-serif;
+  font-size: 2.3vh;
+  min-width: 24vh;
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  transition: transform 0.1s ease, filter 0.2s ease, box-shadow 0.1s ease;
+  height: auto;
+  letter-spacing: 0.5px;
+}
+
+.end-game-btn:active {
+  transform: scale(0.96);
+}
+
+.play-again-btn {
+  background-color: #fc7c37;
+  color: #fff;
+  box-shadow: 0 6px #ca500f, 0 10px 20px rgba(252, 124, 55, 0.3);
+}
+
+.play-again-btn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 4px #ca500f, 0 8px 16px rgba(252, 124, 55, 0.3);
+  transform: translateY(2px);
+}
+
+.play-again-btn:active {
+  box-shadow: 0 1px #ca500f;
+  transform: translateY(5px) scale(0.97);
+}
+
+.return-lobby-btn {
+  background-color: #3e312a;
+  color: #f7e9df;
+  border: 2px solid #fc7c3744;
+  box-shadow: 0 6px #241c18, 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.return-lobby-btn:hover {
+  filter: brightness(1.15);
+  box-shadow: 0 4px #241c18, 0 8px 16px rgba(0, 0, 0, 0.4);
+  transform: translateY(2px);
+  border-color: #fc7c3788;
+}
+
+.return-lobby-btn:active {
+  box-shadow: 0 1px #241c18;
+  transform: translateY(5px) scale(0.97);
+}
+
+.end-game-timer {
   position: absolute;
   bottom: 0;
   background-color: #fc7c37;
@@ -1977,15 +2124,25 @@ div.cross {
   border-left: 0.8vh solid white;
   border-right: 0.8vh solid white;
   border-top: 0.8vh solid white;
+  box-shadow: 0 -5px 15px rgba(252, 124, 55, 0.3);
 }
 
-.end-page .timer h1 {
-  font-size: 8.5vh;
-  margin-top: 3vh;
+.end-game-timer h1 {
+  font-family: 'Lilita One', sans-serif;
+  font-size: 8vh;
+  margin-top: 3.5vh;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
-.end-page .timer h5 {
+.end-game-timer h5 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: uppercase;
+  font-size: 1.5vh;
   margin-top: -6.5vh;
+  letter-spacing: 1px;
 }
 
 /* HELPER TEXT & TIMER */

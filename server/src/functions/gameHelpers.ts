@@ -60,6 +60,13 @@ export function nextPlayer(roomId: string) {
   let player = rooms[roomId].state.turn.player;
   if (rooms[roomId].state.players[player].hand.length > 7) return;
 
+  // Clear timer directly to avoid circular dependency issues
+  if (rooms[roomId].timerId) {
+    clearInterval(rooms[roomId].timerId);
+    rooms[roomId].timerId = undefined;
+  }
+  rooms[roomId].state.timer = null;
+
   const newPlayer = (player + 1) % rooms[roomId].numPlayers;
   rooms[roomId].state.turn.player = newPlayer;
   const hasMegaSlime = rooms[roomId].state.board[newPlayer].largeCards.some(
