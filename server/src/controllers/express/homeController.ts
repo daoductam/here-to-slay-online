@@ -5,6 +5,7 @@ import { initialState } from '../../cards';
 import { addPlayer } from '../../functions/helpers';
 import { RequestHandler } from 'express';
 import random from 'lodash.random';
+import { broadcastRoomList } from '../../server';
 
 export const getRooms: RequestHandler = (req, res) => {
   let updatedRooms: { [key: string]: { joined: number; target: number } } = {};
@@ -65,6 +66,7 @@ export const createRoom: RequestHandler = (req, res) => {
     chatHistory: []
   };
   addPlayer(id, userId, username);
+  broadcastRoomList();
 
   return res.json({ successful: true, res: userId });
 };
@@ -88,6 +90,7 @@ export const joinRoom: RequestHandler = (req, res) => {
     }
 
     addPlayer(roomId, userId, username);
+    broadcastRoomList();
 
     return res.json({ successful: true, res: userId });
   } else {

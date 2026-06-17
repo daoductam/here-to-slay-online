@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { io } from 'socket.io-client';
 import { criticalAssets, deferredAssets } from './cards';
 import { getImage } from './helpers/getImage';
 import GameGuide from './components/GameGuide';
@@ -49,9 +50,15 @@ function App() {
     window.addEventListener('resize', handleViewportReset);
     window.addEventListener('orientationchange', handleViewportReset);
 
+    const socket = io(SERVER_URL);
+    socket.on('room-list:update', (updatedRooms) => {
+      setRooms(updatedRooms);
+    });
+
     loadRooms();
 
     return () => {
+      socket.disconnect();
       window.removeEventListener('resize', handleViewportReset);
       window.removeEventListener('orientationchange', handleViewportReset);
     };

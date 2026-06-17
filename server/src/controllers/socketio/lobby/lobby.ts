@@ -6,7 +6,8 @@ import {
   sendState,
   emit,
   sendGameState,
-  confirmNumPlayers
+  confirmNumPlayers,
+  broadcastRoomList
 } from '../../../server';
 
 export const enterLobby = (socket: Socket) => {
@@ -68,6 +69,7 @@ export const leaveLobby = (socket: Socket) => {
 
     if (rooms[roomId].numPlayers === 1) {
       delete rooms[roomId];
+      broadcastRoomList();
       cb();
       socket.disconnect();
       return;
@@ -75,6 +77,7 @@ export const leaveLobby = (socket: Socket) => {
 
     removePlayer(rooms[roomId], playerNum);
     sendState(roomId);
+    broadcastRoomList();
     cb();
     socket.disconnect();
   };
@@ -149,6 +152,7 @@ export const startMatch = (socket: Socket) => {
       distributeCards(rooms[roomId].state, rooms[roomId].numPlayers);
 
       state.match.gameStarted = true;
+      broadcastRoomList();
       state.turn.phaseChanged = true;
       state.turn.isRolling = true;
 

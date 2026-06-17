@@ -50,6 +50,7 @@ export const io = new Server(httpServer, {
 });
 
 io.on('connection', socket => {
+  socket.emit('room-list:update', getRoomsList());
   /* LOBBY */
   socket.on('enter-lobby', enterLobby(socket));
   socket.on('leave-lobby', leaveLobby(socket));
@@ -106,6 +107,7 @@ io.on('connection', socket => {
       setTimeout(() => {
         disconnectAll(roomId);
         delete rooms[roomId];
+        broadcastRoomList();
       }, 500);
     }
   });
@@ -140,6 +142,7 @@ io.on('connection', socket => {
                     setTimeout(() => {
                       disconnectAll(roomId);
                       delete rooms[roomId];
+                      broadcastRoomList();
                     }, 500);
                   } else {
                     sendGameState(roomId);
@@ -198,4 +201,21 @@ export function confirmNumPlayers(roomId: string): boolean {
   return (
     io.sockets.adapter.rooms.get(roomId)?.size === rooms[roomId].numPlayers
   );
+}
+
+export function getRoomsList() {
+  let updatedRooms: { [key: string]: { joined: number; target: number } } = {};
+  for (const key of Object.keys(rooms)) {
+    if (!rooms[key].private && !rooms[key].state.match.gameStarted) {
+      updatedRooms[key] = {
+        joined: rooms[key].numPlayers,
+        target: rooms[key].state.match.targetPlayers || 3
+      };
+    }
+  }
+  return updatedRooms;
+}
+
+export function broadcastRoomList() {
+  io.emit('room-list:update', getRoomsList());
 }
