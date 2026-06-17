@@ -30,7 +30,7 @@ import {
 import { useLeaderAbility } from './controllers/socketio/game/leaderAbility';
 import { returnToLobby, playAgain } from './controllers/socketio/game/gameReset';
 import { sendChatMessage } from './controllers/socketio/chat';
-import { handlePhaseTimer } from './functions/timerHelper';
+import { handlePhaseTimer, clearRoomTimer } from './functions/timerHelper';
 import 'dotenv/config';
 
 /* EXPRESS SERVER */
@@ -107,6 +107,7 @@ io.on('connection', socket => {
       io.in(roomId).emit('match-aborted', rooms[roomId].state.match.players[playerNum]);
       setTimeout(() => {
         disconnectAll(roomId);
+        clearRoomTimer(roomId);
         delete rooms[roomId];
         broadcastRoomList();
       }, 500);
@@ -142,6 +143,7 @@ io.on('connection', socket => {
                     io.in(roomId).emit('match-aborted', currentRoom.state.match.players[idx]);
                     setTimeout(() => {
                       disconnectAll(roomId);
+                      clearRoomTimer(roomId);
                       delete rooms[roomId];
                       broadcastRoomList();
                     }, 500);

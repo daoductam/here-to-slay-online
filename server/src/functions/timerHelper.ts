@@ -78,6 +78,11 @@ export const resumeRoomTimer = (roomId: string, onTimeout: () => void) => {
   const room = rooms[roomId];
   if (!room || !room.state.timer) return;
 
+  if (room.timerId) {
+    clearInterval(room.timerId);
+    room.timerId = undefined;
+  }
+
   // Apply buffer time if remaining time is too low
   if (room.state.timer.timeLeft < BUFFER_TIME_LIMIT) {
     room.state.timer.timeLeft = BUFFER_TIME_LIMIT;
@@ -132,69 +137,67 @@ export const handlePhaseTimer = (roomId: string) => {
     return;
   }
 
-  if (state.turn.phaseChanged) {
-    const phase = state.turn.phase;
+  const phase = state.turn.phase;
 
-    if (phase === 'challenge') {
-      pauseRoomTimer(roomId);
-      startRoomTimer(roomId, 'challenge', CHALLENGE_TIME_LIMIT, () => {
-        const currentRoom = rooms[roomId];
-        if (!currentRoom) return;
+  if (phase === 'challenge') {
+    pauseRoomTimer(roomId);
+    startRoomTimer(roomId, 'challenge', CHALLENGE_TIME_LIMIT, () => {
+      const currentRoom = rooms[roomId];
+      if (!currentRoom) return;
 
-        for (let i = 0; i < currentRoom.numPlayers; i++) {
-          if (currentRoom.state.match.isReady[i] === null) {
-            currentRoom.state.match.isReady[i] = false;
-          }
+      for (let i = 0; i < currentRoom.numPlayers; i++) {
+        if (currentRoom.state.match.isReady[i] === null) {
+          currentRoom.state.match.isReady[i] = false;
         }
-        const { challenge } = require('../controllers/socketio/game/challenge');
-        challenge(roomId, activeUserId, false, undefined);
-      });
-    } else if (phase === 'modify') {
-      pauseRoomTimer(roomId);
-      startRoomTimer(roomId, 'modify', MODIFY_TIME_LIMIT, () => {
-        const currentRoom = rooms[roomId];
-        if (!currentRoom) return;
-
-        for (let i = 0; i < currentRoom.numPlayers; i++) {
-          if (currentRoom.state.match.isReady[i] === null) {
-            currentRoom.state.match.isReady[i] = false;
-          }
-        }
-        const { modifyRoll } = require('../controllers/socketio/game/modify');
-        modifyRoll(roomId, activeUserId, null, false);
-      });
-    } else if (phase === 'end-turn-discard') {
-      startRoomTimer(roomId, 'turn', TURN_TIME_LIMIT, () => {
-        const currentRoom = rooms[roomId];
-        if (!currentRoom) return;
-
-        const playerHand = currentRoom.state.players[activePlayer].hand;
-        const toDiscardCount = currentRoom.state.turn.toDiscard || (playerHand.length - 7);
-        const { discardCard } = require('./game');
-        for (let i = 0; i < toDiscardCount; i++) {
-          if (playerHand.length > 7) {
-            const cardToDiscard = playerHand[Math.floor(Math.random() * playerHand.length)];
-            discardCard(roomId, activePlayer, cardToDiscard.id);
-          }
-        }
-        currentRoom.state.turn.toDiscard = 0;
-        const { nextPlayer } = require('./gameHelpers');
-        nextPlayer(roomId);
-      });
-    } else if (
-      ['play', 'choose-hero', 'draw', 'attack-roll', 'use-effect-roll', 'use-effect'].includes(phase)
-    ) {
-      const hasActiveTimer = state.timer && state.timer.type === 'turn';
-      const { pass } = require('../controllers/socketio/game/useEffect');
-      if (hasActiveTimer) {
-        resumeRoomTimer(roomId, () => {
-          pass(roomId, activeUserId);
-        });
-      } else {
-        startRoomTimer(roomId, 'turn', TURN_TIME_LIMIT, () => {
-          pass(roomId, activeUserId);
-        });
       }
+      const { challenge } = require('../controllers/socketio/game/challenge');
+      challenge(roomId, activeUserId, false, undefined);
+    });
+  } else if (phase === 'modify') {
+    pauseRoomTimer(roomId);
+    startRoomTimer(roomId, 'modify', MODIFY_TIME_LIMIT, () => {
+      const currentRoom = rooms[roomId];
+      if (!currentRoom) return;
+
+      for (let i = 0; i < currentRoom.numPlayers; i++) {
+        if (currentRoom.state.match.isReady[i] === null) {
+          currentRoom.state.match.isReady[i] = false;
+        }
+      }
+      const { modifyRoll } = require('../controllers/socketio/game/modify');
+      modifyRoll(roomId, activeUserId, null, false);
+    });
+  } else if (phase === 'end-turn-discard') {
+    startRoomTimer(roomId, 'turn', TURN_TIME_LIMIT, () => {
+      const currentRoom = rooms[roomId];
+      if (!currentRoom) return;
+
+      const playerHand = currentRoom.state.players[activePlayer].hand;
+      const toDiscardCount = currentRoom.state.turn.toDiscard || (playerHand.length - 7);
+      const { discardCard } = require('./game');
+      for (let i = 0; i < toDiscardCount; i++) {
+        if (playerHand.length > 7) {
+          const cardToDiscard = playerHand[Math.floor(Math.random() * playerHand.length)];
+          discardCard(roomId, activePlayer, cardToDiscard.id);
+        }
+      }
+      currentRoom.state.turn.toDiscard = 0;
+      const { nextPlayer } = require('./gameHelpers');
+      nextPlayer(roomId);
+    });
+  } else if (
+    ['play', 'choose-hero', 'draw', 'attack-roll', 'use-effect-roll', 'use-effect'].includes(phase)
+  ) {
+    const hasActiveTimer = state.timer && state.timer.type === 'turn';
+    const { pass } = require('../controllers/socketio/game/useEffect');
+    if (hasActiveTimer) {
+      resumeRoomTimer(roomId, () => {
+        pass(roomId, activeUserId);
+      });
+    } else {
+      startRoomTimer(roomId, 'turn', TURN_TIME_LIMIT, () => {
+        pass(roomId, activeUserId);
+      });
     }
   }
 };

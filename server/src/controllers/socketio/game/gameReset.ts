@@ -14,6 +14,9 @@ export const returnToLobby = (socket: Socket) => {
 
     const room = rooms[roomId];
 
+    const { clearRoomTimer } = require('../../../functions/timerHelper');
+    clearRoomTimer(roomId);
+
     if (room.endGameTimer) {
       clearInterval(room.endGameTimer);
       room.endGameTimer = undefined;
@@ -83,6 +86,9 @@ export const playAgain = (socket: Socket) => {
     if (playerNum === -1 || !rooms[roomId]) return;
 
     const room = rooms[roomId];
+
+    const { clearRoomTimer } = require('../../../functions/timerHelper');
+    clearRoomTimer(roomId);
 
     if (room.endGameTimer) {
       clearInterval(room.endGameTimer);
