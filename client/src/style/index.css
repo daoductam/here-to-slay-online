@@ -265,3 +265,10 @@ span.material-symbols-outlined.rotate {
     transform: rotate(359deg);
   }
 }
+
+/* PREVENT IOS ZOOM ON FOCUS */
+@media screen and (max-width: 1024px) {
+  input, select, textarea {
+    font-size: 16px !important;
+  }
+}
