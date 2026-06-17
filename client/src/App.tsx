@@ -42,7 +42,19 @@ function App() {
       img.src = typeof card === 'string' ? card : (getImage(card) as string);
     }
 
+    const handleViewportReset = () => {
+      window.scrollTo(0, 0);
+      document.body.scrollTop = 0;
+    };
+    window.addEventListener('resize', handleViewportReset);
+    window.addEventListener('orientationchange', handleViewportReset);
+
     loadRooms();
+
+    return () => {
+      window.removeEventListener('resize', handleViewportReset);
+      window.removeEventListener('orientationchange', handleViewportReset);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
